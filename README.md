@@ -24,12 +24,9 @@ Run the project from IDE
 - sort the list according to the date
 
 # Up-coming features:
-- Cloud support for database
 - Animation effects
 - User Notification
-- Encryption
-- Validation
-- Login/Home
+- In മലയാളം
 
 # Wiki
 Check out more information on [Wiki](https://github.com/oreymaonr/adenium/wiki)
