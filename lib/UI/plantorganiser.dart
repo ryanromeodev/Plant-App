@@ -72,16 +72,17 @@ class _PlantOrgState extends State<PlantOrg> {
             month: month,
             year: year,
           ),
-          PlantListHeading(),
+          PlantListHeading(todisplay: "ചെടികളുടെ പേര്"),
           plantListBuilder(),
           SizedBox(height: 100),
         ],
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: displayDialog,
-        // onPressed: () {
-        //   fileTest(context);
-        // },
+        // onPressed: displayDialog,
+        onPressed: () {
+          Future<Plant> plant = addingPlantPage(context);
+          print(plant);
+        },
         tooltip: "add plant",
         child: const Icon(Icons.add),
       ),

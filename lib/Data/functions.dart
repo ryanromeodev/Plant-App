@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:plantapp/Data/data.dart';
 import 'package:plantapp/Data/plant.dart';
+import 'package:plantapp/UI/Pages/addplant.dart';
 
 void snackbarfun(context) {
   final snackBar = SnackBar(
@@ -14,6 +15,20 @@ void snackbarfun(context) {
 void fileTest(context) {
   PlantData pdata = PlantData();
   pdata.readJson();
+}
+
+Future<Plant> addingPlantPage(BuildContext context) async {
+  final Plant plant = await Navigator.push(
+    context,
+    MaterialPageRoute(builder: (context) => const Addplant()),
+  );
+  // When a BuildContext is used from a StatefulWidget, the mounted property
+  // must be checked after an asynchronous gap.
+  if (!context.mounted) {
+    return Plant(plantname: "", plantdetails: "", plantdate: "");
+  }
+
+  return plant;
 }
 
 ///[plantSorter] sort out plants in the order of date t serve the planting functionality

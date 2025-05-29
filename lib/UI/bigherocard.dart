@@ -79,9 +79,7 @@ class BigHeroCard extends StatelessWidget {
                   children: [
                     TextSpan(
                       text: " $day $month $year",
-                      style: Theme.of(
-                        context,
-                      ).textTheme.headlineSmall!.copyWith(color: Colors.amber),
+                      style: Theme.of(context).textTheme.headlineSmall,
                       // TextStyle(
                       //   fontSize: herotextsize,
                       //   color: textwhite,
