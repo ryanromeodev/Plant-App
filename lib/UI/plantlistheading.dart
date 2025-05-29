@@ -10,12 +10,7 @@ class PlantListHeading extends StatelessWidget {
       margin: EdgeInsets.all(10),
       child: Text(
         "ചെടികളുടെ പേര്",
-        style: TextStyle(
-          fontSize: 20,
-          color: Colors.blueGrey,
-          fontWeight: FontWeight.normal,
-          fontFamily: "",
-        ),
+        style: Theme.of(context).textTheme.displayMedium,
       ),
     );
   }

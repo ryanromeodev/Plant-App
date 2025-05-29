@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:plantapp/Data/functions.dart';
-import 'package:plantapp/Data/strings.dart';
 
 class BigHeroCard extends StatelessWidget {
   const BigHeroCard({
@@ -42,11 +41,7 @@ class BigHeroCard extends StatelessWidget {
               margin: EdgeInsets.all(10),
               child: Text(
                 heroDisplayPlantName,
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  color: textwhite,
-                  fontSize: herobigtextsize,
-                ),
+                style: Theme.of(context).textTheme.headlineLarge,
               ),
             ),
             if (heroDisplayPlantDetails.isNotEmpty)
@@ -54,17 +49,18 @@ class BigHeroCard extends StatelessWidget {
                 margin: EdgeInsets.symmetric(horizontal: 12.0),
                 padding: EdgeInsets.all(2.0),
                 decoration: BoxDecoration(
-                  color: textwhite.withAlpha(50),
+                  color: Colors.white.withAlpha(50),
                   borderRadius: BorderRadius.circular(30),
                 ),
                 child: Text(
                   heroDisplayPlantDetails,
                   textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontWeight: FontWeight.normal,
-                    color: textwhite,
-                    fontSize: herotextsize,
-                  ),
+                  style: Theme.of(context).textTheme.headlineMedium,
+                  // TextStyle(
+                  //   fontWeight: FontWeight.normal,
+                  //   color: textwhite,
+                  //   fontSize: herotextsize,
+                  // ),
                 ),
               ),
             Container(
@@ -73,21 +69,25 @@ class BigHeroCard extends StatelessWidget {
               child: RichText(
                 text: TextSpan(
                   text: "തീയതി :",
-                  style: TextStyle(
-                    fontSize: herotextsize,
-                    color: textwhite,
-                    fontWeight: FontWeight.normal,
-                    fontStyle: FontStyle.normal,
-                  ),
+                  style: Theme.of(context).textTheme.headlineSmall,
+                  // style: TextStyle(
+                  //   fontSize: herotextsize,
+                  //   color: textwhite,
+                  //   fontWeight: FontWeight.normal,
+                  //   fontStyle: FontStyle.normal,
+                  // ),
                   children: [
                     TextSpan(
                       text: " $day $month $year",
-                      style: TextStyle(
-                        fontSize: herotextsize,
-                        color: textwhite,
-                        fontWeight: FontWeight.normal,
-                        fontStyle: FontStyle.normal,
-                      ),
+                      style: Theme.of(
+                        context,
+                      ).textTheme.headlineSmall!.copyWith(color: Colors.amber),
+                      // TextStyle(
+                      //   fontSize: herotextsize,
+                      //   color: textwhite,
+                      //   fontWeight: FontWeight.normal,
+                      //   fontStyle: FontStyle.normal,
+                      // ),
                     ),
                   ],
                 ),

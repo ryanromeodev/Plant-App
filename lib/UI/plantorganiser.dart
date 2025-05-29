@@ -50,8 +50,8 @@ class _PlantOrgState extends State<PlantOrg> {
     return Scaffold(
       // extendBodyBehindAppBar: true,
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
         actions: [
+          IconButton(icon: const Icon(Icons.light_mode), onPressed: () {}),
           IconButton(
             icon: const Icon(Icons.download),
             onPressed: () {
@@ -59,14 +59,7 @@ class _PlantOrgState extends State<PlantOrg> {
             },
           ),
         ],
-        title: const Text(
-          'Home',
-          style: TextStyle(
-            fontSize: 35.0,
-            color: Colors.black,
-            fontWeight: FontWeight.normal,
-          ),
-        ),
+        title: Text('Home', style: Theme.of(context).textTheme.displayLarge),
         scrolledUnderElevation: 0.0,
         // surfaceTintColor: Colors.transparent,
       ),
@@ -112,22 +105,19 @@ class _PlantOrgState extends State<PlantOrg> {
       //         );
       //       }).toList(),
       // ),
-      child: Container(
-        color: Colors.transparent,
-        child: GridView.count(
-          crossAxisCount: 1,
-          shrinkWrap: true,
-          padding: const EdgeInsets.symmetric(vertical: 8.0),
-          scrollDirection: Axis.horizontal,
-          children:
-              plist.map((Plant plant) {
-                return PlantTile(
-                  plant: plant,
-                  onPlantOrgChange: handlePlantOrgChange,
-                  heroDisplay: heroDisplayFunction,
-                );
-              }).toList(),
-        ),
+      child: GridView.count(
+        crossAxisCount: 1,
+        shrinkWrap: true,
+        padding: const EdgeInsets.symmetric(vertical: 8.0),
+        scrollDirection: Axis.horizontal,
+        children:
+            plist.map((Plant plant) {
+              return PlantTile(
+                plant: plant,
+                onPlantOrgChange: handlePlantOrgChange,
+                heroDisplay: heroDisplayFunction,
+              );
+            }).toList(),
       ),
     );
   }

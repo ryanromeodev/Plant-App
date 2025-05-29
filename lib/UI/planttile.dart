@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:plantapp/Data/functions.dart';
 import 'package:plantapp/Data/plant.dart';
-import 'package:plantapp/Data/strings.dart';
 
 /// This is the UI of a single [Plant] TILE
 /// multiple of these instances are created with to form a long list of plants
@@ -65,21 +64,11 @@ class _PlantTileState extends State<PlantTile> {
               child: RichText(
                 text: TextSpan(
                   text: day,
-                  style: TextStyle(
-                    fontSize: normaltextsize,
-                    color: textwhite,
-                    fontWeight: FontWeight.normal,
-                    fontStyle: FontStyle.normal,
-                  ),
+                  style: Theme.of(context).textTheme.bodyMedium,
                   children: [
                     TextSpan(
                       text: " $month $year",
-                      style: TextStyle(
-                        fontSize: normaltextsize,
-                        color: textwhite,
-                        fontWeight: FontWeight.normal,
-                        fontStyle: FontStyle.normal,
-                      ),
+                      style: Theme.of(context).textTheme.bodyMedium,
                     ),
                   ],
                 ),
@@ -89,12 +78,7 @@ class _PlantTileState extends State<PlantTile> {
               alignment: Alignment.bottomCenter,
               child: Text(
                 widget.plant.plantname,
-                style: TextStyle(
-                  fontSize: normaltextsize,
-                  color: textwhite,
-                  fontWeight: FontWeight.bold,
-                  fontStyle: FontStyle.normal,
-                ),
+                style: Theme.of(context).textTheme.bodyMedium,
               ),
             ),
             Container(
@@ -109,15 +93,15 @@ class _PlantTileState extends State<PlantTile> {
                 textAlign: TextAlign.center,
                 text: TextSpan(
                   text: "ഇനി",
-                  style: TextStyle(fontSize: 16.0, color: textwhite),
+                  style: Theme.of(context).textTheme.bodyMedium,
                   children: [
                     TextSpan(
                       text: " $pendingDays",
-                      style: TextStyle(color: textwhite),
+                      style: Theme.of(context).textTheme.bodyMedium,
                     ),
                     TextSpan(
                       text: " ദിവസം",
-                      style: TextStyle(fontSize: 16.0, color: textwhite),
+                      style: Theme.of(context).textTheme.bodyMedium,
                     ),
                   ],
                 ),
