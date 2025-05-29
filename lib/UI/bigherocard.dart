@@ -26,6 +26,9 @@ class BigHeroCard extends StatelessWidget {
         margin: EdgeInsets.all(10.0),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20.0),
+          boxShadow: [
+            BoxShadow(color: Colors.black.withAlpha(80), blurRadius: 10.0),
+          ],
           gradient: LinearGradient(
             colors: getColorsList,
             transform: GradientRotation(0.5),
