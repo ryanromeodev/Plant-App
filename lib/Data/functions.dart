@@ -1,11 +1,6 @@
-import 'dart:convert';
-import 'dart:developer' as developer;
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:plantapp/Data/data.dart';
 import 'package:plantapp/Data/plant.dart';
-import 'package:plantapp/Data/strings.dart';
 
 void snackbarfun(context) {
   final snackBar = SnackBar(
