@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:plantapp/Data/data.dart';
 import 'package:plantapp/Data/plant.dart';
-import 'package:plantapp/Data/strings.dart';
+import 'package:plantapp/UI/bigherocard.dart';
+import 'package:plantapp/UI/plantlistheading.dart';
 import 'package:plantapp/UI/planttile.dart';
 import 'package:plantapp/Data/fabtestfun.dart';
 
@@ -71,133 +72,20 @@ class _PlantOrgState extends State<PlantOrg> {
       ),
       body: Column(
         children: [
-          Expanded(
-            flex: 2,
-            child: Container(
-              margin: EdgeInsets.all(10.0),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20.0),
-                gradient: LinearGradient(
-                  colors: getColorsList,
-                  transform: GradientRotation(0.5),
-                ),
-              ),
-              child: Stack(
-                alignment: Alignment.center,
-                children: [
-                  Container(
-                    alignment: Alignment.topCenter,
-                    margin: EdgeInsets.all(10),
-                    child: Text(
-                      heroDisplayPlantName,
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: textwhite,
-                        fontSize: herobigtextsize,
-                      ),
-                    ),
-                  ),
-                  FittedBox(
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color: textwhite.withAlpha(50),
-                        borderRadius: BorderRadius.circular(30),
-                      ),
-                      child: Padding(
-                        padding: EdgeInsets.all(30),
-                        child: Text(
-                          heroDisplayPlantDetails,
-                          style: TextStyle(
-                            fontWeight: FontWeight.normal,
-                            color: textwhite,
-                            fontSize: herotextsize,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                  Container(
-                    padding: EdgeInsets.all(16.0),
-                    alignment: Alignment.bottomLeft,
-                    child: RichText(
-                      text: TextSpan(
-                        text: "തീയതി :",
-                        style: TextStyle(
-                          fontSize: herotextsize,
-                          color: textwhite,
-                          fontWeight: FontWeight.normal,
-                          fontStyle: FontStyle.normal,
-                        ),
-                        children: [
-                          TextSpan(
-                            text: " $day $month $year",
-                            style: TextStyle(
-                              fontSize: herotextsize,
-                              color: textwhite,
-                              fontWeight: FontWeight.normal,
-                              fontStyle: FontStyle.normal,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
+          BigHeroCard(
+            heroDisplayPlantName: heroDisplayPlantName,
+            heroDisplayPlantDetails: heroDisplayPlantDetails,
+            day: day,
+            month: month,
+            year: year,
           ),
-          Container(
-            alignment: Alignment.centerLeft,
-            margin: EdgeInsets.all(10),
-            child: Text(
-              "ചെടികളുടെ പേര്",
-              style: TextStyle(
-                fontSize: 20,
-                color: Colors.blueGrey,
-                fontWeight: FontWeight.normal,
-                fontFamily: "",
-              ),
-            ),
-          ),
-          Expanded(
-            flex: 1,
-            // child: CarouselView.weighted(
-            //   controller: CarouselController(initialItem: 1),
-            //   scrollDirection: Axis.horizontal,
-            //   itemSnapping: true,
-            //   flexWeights: const <int>[1, 2, 8, 2, 1],
-            //   children:
-            //       plist.map((Plant plant) {
-            //         return PlantTile(
-            //           plant: plant,
-            //           onPlantOrgChange: _handlePlantOrgChange,
-            //           heroDisplay: _heroDisplayFunction,
-            //         );
-            //       }).toList(),
-            // ),
-            child: Container(
-              color: Colors.transparent,
-              child: GridView.count(
-                crossAxisCount: 1,
-                shrinkWrap: true,
-                padding: const EdgeInsets.symmetric(vertical: 8.0),
-                scrollDirection: Axis.horizontal,
-                children:
-                    plist.map((Plant plant) {
-                      return PlantTile(
-                        plant: plant,
-                        onPlantOrgChange: _handlePlantOrgChange,
-                        heroDisplay: _heroDisplayFunction,
-                      );
-                    }).toList(),
-              ),
-            ),
-          ),
+          PlantListHeading(),
+          plantListBuilder(),
           SizedBox(height: 100),
         ],
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: _displayDialog,
+        onPressed: displayDialog,
         // onPressed: () {
         //   fileTest(context);
         // },
@@ -207,7 +95,44 @@ class _PlantOrgState extends State<PlantOrg> {
     );
   }
 
-  _heroDisplayFunction(Plant plant) {
+  Expanded plantListBuilder() {
+    return Expanded(
+      flex: 1,
+      // child: CarouselView.weighted(
+      //   controller: CarouselController(initialItem: 1),
+      //   scrollDirection: Axis.horizontal,
+      //   itemSnapping: true,
+      //   flexWeights: const <int>[1, 2, 8, 2, 1],
+      //   children:
+      //       plist.map((Plant plant) {
+      //         return PlantTile(
+      //           plant: plant,
+      //           onPlantOrgChange: _handlePlantOrgChange,
+      //           heroDisplay: _heroDisplayFunction,
+      //         );
+      //       }).toList(),
+      // ),
+      child: Container(
+        color: Colors.transparent,
+        child: GridView.count(
+          crossAxisCount: 1,
+          shrinkWrap: true,
+          padding: const EdgeInsets.symmetric(vertical: 8.0),
+          scrollDirection: Axis.horizontal,
+          children:
+              plist.map((Plant plant) {
+                return PlantTile(
+                  plant: plant,
+                  onPlantOrgChange: handlePlantOrgChange,
+                  heroDisplay: heroDisplayFunction,
+                );
+              }).toList(),
+        ),
+      ),
+    );
+  }
+
+  heroDisplayFunction(Plant plant) {
     setState(() {
       heroDisplayPlantName = plant.plantname;
       heroDisplayPlantDetails = plant.plantdetails;
@@ -218,7 +143,7 @@ class _PlantOrgState extends State<PlantOrg> {
     });
   }
 
-  _updatePlantItem(
+  updatePlantItem(
     Plant plant,
     String updatedPlantname,
     String updatedPlantDetails,
@@ -239,7 +164,7 @@ class _PlantOrgState extends State<PlantOrg> {
     plantSorter(plist);
   }
 
-  _removePlantItem(Plant plant) {
+  removePlantItem(Plant plant) {
     setState(() {
       plist.remove(plant);
       _textEditingController1.clear();
@@ -248,7 +173,7 @@ class _PlantOrgState extends State<PlantOrg> {
     });
   }
 
-  _handlePlantOrgChange(Plant plant) {
+  handlePlantOrgChange(Plant plant) {
     return showDialog(
       context: context,
       barrierDismissible: false,
@@ -268,7 +193,7 @@ class _PlantOrgState extends State<PlantOrg> {
                 decoration: InputDecoration(hintText: plant.plantdetails),
               ),
               ElevatedButton(
-                onPressed: () => _selectDate(context, plant),
+                onPressed: () => selectDate(context, plant),
                 child: const Text('Set Date'),
               ),
             ],
@@ -277,14 +202,14 @@ class _PlantOrgState extends State<PlantOrg> {
             TextButton(
               onPressed: () {
                 Navigator.of(context).pop();
-                _removePlantItem(plant);
+                removePlantItem(plant);
               },
               child: const Text("Remove"),
             ),
             TextButton(
               onPressed: () {
                 Navigator.of(context).pop();
-                _updatePlantItem(
+                updatePlantItem(
                   plant,
                   _textEditingController1.text.isEmpty
                       ? plant.plantname
@@ -310,7 +235,7 @@ class _PlantOrgState extends State<PlantOrg> {
   }
 
   ///Addding a new [Plant]
-  _addPlantItem(String name, String details) {
+  addPlantItem(String name, String details) {
     setState(() {
       plist.add(
         Plant(
@@ -326,7 +251,7 @@ class _PlantOrgState extends State<PlantOrg> {
   }
 
   ///Selecting a date for the [Plant]
-  _selectDate(BuildContext context, Plant plant) async {
+  selectDate(BuildContext context, Plant plant) async {
     DateTime? newSelectedDate = await showDatePicker(
       context: context,
       initialDate: DateTime(2021, 7, 12),
@@ -339,7 +264,7 @@ class _PlantOrgState extends State<PlantOrg> {
   }
 
   /// the dialog window caused by clicking on the FAB button
-  _displayDialog() {
+  displayDialog() {
     return showDialog(
       context: context,
       barrierDismissible: false, //user must tap button
@@ -367,7 +292,7 @@ class _PlantOrgState extends State<PlantOrg> {
               onPressed: () {
                 Navigator.of(context).pop();
                 // TODO: to add date while adding plant
-                _addPlantItem(
+                addPlantItem(
                   _textEditingController1.text,
                   _textEditingController2.text,
                 );
