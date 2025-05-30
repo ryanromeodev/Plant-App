@@ -30,7 +30,7 @@ class _PlantTileState extends State<PlantTile> {
     //the birthday's date
     final from = DateTime(int.parse(year), int.parse(month), int.parse(day));
     final to = DateTime.now();
-    final pendingDays = to.difference(from).inDays;
+    final pendingDays = to.difference(from).inDays * -1;
 
     return GestureDetector(
       onDoubleTap: () {

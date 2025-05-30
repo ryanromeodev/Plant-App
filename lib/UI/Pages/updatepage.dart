@@ -2,19 +2,31 @@ import 'package:flutter/material.dart';
 import 'package:plantapp/Data/plant.dart';
 import 'package:plantapp/UI/plantlistheading.dart';
 
-class Addplant extends StatefulWidget {
-  const Addplant({super.key});
+class UpdatePlant extends StatefulWidget {
+  const UpdatePlant({super.key, required this.plant});
+
+  final Plant plant;
 
   @override
-  State<Addplant> createState() => _AddplantState();
+  State<UpdatePlant> createState() => _UpdatePlantState();
 }
 
-class _AddplantState extends State<Addplant> {
+class _UpdatePlantState extends State<UpdatePlant> {
   final nameController = TextEditingController();
   final detailsController = TextEditingController();
-  String name = "",
-      details = "",
-      date = DateTime.now().toString().substring(0, 10);
+
+  String oldname = "", olddetails = "", olddate = "";
+
+  @override
+  void initState() {
+    super.initState();
+    oldname = widget.plant.plantname;
+    olddetails = widget.plant.plantdetails;
+    olddate = widget.plant.plantdate;
+    nameController.text = widget.plant.plantname;
+    detailsController.text = widget.plant.plantdetails;
+    date = widget.plant.plantdate;
+  }
 
   @override
   void dispose() {
@@ -23,6 +35,10 @@ class _AddplantState extends State<Addplant> {
     detailsController.dispose();
     super.dispose();
   }
+
+  String name = "",
+      details = "",
+      date = DateTime.now().toString().substring(0, 10);
 
   @override
   Widget build(BuildContext context) {
@@ -131,30 +147,54 @@ class _AddplantState extends State<Addplant> {
                         ? ElevatedButton(
                           onPressed: () {
                             // Close the screen and return "Yep!" as the result.
-                            Navigator.pop(
-                              context,
+                            Navigator.pop(context, (
                               Plant(
-                                plantname: nameController.text,
-                                plantdetails:
-                                    detailsController.text.isNotEmpty
-                                        ? detailsController.text
-                                        : "വിവരങ്ങൾ നൽകിയിട്ടില്ല",
-                                plantdate: date,
+                                plantname: oldname,
+                                plantdetails: olddetails,
+                                plantdate: olddate,
                               ),
-                            );
+                              nameController.text,
+                              detailsController.text.isNotEmpty
+                                  ? detailsController.text
+                                  : "വിവരങ്ങൾ നൽകിയിട്ടില്ല",
+                              date,
+                            ));
                           },
-                          child: const Text('Confirm'),
+                          child: const Text('Udpate'),
                         )
                         : ElevatedButton(
                           onPressed: null,
-                          child: const Text('Confirm'),
+                          child: const Text('Update'),
+                        ),
+                    nameController.text.length >= 2
+                        ? ElevatedButton(
+                          onPressed: () {
+                            // Close the screen and return "Yep!" as the result.
+                            Navigator.pop(context, (
+                              Plant(
+                                plantname: oldname,
+                                plantdetails: olddetails,
+                                plantdate: olddate,
+                              ),
+                              "",
+                              "",
+                              "",
+                            ));
+                          },
+                          child: const Text('Remove'),
+                        )
+                        : ElevatedButton(
+                          onPressed: null,
+                          child: const Text('Remove'),
                         ),
                     ElevatedButton(
                       onPressed: () {
-                        Navigator.pop(
-                          context,
+                        Navigator.pop(context, (
                           Plant(plantname: "", plantdetails: "", plantdate: ""),
-                        );
+                          "",
+                          "",
+                          "",
+                        ));
                       },
                       child: const Text('Cancel'),
                     ),

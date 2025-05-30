@@ -17,10 +17,6 @@ class HomePage extends StatefulWidget {
 ///to read a text file and populate the data or else create a new text file for
 ///storing the newly populated data
 class _HomePageState extends State<HomePage> {
-  final TextEditingController _textEditingController1 = TextEditingController();
-  final TextEditingController _textEditingController2 = TextEditingController();
-  late String plantBufferDate = DateTime.now().toString();
-
   List<Plant> plist = [];
 
   @override
@@ -82,7 +78,9 @@ class _HomePageState extends State<HomePage> {
         // onPressed: displayDialog,
         onPressed: () async {
           Plant plant = await addingPlantPage(context);
-          print(plant.plantname);
+          if (plant.plantname.isNotEmpty) {
+            addPlantItem(plant.plantname, plant.plantdetails, plant.plantdate);
+          }
         },
         tooltip: "add plant",
         child: const Icon(Icons.add),
@@ -106,12 +104,25 @@ class _HomePageState extends State<HomePage> {
             plist.map((Plant plant) {
               return PlantTile(
                 plant: plant,
-                onPlantOrgChange: handlePlantOrgChange,
+                onPlantOrgChange: updateHandler,
                 heroDisplay: heroDisplayFunction,
               );
             }).toList(),
       ),
     );
+  }
+
+  updateHandler(Plant plant) async {
+    Plant outPlant;
+    String name, details, date;
+    (outPlant, name, details, date) = await updatePlantPage(context, plant);
+    // print("from root $outPlant,$name,$details$date");
+    if (name.isEmpty) {
+      // Remove
+      removePlantItem(outPlant);
+    } else {
+      updatePlantItem(outPlant, name, details, date);
+    }
   }
 
   heroDisplayFunction(Plant plant) {
@@ -131,8 +142,8 @@ class _HomePageState extends State<HomePage> {
     String updatedPlantDetails,
     String date,
   ) {
+    removePlantItem(plant);
     setState(() {
-      plist.remove(plant);
       plist.add(
         Plant(
           plantname: updatedPlantname,
@@ -140,156 +151,33 @@ class _HomePageState extends State<HomePage> {
           plantdate: date,
         ),
       );
-      _textEditingController1.clear();
-      _textEditingController2.clear();
     });
     plantSorter(plist);
+    resetHeroname();
   }
 
   removePlantItem(Plant plant) {
+    String name = plant.plantname;
     setState(() {
-      plist.remove(plant);
-      _textEditingController1.clear();
-      _textEditingController2.clear();
+      plist.removeWhere((plant) => plant.plantname == name);
       plantSorter(plist);
+      resetHeroname();
     });
   }
 
-  handlePlantOrgChange(Plant plant) {
-    return showDialog(
-      context: context,
-      barrierDismissible: false,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: const Text("Modify plants"),
-          content: Column(
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              TextField(
-                controller: _textEditingController1,
-                decoration: InputDecoration(hintText: plant.plantname),
-              ),
-              TextField(
-                controller: _textEditingController2,
-                decoration: InputDecoration(hintText: plant.plantdetails),
-              ),
-              ElevatedButton(
-                onPressed: () => selectDate(context, plant),
-                child: const Text('Set Date'),
-              ),
-            ],
-          ),
-          actions: <Widget>[
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-                removePlantItem(plant);
-              },
-              child: const Text("Remove"),
-            ),
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-                updatePlantItem(
-                  plant,
-                  _textEditingController1.text.isEmpty
-                      ? plant.plantname
-                      : _textEditingController1.text,
-                  _textEditingController2.text.isEmpty
-                      ? plant.plantdetails
-                      : _textEditingController2.text,
-                  plantBufferDate,
-                );
-              },
-              child: const Text("Update"),
-            ),
-            TextButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              child: const Text("Cancel"),
-            ),
-          ],
-        );
-      },
-    );
+  resetHeroname() {
+    setState(() {
+      heroDisplayPlantName = "ചെടികളുടെ പേര്";
+      heroDisplayPlantDetails = "വിവരങ്ങൾ";
+      heroDisplayPlantDate = "തീയതി";
+    });
   }
 
   ///Addding a new [Plant]
-  addPlantItem(String name, String details) {
+  addPlantItem(String name, String details, String date) {
     setState(() {
-      plist.add(
-        Plant(
-          plantname: name,
-          plantdetails: details,
-          plantdate: DateTime.now().toString(),
-        ),
-      );
+      plist.add(Plant(plantname: name, plantdetails: details, plantdate: date));
       plantSorter(plist);
     });
-    _textEditingController1.clear();
-    _textEditingController2.clear();
-  }
-
-  ///Selecting a date for the [Plant]
-  selectDate(BuildContext context, Plant plant) async {
-    DateTime? newSelectedDate = await showDatePicker(
-      context: context,
-      initialDate: DateTime(2021, 7, 12),
-      firstDate: DateTime(1999),
-      lastDate: DateTime(2032),
-    );
-    setState(() {
-      plantBufferDate = newSelectedDate.toString();
-    });
-  }
-
-  /// the dialog window caused by clicking on the FAB button
-  displayDialog() {
-    return showDialog(
-      context: context,
-      barrierDismissible: false, //user must tap button
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: const Text("Add new Item"),
-          content: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              TextField(
-                controller: _textEditingController1,
-                decoration: const InputDecoration(hintText: "add new plants"),
-              ),
-              TextField(
-                controller: _textEditingController2,
-                decoration: const InputDecoration(
-                  hintText: "details of the plant",
-                ),
-              ),
-            ],
-          ),
-          actions: <Widget>[
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-                // TODO: to add date while adding plant
-                addPlantItem(
-                  _textEditingController1.text,
-                  _textEditingController2.text,
-                );
-              },
-              child: const Text("Add"),
-            ),
-            TextButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              child: const Text("Cancel"),
-            ),
-          ],
-        );
-      },
-    );
   }
 }
