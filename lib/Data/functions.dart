@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:plantapp/Data/data.dart';
 import 'package:plantapp/Data/plant.dart';
-import 'package:plantapp/UI/Pages/addplant.dart';
+import 'package:plantapp/UI/Pages/addpage.dart';
 
 void snackbarfun(context) {
   final snackBar = SnackBar(
@@ -18,6 +18,7 @@ void fileTest(context) {
 }
 
 Future<Plant> addingPlantPage(BuildContext context) async {
+  // Plant plant = Plant(plantname: "", plantdetails: "", plantdate: "");
   final Plant plant = await Navigator.push(
     context,
     MaterialPageRoute(builder: (context) => const Addplant()),

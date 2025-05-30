@@ -6,17 +6,17 @@ import 'package:plantapp/UI/plantlistheading.dart';
 import 'package:plantapp/UI/planttile.dart';
 import 'package:plantapp/Data/functions.dart';
 
-class PlantOrg extends StatefulWidget {
-  const PlantOrg({super.key});
+class HomePage extends StatefulWidget {
+  const HomePage({super.key});
 
   @override
-  State<PlantOrg> createState() => _PlantOrgState();
+  State<HomePage> createState() => _HomePageState();
 }
 
-///The [_PlantOrgState] have the [initState] function where the program tries
+///The [_HomePageState] have the [initState] function where the program tries
 ///to read a text file and populate the data or else create a new text file for
 ///storing the newly populated data
-class _PlantOrgState extends State<PlantOrg> {
+class _HomePageState extends State<HomePage> {
   final TextEditingController _textEditingController1 = TextEditingController();
   final TextEditingController _textEditingController2 = TextEditingController();
   late String plantBufferDate = DateTime.now().toString();
@@ -63,25 +63,26 @@ class _PlantOrgState extends State<PlantOrg> {
         scrolledUnderElevation: 0.0,
         // surfaceTintColor: Colors.transparent,
       ),
-      body: Column(
-        children: [
-          BigHeroCard(
-            heroDisplayPlantName: heroDisplayPlantName,
-            heroDisplayPlantDetails: heroDisplayPlantDetails,
-            day: day,
-            month: month,
-            year: year,
-          ),
-          PlantListHeading(todisplay: "ചെടികളുടെ പേര്"),
-          plantListBuilder(),
-          SizedBox(height: 100),
-        ],
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            BigHeroCard(
+              heroDisplayPlantName: heroDisplayPlantName,
+              heroDisplayPlantDetails: heroDisplayPlantDetails,
+              day: day,
+              month: month,
+              year: year,
+            ),
+            PlantListHeading(todisplay: "ചെടികളുടെ പേര്"),
+            plantListBuilder(),
+          ],
+        ),
       ),
       floatingActionButton: FloatingActionButton(
         // onPressed: displayDialog,
-        onPressed: () {
-          Future<Plant> plant = addingPlantPage(context);
-          print(plant);
+        onPressed: () async {
+          Plant plant = await addingPlantPage(context);
+          print(plant.plantname);
         },
         tooltip: "add plant",
         child: const Icon(Icons.add),
@@ -89,23 +90,13 @@ class _PlantOrgState extends State<PlantOrg> {
     );
   }
 
-  Expanded plantListBuilder() {
-    return Expanded(
-      flex: 1,
-      // child: CarouselView.weighted(
-      //   controller: CarouselController(initialItem: 1),
-      //   scrollDirection: Axis.horizontal,
-      //   itemSnapping: true,
-      //   flexWeights: const <int>[1, 2, 8, 2, 1],
-      //   children:
-      //       plist.map((Plant plant) {
-      //         return PlantTile(
-      //           plant: plant,
-      //           onPlantOrgChange: _handlePlantOrgChange,
-      //           heroDisplay: _heroDisplayFunction,
-      //         );
-      //       }).toList(),
-      // ),
+  SizedBox plantListBuilder() {
+    Orientation orientation = MediaQuery.of(context).orientation;
+    return SizedBox(
+      height:
+          orientation == Orientation.portrait
+              ? MediaQuery.of(context).size.height / 4
+              : MediaQuery.of(context).size.height / 2,
       child: GridView.count(
         crossAxisCount: 1,
         shrinkWrap: true,

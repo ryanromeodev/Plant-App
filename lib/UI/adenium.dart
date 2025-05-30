@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:plantapp/UI/plantorganiser.dart';
+import 'package:plantapp/UI/Pages/homepage.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class Adenium extends StatelessWidget {
@@ -8,10 +7,10 @@ class Adenium extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setPreferredOrientations([
-      DeviceOrientation.portraitUp,
-      DeviceOrientation.portraitDown,
-    ]);
+    // SystemChrome.setPreferredOrientations([
+    //   DeviceOrientation.portraitUp,
+    //   DeviceOrientation.portraitDown,
+    // ]);
     return MaterialApp(
       title: "Adenium plant organiser",
       debugShowCheckedModeBanner: false,
@@ -52,7 +51,7 @@ class Adenium extends StatelessWidget {
           // backgroundColor: Colors.lightBlue,
         ),
       ),
-      home: const PlantOrg(),
+      home: const HomePage(),
     );
   }
 }
