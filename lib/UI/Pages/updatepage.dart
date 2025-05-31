@@ -169,7 +169,6 @@ class _UpdatePlantState extends State<UpdatePlant> {
                     nameController.text.length >= 2
                         ? ElevatedButton(
                           onPressed: () {
-                            // Close the screen and return "Yep!" as the result.
                             Navigator.pop(context, (
                               Plant(
                                 plantname: oldname,

@@ -17,22 +17,23 @@ class Adenium extends StatelessWidget {
       theme: ThemeData(
         // Define the default brightness and colors.
         colorScheme: ColorScheme.fromSeed(
-          seedColor: Colors.blue,
+          seedColor: Colors.white,
+
           // ···
           brightness: Brightness.light,
         ),
         appBarTheme: AppBarTheme(),
         textTheme: TextTheme(
           displayLarge: GoogleFonts.roboto(
-            color: Colors.blueGrey,
+            color: Theme.of(context).colorScheme.primary,
             fontSize: 35,
           ),
           displayMedium: GoogleFonts.roboto(
-            color: Colors.blueGrey,
+            color: Theme.of(context).colorScheme.primary,
             fontSize: 25,
           ),
           headlineLarge: GoogleFonts.roboto(
-            color: Colors.white,
+            color: Theme.of(context).colorScheme.primary,
             fontSize: 30.0,
           ),
           headlineMedium: GoogleFonts.roboto(
@@ -48,7 +49,7 @@ class Adenium extends StatelessWidget {
           // bodySmall: GoogleFonts.roboto(color: Colors.white),
         ),
         floatingActionButtonTheme: FloatingActionButtonThemeData(
-          // backgroundColor: Colors.lightBlue,
+          backgroundColor: Theme.of(context).colorScheme.secondary,
         ),
       ),
       home: const HomePage(),

@@ -35,9 +35,11 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
-  String heroDisplayPlantName = "ചെടികളുടെ പേര്";
-  String heroDisplayPlantDetails = "വിവരങ്ങൾ";
-  String heroDisplayPlantDate = "തീയതി";
+  Plant displayPlant = Plant(
+    plantname: "ചെടികളുടെ പേര്",
+    plantdetails: "വിവരങ്ങൾ",
+    plantdate: DateTime.now().toString().substring(0, 10),
+  );
 
   String day = "", month = "", year = "";
 
@@ -62,13 +64,7 @@ class _HomePageState extends State<HomePage> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            BigHeroCard(
-              heroDisplayPlantName: heroDisplayPlantName,
-              heroDisplayPlantDetails: heroDisplayPlantDetails,
-              day: day,
-              month: month,
-              year: year,
-            ),
+            BigHeroCard(plant: displayPlant, updatehandle: updateHandler),
             PlantListHeading(todisplay: "ചെടികളുടെ പേര്"),
             plantListBuilder(),
           ],
@@ -127,12 +123,7 @@ class _HomePageState extends State<HomePage> {
 
   heroDisplayFunction(Plant plant) {
     setState(() {
-      heroDisplayPlantName = plant.plantname;
-      heroDisplayPlantDetails = plant.plantdetails;
-      heroDisplayPlantDate = plant.plantdate;
-      year = heroDisplayPlantDate.substring(0, 4);
-      month = heroDisplayPlantDate.substring(5, 7);
-      day = heroDisplayPlantDate.substring(8, 10);
+      displayPlant = plant;
     });
   }
 
@@ -167,9 +158,12 @@ class _HomePageState extends State<HomePage> {
 
   resetHeroname() {
     setState(() {
-      heroDisplayPlantName = "ചെടികളുടെ പേര്";
-      heroDisplayPlantDetails = "വിവരങ്ങൾ";
-      heroDisplayPlantDate = "തീയതി";
+      displayPlant =
+          displayPlant = Plant(
+            plantname: "ചെടികളുടെ പേര്",
+            plantdetails: "വിവരങ്ങൾ",
+            plantdate: "",
+          );
     });
   }
 
