@@ -91,14 +91,14 @@ Future<String> createFolder(String filename) async {
   final dir = Directory(
     '${Platform.isAndroid ?
         // (await getExternalStorageDirectory())!.path //FOR ANDROID
-        (await getApplicationSupportDirectory()).path : (await getApplicationSupportDirectory()).path //FOR IOS
+        (await getExternalStorageDirectory())!.path : (await getApplicationSupportDirectory()).path //FOR IOS
         }/$filename',
   );
   var status = await Permission.storage.status;
   if (!status.isGranted) {
     await Permission.storage.request();
   }
-  if ((await dir.exists())) {
+  if (await dir.exists()) {
     developer.log(
       "$blue[fabtestfun:createFolder] Already Exists $dir ${await dir.exists()}$reset",
     );
