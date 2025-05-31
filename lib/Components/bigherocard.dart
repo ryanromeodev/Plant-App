@@ -111,22 +111,30 @@ class _BigHeroCardState extends State<BigHeroCard> {
             ),
           ),
           Container(
-            margin: EdgeInsets.fromLTRB(0, 0, 20, 20),
+            margin: EdgeInsets.fromLTRB(0, 0, 10, 10),
             alignment: Alignment.bottomRight,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 widget.plant.plantdate == ""
-                    ? FilledButton(
+                    ? FloatingActionButton(
                       onPressed: null,
-                      style: FilledButton.styleFrom(shape: CircleBorder()),
-                      child: Icon(Icons.edit),
+                      foregroundColor:
+                          Theme.of(context).colorScheme.onSecondary,
+                      backgroundColor: Theme.of(context).colorScheme.secondary,
+                      child: Icon(Icons.edit_off),
                     )
-                    : FilledButton(
+                    //  FilledButton(
+                    //   onPressed: null,
+                    //   style: FilledButton.styleFrom(shape: CircleBorder()),
+                    //   child: Icon(Icons.edit),
+                    // )
+                    : FloatingActionButton(
+                      foregroundColor: Theme.of(context).colorScheme.onPrimary,
+                      backgroundColor: Theme.of(context).colorScheme.primary,
                       onPressed: () {
                         widget.updatehandle(widget.plant);
                       },
-                      style: FilledButton.styleFrom(shape: CircleBorder()),
                       child: Icon(Icons.edit),
                     ),
               ],

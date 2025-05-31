@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:plantapp/Data/plant.dart';
-import 'package:plantapp/UI/plantlistheading.dart';
+import 'package:plantapp/Components/plantlistheading.dart';
 
 class Addplant extends StatefulWidget {
   const Addplant({super.key});
@@ -32,7 +32,7 @@ class _AddplantState extends State<Addplant> {
         appBar: AppBar(
           automaticallyImplyLeading: false,
           title: Text(
-            'ചേർക്കുക',
+            'ചെടി ചേർക്കുക',
             style: Theme.of(context).textTheme.displaySmall,
           ),
         ),

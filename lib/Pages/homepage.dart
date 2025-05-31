@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:plantapp/Data/data.dart';
-import 'package:plantapp/Data/plant.dart';
-import 'package:plantapp/UI/adenium.dart';
-import 'package:plantapp/UI/bigherocard.dart';
-import 'package:plantapp/UI/plantlistheading.dart';
-import 'package:plantapp/UI/planttile.dart';
 import 'package:plantapp/Data/functions.dart';
+import 'package:plantapp/Data/plant.dart';
+import 'package:plantapp/Components/theme.dart';
+import 'package:plantapp/Components/bigherocard.dart';
+import 'package:plantapp/Components/plantlistheading.dart';
+import 'package:plantapp/Components/planttile.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -51,6 +51,12 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         actions: [
           IconButton(
+            icon: const Icon(Icons.refresh),
+            onPressed: () {
+              removeUnwantedDate(plist);
+            },
+          ),
+          IconButton(
             icon: changinIcon,
             onPressed:
                 () => {
@@ -72,7 +78,7 @@ class _HomePageState extends State<HomePage> {
             },
           ),
         ],
-        title: Text('Home', style: Theme.of(context).textTheme.displaySmall),
+        title: Text('തുടക്കം', style: Theme.of(context).textTheme.displaySmall),
         scrolledUnderElevation: 0.0,
         // surfaceTintColor: Colors.transparent,
       ),
@@ -80,20 +86,20 @@ class _HomePageState extends State<HomePage> {
         child: Column(
           children: [
             BigHeroCard(plant: displayPlant, updatehandle: updateHandler),
-            PlantListHeading(todisplay: "ചെടികളുടെ പേര്"),
+            PlantListHeading(todisplay: "ചെടികളുടെ പേരുകൾ"),
             plantListBuilder(),
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        // onPressed: displayDialog,
         onPressed: () async {
           Plant plant = await addingPlantPage(context);
           if (plant.plantname.isNotEmpty) {
             addPlantItem(plant.plantname, plant.plantdetails, plant.plantdate);
           }
         },
-        tooltip: "add plant",
+        foregroundColor: Theme.of(context).colorScheme.onPrimary,
+        backgroundColor: Theme.of(context).colorScheme.primary,
         child: const Icon(Icons.add),
       ),
     );
@@ -121,6 +127,22 @@ class _HomePageState extends State<HomePage> {
             }).toList(),
       ),
     );
+  }
+
+  removeUnwantedDate(List<Plant> plants) {
+    for (Plant plant in plants) {
+      final String year = plant.plantdate.substring(0, 4);
+      final String month = plant.plantdate.substring(5, 7);
+      final String day = plant.plantdate.substring(8, 10);
+      //the birthday's date
+      final from = DateTime(int.parse(year), int.parse(month), int.parse(day));
+      final to = DateTime.now();
+      final int pendingDays = to.difference(from).inDays * -1;
+      // plist.removeWhere((plant) => plant.plantname == name);
+      if (pendingDays > 0) {
+        print(plant);
+      }
+    }
   }
 
   updateHandler(Plant plant) async {

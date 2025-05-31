@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:plantapp/UI/Pages/homepage.dart';
+import 'package:plantapp/Pages/homepage.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class Adenium extends StatefulWidget {
@@ -62,6 +62,9 @@ class _AdeniumState extends State<Adenium> {
             borderRadius: BorderRadius.circular(5.0),
           ),
         ),
+      ),
+      floatingActionButtonTheme: FloatingActionButtonThemeData(
+        foregroundColor: Theme.of(context).colorScheme.primary,
       ),
     );
   }

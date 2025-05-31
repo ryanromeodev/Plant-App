@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:plantapp/Data/plant.dart';
-import 'package:plantapp/UI/plantlistheading.dart';
+import 'package:plantapp/Components/plantlistheading.dart';
 
 class UpdatePlant extends StatefulWidget {
   const UpdatePlant({super.key, required this.plant});
@@ -48,7 +48,7 @@ class _UpdatePlantState extends State<UpdatePlant> {
         appBar: AppBar(
           automaticallyImplyLeading: false,
           title: Text(
-            'പുതുക്കുക',
+            'ചെടി പുതുക്കുക',
             style: Theme.of(context).textTheme.displaySmall,
           ),
         ),
