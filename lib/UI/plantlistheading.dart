@@ -10,7 +10,7 @@ class PlantListHeading extends StatelessWidget {
     return Container(
       alignment: Alignment.centerLeft,
       margin: EdgeInsets.all(10),
-      child: Text(todisplay, style: Theme.of(context).textTheme.displayMedium),
+      child: Text(todisplay, style: Theme.of(context).textTheme.titleLarge),
     );
   }
 }

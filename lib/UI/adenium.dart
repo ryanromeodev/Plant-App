@@ -2,57 +2,73 @@ import 'package:flutter/material.dart';
 import 'package:plantapp/UI/Pages/homepage.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class Adenium extends StatelessWidget {
+class Adenium extends StatefulWidget {
   const Adenium({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    // SystemChrome.setPreferredOrientations([
-    //   DeviceOrientation.portraitUp,
-    //   DeviceOrientation.portraitDown,
-    // ]);
-    return MaterialApp(
-      title: "Adenium plant organiser",
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        // Define the default brightness and colors.
-        colorScheme: ColorScheme.fromSeed(
-          seedColor: Colors.white,
+  State<Adenium> createState() => _AdeniumState();
 
-          // ···
-          brightness: Brightness.light,
-        ),
-        appBarTheme: AppBarTheme(),
-        textTheme: TextTheme(
-          displayLarge: GoogleFonts.roboto(
-            color: Theme.of(context).colorScheme.primary,
-            fontSize: 35,
-          ),
-          displayMedium: GoogleFonts.roboto(
-            color: Theme.of(context).colorScheme.primary,
-            fontSize: 25,
-          ),
-          headlineLarge: GoogleFonts.roboto(
-            color: Theme.of(context).colorScheme.primary,
-            fontSize: 30.0,
-          ),
-          headlineMedium: GoogleFonts.roboto(
-            color: Colors.white,
-            fontSize: 20.0,
-            wordSpacing: 2,
-          ),
-          headlineSmall: GoogleFonts.roboto(
-            color: Colors.white,
-            fontSize: 16.0,
-          ),
-          bodyMedium: GoogleFonts.roboto(color: Colors.white),
-          // bodySmall: GoogleFonts.roboto(color: Colors.white),
-        ),
-        floatingActionButtonTheme: FloatingActionButtonThemeData(
-          backgroundColor: Theme.of(context).colorScheme.secondary,
-        ),
-      ),
+  /// ↓↓ ADDED
+  /// InheritedWidget style accessor to our State object.
+  static _AdeniumState of(BuildContext context) =>
+      context.findAncestorStateOfType<_AdeniumState>()!;
+}
+
+class _AdeniumState extends State<Adenium> {
+  ThemeMode _themeMode = ThemeMode.system;
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: "Adenium",
+      debugShowCheckedModeBanner: false,
+      theme: baseTheme(Brightness.light),
+      darkTheme: baseTheme(Brightness.dark),
+      themeMode: _themeMode,
       home: const HomePage(),
     );
+  }
+
+  ThemeData baseTheme(Brightness brightness) {
+    return ThemeData(
+      colorScheme: ColorScheme.fromSeed(
+        seedColor: const Color.fromARGB(255, 162, 170, 205),
+        dynamicSchemeVariant: DynamicSchemeVariant.tonalSpot,
+        brightness: brightness,
+      ),
+      textTheme: TextTheme(
+        headlineLarge: GoogleFonts.aboreto(
+          fontWeight: FontWeight.bold,
+          textStyle: TextStyle(
+            decoration: TextDecoration.underline,
+            decorationStyle: TextDecorationStyle.dotted,
+          ),
+        ),
+        headlineSmall: GoogleFonts.aboreto(),
+        // displaySmall: GoogleFonts.aboreto(),
+        titleLarge: GoogleFonts.aboreto(),
+        bodyMedium: GoogleFonts.aboreto(),
+      ),
+      filledButtonTheme: FilledButtonThemeData(
+        style: FilledButton.styleFrom(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(5.0),
+          ),
+        ),
+      ),
+      elevatedButtonTheme: ElevatedButtonThemeData(
+        style: ElevatedButton.styleFrom(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(5.0),
+          ),
+        ),
+      ),
+    );
+  }
+
+  void changeTheme(ThemeMode themeMode) {
+    setState(() {
+      _themeMode = themeMode;
+    });
   }
 }

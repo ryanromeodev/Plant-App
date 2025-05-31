@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:plantapp/Data/functions.dart';
 import 'package:plantapp/Data/plant.dart';
 
 /// This is the UI of a single [Plant] TILE
@@ -32,85 +31,76 @@ class _PlantTileState extends State<PlantTile> {
     final to = DateTime.now();
     final pendingDays = to.difference(from).inDays * -1;
 
-    return Material(
-      child: Container(
-        padding: EdgeInsets.all(10.0),
-        margin: EdgeInsets.all(16.0),
-        decoration: BoxDecoration(
-          // color: Colors.blue.withAlpha(100),
-          boxShadow: [
-            BoxShadow(color: Colors.black.withAlpha(100), blurRadius: 10.0),
-          ],
-          borderRadius: BorderRadius.circular(26.0),
-          gradient: LinearGradient(
-            begin: getAlignments.first,
-            end: getAlignments.last,
-            colors: getColorsList,
-            tileMode: TileMode.clamp,
-            transform: GradientRotation(0.5),
-          ),
-        ),
-        child: InkWell(
-          borderRadius: BorderRadius.circular(1.0),
-          onDoubleTap: () {
-            widget.onPlantOrgChange(widget.plant);
-          },
-          onTap: () {
-            widget.heroDisplay(widget.plant);
-          },
-          // splashColor: Colors.red,
-          child: Stack(
-            children: [
-              Align(
-                alignment: Alignment.topLeft,
-                child: RichText(
-                  text: TextSpan(
-                    text: day,
-                    style: Theme.of(context).textTheme.bodyMedium,
-                    children: [
-                      TextSpan(
-                        text: " $month $year",
-                        style: Theme.of(context).textTheme.bodyMedium,
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              Align(
-                alignment: Alignment.bottomCenter,
-                child: Text(
-                  widget.plant.plantname,
+    return Container(
+      padding: EdgeInsets.all(10.0),
+      margin: EdgeInsets.all(16.0),
+      decoration: BoxDecoration(
+        boxShadow: [
+          BoxShadow(color: Colors.black.withAlpha(100), blurRadius: 10.0),
+        ],
+        borderRadius: BorderRadius.circular(26.0),
+        color: Theme.of(context).colorScheme.surfaceContainerLow,
+      ),
+      child: GestureDetector(
+        onDoubleTap: () {
+          widget.onPlantOrgChange(widget.plant);
+        },
+        onTap: () {
+          widget.heroDisplay(widget.plant);
+        },
+        child: Stack(
+          children: [
+            Align(
+              alignment: Alignment.topLeft,
+              child: RichText(
+                text: TextSpan(
+                  text: day,
                   style: Theme.of(context).textTheme.bodyMedium,
+                  children: [
+                    TextSpan(
+                      text: " $month $year",
+                      style: Theme.of(context).textTheme.bodyMedium,
+                    ),
+                  ],
                 ),
               ),
-              Container(
-                padding: EdgeInsets.all(0.1),
-                margin: EdgeInsets.symmetric(vertical: 25, horizontal: 20),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(26.0),
-                  color: Colors.transparent.withAlpha(20),
-                ),
-                alignment: Alignment.center,
-                child: RichText(
-                  textAlign: TextAlign.center,
-                  text: TextSpan(
-                    text: "ഇനി",
-                    style: Theme.of(context).textTheme.bodyMedium,
-                    children: [
-                      TextSpan(
-                        text: " $pendingDays",
-                        style: Theme.of(context).textTheme.bodyMedium,
-                      ),
-                      TextSpan(
-                        text: " ദിവസം",
-                        style: Theme.of(context).textTheme.bodyMedium,
-                      ),
-                    ],
-                  ),
+            ),
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: Text(
+                widget.plant.plantname,
+                style: Theme.of(context).textTheme.bodyMedium,
+                overflow: TextOverflow.ellipsis,
+                maxLines: 1,
+              ),
+            ),
+            Container(
+              padding: EdgeInsets.all(0.1),
+              margin: EdgeInsets.symmetric(vertical: 25, horizontal: 20),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(26.0),
+                color: Theme.of(context).colorScheme.surfaceContainer,
+              ),
+              alignment: Alignment.center,
+              child: RichText(
+                textAlign: TextAlign.center,
+                text: TextSpan(
+                  text: "ഇനി",
+                  style: Theme.of(context).textTheme.bodyMedium,
+                  children: [
+                    TextSpan(
+                      text: " $pendingDays",
+                      style: Theme.of(context).textTheme.bodyMedium,
+                    ),
+                    TextSpan(
+                      text: " ദിവസം",
+                      style: Theme.of(context).textTheme.bodyMedium,
+                    ),
+                  ],
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

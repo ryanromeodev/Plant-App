@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:plantapp/Data/data.dart';
 import 'package:plantapp/Data/plant.dart';
+import 'package:plantapp/UI/adenium.dart';
 import 'package:plantapp/UI/bigherocard.dart';
 import 'package:plantapp/UI/plantlistheading.dart';
 import 'package:plantapp/UI/planttile.dart';
@@ -42,14 +43,28 @@ class _HomePageState extends State<HomePage> {
   );
 
   String day = "", month = "", year = "";
-
+  Icon changinIcon = Icon(Icons.light_mode);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       // extendBodyBehindAppBar: true,
       appBar: AppBar(
         actions: [
-          IconButton(icon: const Icon(Icons.light_mode), onPressed: () {}),
+          IconButton(
+            icon: changinIcon,
+            onPressed:
+                () => {
+                  Theme.of(context).brightness == Brightness.light
+                      ? {
+                        Adenium.of(context).changeTheme(ThemeMode.dark),
+                        changinIcon = Icon(Icons.dark_mode),
+                      }
+                      : {
+                        Adenium.of(context).changeTheme(ThemeMode.light),
+                        changinIcon = Icon(Icons.light_mode),
+                      },
+                },
+          ),
           IconButton(
             icon: const Icon(Icons.download),
             onPressed: () {
@@ -57,7 +72,7 @@ class _HomePageState extends State<HomePage> {
             },
           ),
         ],
-        title: Text('Home', style: Theme.of(context).textTheme.displayLarge),
+        title: Text('Home', style: Theme.of(context).textTheme.displaySmall),
         scrolledUnderElevation: 0.0,
         // surfaceTintColor: Colors.transparent,
       ),

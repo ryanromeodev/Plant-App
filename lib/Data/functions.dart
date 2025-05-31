@@ -71,18 +71,6 @@ String dateTimeFormatter(DateTime? datetime) {
   return "${datetimeparsed.day}-${datetimeparsed.month}-${datetimeparsed.year}";
 }
 
-List<Color> get getColorsList => [
-  Colors.blueGrey,
-  Colors.grey,
-  // ]..shuffle();
-];
-List<Alignment> get getAlignments => [
-  Alignment.bottomLeft,
-  Alignment.bottomRight,
-  Alignment.topRight,
-  Alignment.topLeft,
-];
-
 int daysBetween(DateTime from, DateTime to) {
   from = DateTime(from.year, from.month, from.day);
   to = DateTime(to.year, to.month, to.day);

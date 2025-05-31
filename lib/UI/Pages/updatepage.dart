@@ -45,7 +45,13 @@ class _UpdatePlantState extends State<UpdatePlant> {
     return PopScope(
       canPop: false,
       child: Scaffold(
-        appBar: AppBar(automaticallyImplyLeading: false),
+        appBar: AppBar(
+          automaticallyImplyLeading: false,
+          title: Text(
+            'പുതുക്കുക',
+            style: Theme.of(context).textTheme.displaySmall,
+          ),
+        ),
         body: SingleChildScrollView(
           child: Column(
             children: [
@@ -54,16 +60,7 @@ class _UpdatePlantState extends State<UpdatePlant> {
                 margin: EdgeInsets.all(10.0),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20.0),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black.withAlpha(80),
-                      blurRadius: 10.0,
-                    ),
-                  ],
-                  gradient: LinearGradient(
-                    colors: [Colors.white, Colors.white],
-                    transform: GradientRotation(0.5),
-                  ),
+                  color: Theme.of(context).colorScheme.primaryContainer,
                 ),
                 child: TextField(
                   onChanged: (text) {
@@ -79,7 +76,6 @@ class _UpdatePlantState extends State<UpdatePlant> {
                       borderRadius: BorderRadius.all(Radius.circular(20)),
                     ),
                     hintText: 'പേര് ഇവിടെ എഴുതുക',
-                    fillColor: Colors.white,
                   ),
                 ),
               ),
@@ -88,16 +84,7 @@ class _UpdatePlantState extends State<UpdatePlant> {
                 margin: EdgeInsets.all(10.0),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20.0),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black.withAlpha(80),
-                      blurRadius: 10.0,
-                    ),
-                  ],
-                  gradient: LinearGradient(
-                    colors: [Colors.white, Colors.white],
-                    transform: GradientRotation(0.5),
-                  ),
+                  color: Theme.of(context).colorScheme.primaryContainer,
                 ),
                 child: TextField(
                   controller: detailsController,
@@ -107,8 +94,6 @@ class _UpdatePlantState extends State<UpdatePlant> {
                       borderRadius: BorderRadius.all(Radius.circular(20)),
                     ),
                     hintText: 'വിവരങ്ങൾ ഇവിടെ എഴുതുക',
-                    fillColor: Colors.white,
-                    hintMaxLines: 3,
                   ),
                 ),
               ),
@@ -144,7 +129,7 @@ class _UpdatePlantState extends State<UpdatePlant> {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     nameController.text.length >= 2
-                        ? ElevatedButton(
+                        ? FilledButton(
                           onPressed: () {
                             // Close the screen and return "Yep!" as the result.
                             Navigator.pop(context, (
@@ -160,14 +145,19 @@ class _UpdatePlantState extends State<UpdatePlant> {
                               date,
                             ));
                           },
-                          child: const Text('Udpate'),
+                          // style: FilledButton.styleFrom(
+                          //   shape: RoundedRectangleBorder(
+                          //     borderRadius: BorderRadius.circular(5.0),
+                          //   ),
+                          // ),
+                          child: const Text('Update'),
                         )
-                        : ElevatedButton(
+                        : FilledButton(
                           onPressed: null,
                           child: const Text('Update'),
                         ),
                     nameController.text.length >= 2
-                        ? ElevatedButton(
+                        ? FilledButton(
                           onPressed: () {
                             Navigator.pop(context, (
                               Plant(
@@ -182,11 +172,11 @@ class _UpdatePlantState extends State<UpdatePlant> {
                           },
                           child: const Text('Remove'),
                         )
-                        : ElevatedButton(
+                        : FilledButton(
                           onPressed: null,
                           child: const Text('Remove'),
                         ),
-                    ElevatedButton(
+                    FilledButton(
                       onPressed: () {
                         Navigator.pop(context, (
                           Plant(plantname: "", plantdetails: "", plantdate: ""),

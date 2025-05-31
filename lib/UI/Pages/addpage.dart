@@ -29,7 +29,13 @@ class _AddplantState extends State<Addplant> {
     return PopScope(
       canPop: false,
       child: Scaffold(
-        appBar: AppBar(automaticallyImplyLeading: false),
+        appBar: AppBar(
+          automaticallyImplyLeading: false,
+          title: Text(
+            'ചേർക്കുക',
+            style: Theme.of(context).textTheme.displaySmall,
+          ),
+        ),
         body: SingleChildScrollView(
           child: Column(
             children: [
@@ -38,16 +44,7 @@ class _AddplantState extends State<Addplant> {
                 margin: EdgeInsets.all(10.0),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20.0),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black.withAlpha(80),
-                      blurRadius: 10.0,
-                    ),
-                  ],
-                  gradient: LinearGradient(
-                    colors: [Colors.white, Colors.white],
-                    transform: GradientRotation(0.5),
-                  ),
+                  color: Theme.of(context).colorScheme.primaryContainer,
                 ),
                 child: TextField(
                   onChanged: (text) {
@@ -63,7 +60,6 @@ class _AddplantState extends State<Addplant> {
                       borderRadius: BorderRadius.all(Radius.circular(20)),
                     ),
                     hintText: 'പേര് ഇവിടെ എഴുതുക',
-                    fillColor: Colors.white,
                   ),
                 ),
               ),
@@ -72,16 +68,18 @@ class _AddplantState extends State<Addplant> {
                 margin: EdgeInsets.all(10.0),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20.0),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black.withAlpha(80),
-                      blurRadius: 10.0,
-                    ),
-                  ],
-                  gradient: LinearGradient(
-                    colors: [Colors.white, Colors.white],
-                    transform: GradientRotation(0.5),
-                  ),
+
+                  // boxShadow: [
+                  //   BoxShadow(
+                  //     color: Colors.black.withAlpha(80),
+                  //     blurRadius: 10.0,
+                  //   ),
+                  // ],
+                  // gradient: LinearGradient(
+                  //   colors: [Colors.white, Colors.white],
+                  //   transform: GradientRotation(0.5),
+                  // ),
+                  color: Theme.of(context).colorScheme.primaryContainer,
                 ),
                 child: TextField(
                   controller: detailsController,
@@ -128,7 +126,7 @@ class _AddplantState extends State<Addplant> {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     nameController.text.length >= 2
-                        ? ElevatedButton(
+                        ? FilledButton(
                           onPressed: () {
                             // Close the screen and return "Yep!" as the result.
                             Navigator.pop(
@@ -145,11 +143,11 @@ class _AddplantState extends State<Addplant> {
                           },
                           child: const Text('Confirm'),
                         )
-                        : ElevatedButton(
+                        : FilledButton(
                           onPressed: null,
                           child: const Text('Confirm'),
                         ),
-                    ElevatedButton(
+                    FilledButton(
                       onPressed: () {
                         Navigator.pop(
                           context,

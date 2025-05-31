@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:plantapp/Data/functions.dart';
+import 'package:flutter/rendering.dart';
 import 'package:plantapp/Data/plant.dart';
 
 class BigHeroCard extends StatefulWidget {
@@ -27,36 +27,67 @@ class _BigHeroCardState extends State<BigHeroCard> {
         boxShadow: [
           BoxShadow(color: Colors.black.withAlpha(80), blurRadius: 10.0),
         ],
-        gradient: LinearGradient(
-          colors: getColorsList,
-          transform: GradientRotation(0.5),
-        ),
+        color: Theme.of(context).colorScheme.primaryContainer,
       ),
       child: Stack(
         alignment: Alignment.center,
         children: [
-          Container(
-            alignment: Alignment.topCenter,
-            margin: EdgeInsets.all(10),
-            child: Text(
-              widget.plant.plantname,
-              style: Theme.of(context).textTheme.headlineLarge,
-            ),
-          ),
-          if (widget.plant.plantdetails.isNotEmpty)
-            Container(
-              margin: EdgeInsets.symmetric(horizontal: 12.0),
-              padding: EdgeInsets.all(2.0),
-              decoration: BoxDecoration(
-                color: Colors.white.withAlpha(50),
-                borderRadius: BorderRadius.circular(30),
+          MediaQuery.of(context).orientation == Orientation.portrait
+              ? Container(
+                alignment: Alignment.topCenter,
+                margin: EdgeInsets.all(10),
+                child: Text(
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 2,
+                  textAlign: TextAlign.center,
+                  widget.plant.plantname,
+                  style: Theme.of(context).textTheme.headlineLarge,
+                ),
+              )
+              : Container(
+                alignment: Alignment.topCenter,
+                margin: EdgeInsets.all(10),
+                child: Text(
+                  textAlign: TextAlign.center,
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 1,
+                  widget.plant.plantname,
+                  style: Theme.of(context).textTheme.headlineLarge,
+                ),
               ),
-              child: Text(
-                widget.plant.plantdetails,
-                textAlign: TextAlign.center,
-                style: Theme.of(context).textTheme.headlineMedium,
+          widget.plant.plantdetails.isNotEmpty
+              ? MediaQuery.of(context).orientation == Orientation.portrait
+                  ? SizedBox(
+                    height: MediaQuery.of(context).size.height / 4,
+                    child: SingleChildScrollView(
+                      child: Text(
+                        widget.plant.plantdetails,
+                        textAlign: TextAlign.center,
+                        style: Theme.of(context).textTheme.headlineSmall,
+                      ),
+                    ),
+                  )
+                  : SizedBox(
+                    child: SingleChildScrollView(
+                      child: Text(
+                        maxLines: 1,
+                        widget.plant.plantdetails,
+                        textAlign: TextAlign.center,
+                        style: Theme.of(context).textTheme.headlineSmall,
+                      ),
+                    ),
+                  )
+              : SizedBox(
+                height: MediaQuery.of(context).size.height / 4,
+                child: SingleChildScrollView(
+                  child: Text(
+                    "വിവരങ്ങൾ നൽകിയിട്ടില്ല",
+                    textAlign: TextAlign.center,
+                    style: Theme.of(context).textTheme.headlineSmall,
+                  ),
+                ),
               ),
-            ),
+
           Container(
             padding: EdgeInsets.all(16.0),
             alignment: Alignment.bottomLeft,
@@ -88,27 +119,14 @@ class _BigHeroCardState extends State<BigHeroCard> {
                 widget.plant.plantdate == ""
                     ? FilledButton(
                       onPressed: null,
-                      style: FilledButton.styleFrom(
-                        shape: CircleBorder(),
-                        // padding: EdgeInsets.all(20),
-                      ),
-                      // style: ButtonStyle(
-                      //   shape: WidgetStateProperty.all(CircleBorder()),
-                      //   padding: WidgetStateProperty.all(EdgeInsets.all(15)),
-                      //   backgroundColor: WidgetStateProperty.all(
-                      //     Colors.blue,
-                      //   ), // <-- Button color
-                      // ),
+                      style: FilledButton.styleFrom(shape: CircleBorder()),
                       child: Icon(Icons.edit),
                     )
                     : FilledButton(
                       onPressed: () {
                         widget.updatehandle(widget.plant);
                       },
-                      style: FilledButton.styleFrom(
-                        shape: CircleBorder(),
-                        // padding: EdgeInsets.all(20),
-                      ),
+                      style: FilledButton.styleFrom(shape: CircleBorder()),
                       child: Icon(Icons.edit),
                     ),
               ],
