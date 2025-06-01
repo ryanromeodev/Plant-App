@@ -1,21 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:plantapp/Data/plant.dart';
 
-class BigHeroCard extends StatefulWidget {
-  const BigHeroCard({
-    super.key,
-    required this.plant,
-    required this.updatehandle,
-  });
+class WasteCard extends StatefulWidget {
+  const WasteCard({super.key, required this.plant});
 
   final Plant plant;
-  final dynamic updatehandle;
 
   @override
-  State<BigHeroCard> createState() => _BigHeroCardState();
+  State<WasteCard> createState() => _WasteCardState();
 }
 
-class _BigHeroCardState extends State<BigHeroCard> {
+class _WasteCardState extends State<WasteCard> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -117,14 +112,22 @@ class _BigHeroCardState extends State<BigHeroCard> {
               children: [
                 widget.plant.plantdate == ""
                     ? SizedBox()
+                    // FloatingActionButton(
+                    //   heroTag: "edit1",
+                    //   onPressed: null,
+                    //   foregroundColor:
+                    //       Theme.of(context).colorScheme.onSecondary,
+                    //   backgroundColor: Theme.of(context).colorScheme.secondary,
+                    //   child: Icon(Icons.restore),
+                    // )
                     : FloatingActionButton(
-                      heroTag: "edit1",
+                      heroTag: "edit2",
                       foregroundColor: Theme.of(context).colorScheme.onPrimary,
                       backgroundColor: Theme.of(context).colorScheme.primary,
                       onPressed: () {
-                        widget.updatehandle(widget.plant);
+                        // widget.updatehandle(widget.plant);
                       },
-                      child: Icon(Icons.edit),
+                      child: Icon(Icons.restore),
                     ),
               ],
             ),

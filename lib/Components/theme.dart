@@ -32,8 +32,8 @@ class _AdeniumState extends State<Adenium> {
   ThemeData baseTheme(Brightness brightness) {
     return ThemeData(
       colorScheme: ColorScheme.fromSeed(
-        seedColor: const Color.fromARGB(255, 162, 170, 205),
-        dynamicSchemeVariant: DynamicSchemeVariant.tonalSpot,
+        seedColor: Colors.blue,
+        dynamicSchemeVariant: DynamicSchemeVariant.vibrant,
         brightness: brightness,
       ),
       textTheme: TextTheme(

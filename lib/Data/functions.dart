@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:plantapp/Data/data.dart';
 import 'package:plantapp/Data/plant.dart';
 import 'package:plantapp/Pages/addpage.dart';
+import 'package:plantapp/Pages/settings.dart';
 import 'package:plantapp/Pages/updatepage.dart';
 
 void snackbarfun(context) {
@@ -19,10 +20,9 @@ void fileTest(context) {
 }
 
 Future<Plant> addingPlantPage(BuildContext context) async {
-  // Plant plant = Plant(plantname: "", plantdetails: "", plantdate: "");
   final Plant plant = await Navigator.push(
     context,
-    MaterialPageRoute(builder: (context) => const Addplant()),
+    MaterialPageRoute(builder: (context) => Addplant()),
   );
   // When a BuildContext is used from a StatefulWidget, the mounted property
   // must be checked after an asynchronous gap.
@@ -37,7 +37,6 @@ Future<(dynamic, dynamic, dynamic, dynamic)> updatePlantPage(
   BuildContext context,
   Plant plant,
 ) async {
-  // Plant plant = Plant(plantname: "", plantdetails: "", plantdate: "");
   final (
     Plant outPlant,
     String name,
@@ -47,12 +46,20 @@ Future<(dynamic, dynamic, dynamic, dynamic)> updatePlantPage(
     context,
     MaterialPageRoute(builder: (context) => UpdatePlant(plant: plant)),
   );
-  // When a BuildContext is used from a StatefulWidget, the mounted property
-  // must be checked after an asynchronous gap.
   if (!context.mounted) {
     return (Plant(plantname: "", plantdetails: "", plantdate: ""), "", "", "");
   }
   return (outPlant, name, details, date);
+}
+
+Future<void> displayTrashPage(BuildContext context, List<Plant> plants) async {
+  await Navigator.push(
+    context,
+    MaterialPageRoute(builder: (context) => Settings(plist: plants)),
+  );
+  if (!context.mounted) {
+    return;
+  }
 }
 
 ///[plantSorter] sort out plants in the order of date t serve the planting functionality

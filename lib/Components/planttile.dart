@@ -9,11 +9,13 @@ class PlantTile extends StatefulWidget {
     required this.plant,
     required this.onPlantOrgChange,
     required this.heroDisplay,
+    required this.displayPlant,
   }) : super(key: ObjectKey(plant));
 
   final Plant plant;
   final dynamic onPlantOrgChange;
   final dynamic heroDisplay;
+  final Plant displayPlant;
 
   @override
   State<PlantTile> createState() => _PlantTileState();
@@ -39,12 +41,12 @@ class _PlantTileState extends State<PlantTile> {
           BoxShadow(color: Colors.black.withAlpha(100), blurRadius: 10.0),
         ],
         borderRadius: BorderRadius.circular(26.0),
-        color: Theme.of(context).colorScheme.surfaceContainerLow,
+        color:
+            widget.plant.plantname == widget.displayPlant.plantname
+                ? Theme.of(context).colorScheme.inversePrimary
+                : Theme.of(context).colorScheme.primaryContainer,
       ),
       child: GestureDetector(
-        onDoubleTap: () {
-          widget.onPlantOrgChange(widget.plant);
-        },
         onTap: () {
           widget.heroDisplay(widget.plant);
         },

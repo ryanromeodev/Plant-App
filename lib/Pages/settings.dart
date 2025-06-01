@@ -1,0 +1,87 @@
+import 'package:flutter/material.dart';
+import 'package:plantapp/Components/wastecard.dart';
+import 'package:plantapp/Data/plant.dart';
+
+class Settings extends StatefulWidget {
+  const Settings({super.key, required this.plist});
+
+  final List<Plant> plist;
+  @override
+  State<Settings> createState() => _SettingsState();
+}
+
+class _SettingsState extends State<Settings> {
+  Plant displayPlant = Plant(
+    plantname: "ചെടികളുടെ പേര്",
+    plantdetails: "വിവരങ്ങൾ",
+    plantdate: DateTime.now().toString().substring(0, 10),
+  );
+
+  @override
+  Widget build(BuildContext context) {
+    return PopScope(
+      canPop: false,
+      child: Scaffold(
+        appBar: AppBar(
+          automaticallyImplyLeading: false,
+          title: Text(
+            'wasted chedikal',
+            style: Theme.of(context).textTheme.displaySmall,
+          ),
+        ),
+        body: SingleChildScrollView(
+          child: Column(
+            children: [
+              WasteCard(plant: displayPlant),
+              plantListBuilder(),
+              FilledButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: const Text('Cancel'),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  SizedBox plantListBuilder() {
+    Orientation orientation = MediaQuery.of(context).orientation;
+    return SizedBox(
+      height:
+          orientation == Orientation.portrait
+              ? MediaQuery.of(context).size.height / 3
+              : MediaQuery.of(context).size.height / 2,
+      // width:
+      //     orientation == Orientation.portrait
+      //         ? MediaQuery.of(context).size.width / 3
+      //         : MediaQuery.of(context).size.width / 2,
+      child: GridView.count(
+        crossAxisCount: 3,
+        shrinkWrap: true,
+        padding: const EdgeInsets.symmetric(vertical: 8.0),
+        scrollDirection: Axis.vertical,
+        children:
+            widget.plist.map((Plant plant) {
+              return GestureDetector(
+                onTap: () {
+                  heroDisplay(plant);
+                  setState(() {
+                    displayPlant = plant;
+                  });
+                },
+                child: ListTile(
+                  leading: Icon(Icons.eco),
+                  title: Text(plant.plantname),
+                  subtitle: Text(plant.plantdetails),
+                ),
+              );
+            }).toList(),
+      ),
+    );
+  }
+
+  heroDisplay(Plant plant) {}
+}

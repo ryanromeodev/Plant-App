@@ -41,9 +41,25 @@ class _HomePageState extends State<HomePage> {
     plantdetails: "വിവരങ്ങൾ",
     plantdate: DateTime.now().toString().substring(0, 10),
   );
-
   String day = "", month = "", year = "";
   Icon changinIcon = Icon(Icons.light_mode);
+  List<Plant> trashList = [
+    Plant(
+      plantname: "trash1",
+      plantdetails: "trashdetails1",
+      plantdate: "2022-03-10",
+    ),
+    Plant(
+      plantname: "trash2",
+      plantdetails: "trashdetails2",
+      plantdate: "2022-03-10",
+    ),
+    Plant(
+      plantname: "trash3",
+      plantdetails: "trashdetails3",
+      plantdate: "2022-03-10",
+    ),
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -51,9 +67,9 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         actions: [
           IconButton(
-            icon: const Icon(Icons.refresh),
+            icon: const Icon(Icons.delete),
             onPressed: () {
-              removeUnwantedDate(plist);
+              displayTrashPage(context, trashList);
             },
           ),
           IconButton(
@@ -86,7 +102,27 @@ class _HomePageState extends State<HomePage> {
         child: Column(
           children: [
             BigHeroCard(plant: displayPlant, updatehandle: updateHandler),
-            PlantListHeading(todisplay: "ചെടികളുടെ പേരുകൾ"),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                PlantListHeading(todisplay: "ചെടികളുടെ പേരുകൾ"),
+                Container(
+                  margin: EdgeInsets.symmetric(horizontal: 10),
+                  child: Container(
+                    // color: Colors.red,
+                    margin: EdgeInsets.fromLTRB(0, 0, 5, 0),
+                    child: SizedBox(
+                      child: GestureDetector(
+                        onTap: () {
+                          removeUnwantedDate(plist);
+                        },
+                        child: Icon(Icons.refresh),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
             plantListBuilder(),
           ],
         ),
@@ -95,11 +131,18 @@ class _HomePageState extends State<HomePage> {
         onPressed: () async {
           Plant plant = await addingPlantPage(context);
           if (plant.plantname.isNotEmpty) {
-            addPlantItem(plant.plantname, plant.plantdetails, plant.plantdate);
+            addPlantItem(
+              plist,
+              plant.plantname,
+              plant.plantdetails,
+              plant.plantdate,
+            );
           }
         },
         foregroundColor: Theme.of(context).colorScheme.onPrimary,
         backgroundColor: Theme.of(context).colorScheme.primary,
+        heroTag:
+            "add", // need to add this as only one FAB per route is possible
         child: const Icon(Icons.add),
       ),
     );
@@ -123,6 +166,7 @@ class _HomePageState extends State<HomePage> {
                 plant: plant,
                 onPlantOrgChange: updateHandler,
                 heroDisplay: heroDisplayFunction,
+                displayPlant: displayPlant,
               );
             }).toList(),
       ),
@@ -139,20 +183,27 @@ class _HomePageState extends State<HomePage> {
       final to = DateTime.now();
       final int pendingDays = to.difference(from).inDays * -1;
       // plist.removeWhere((plant) => plant.plantname == name);
-      if (pendingDays > 0) {
-        print(plant);
+      if (pendingDays < 0) {
+        print("$plant$pendingDays");
+        setState(() {
+          addPlantItem(
+            trashList,
+            plant.plantname,
+            plant.plantdetails,
+            plant.plantdate,
+          );
+        });
       }
     }
+    print(trashList);
   }
 
   updateHandler(Plant plant) async {
     Plant outPlant;
     String name, details, date;
     (outPlant, name, details, date) = await updatePlantPage(context, plant);
-    // print("from root $outPlant,$name,$details$date");
     if (name.isEmpty) {
-      // Remove
-      removePlantItem(outPlant);
+      removePlantItem(plist, outPlant);
     } else {
       updatePlantItem(outPlant, name, details, date);
     }
@@ -170,7 +221,7 @@ class _HomePageState extends State<HomePage> {
     String updatedPlantDetails,
     String date,
   ) {
-    removePlantItem(plant);
+    removePlantItem(plist, plant);
     setState(() {
       plist.add(
         Plant(
@@ -184,7 +235,7 @@ class _HomePageState extends State<HomePage> {
     resetHeroname();
   }
 
-  removePlantItem(Plant plant) {
+  removePlantItem(List<Plant> plist, Plant plant) {
     String name = plant.plantname;
     setState(() {
       plist.removeWhere((plant) => plant.plantname == name);
@@ -205,7 +256,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   ///Addding a new [Plant]
-  addPlantItem(String name, String details, String date) {
+  addPlantItem(List<Plant> plist, String name, String details, String date) {
     setState(() {
       plist.add(Plant(plantname: name, plantdetails: details, plantdate: date));
       plantSorter(plist);

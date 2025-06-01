@@ -68,17 +68,6 @@ class _AddplantState extends State<Addplant> {
                 margin: EdgeInsets.all(10.0),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20.0),
-
-                  // boxShadow: [
-                  //   BoxShadow(
-                  //     color: Colors.black.withAlpha(80),
-                  //     blurRadius: 10.0,
-                  //   ),
-                  // ],
-                  // gradient: LinearGradient(
-                  //   colors: [Colors.white, Colors.white],
-                  //   transform: GradientRotation(0.5),
-                  // ),
                   color: Theme.of(context).colorScheme.primaryContainer,
                 ),
                 child: TextField(
