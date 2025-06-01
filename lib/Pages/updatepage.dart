@@ -51,6 +51,19 @@ class _UpdatePlantState extends State<UpdatePlant> {
             'ചെടി പുതുക്കുക',
             style: Theme.of(context).textTheme.displaySmall,
           ),
+          actions: [
+            IconButton(
+              icon: const Icon(Icons.arrow_back),
+              onPressed: () {
+                Navigator.pop(context, (
+                  Plant(plantname: "", plantdetails: "", plantdate: ""),
+                  "",
+                  "",
+                  "",
+                ));
+              },
+            ),
+          ],
         ),
         body: SingleChildScrollView(
           child: Column(

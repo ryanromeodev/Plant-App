@@ -112,14 +112,6 @@ class _WasteCardState extends State<WasteCard> {
               children: [
                 widget.plant.plantdate == ""
                     ? SizedBox()
-                    // FloatingActionButton(
-                    //   heroTag: "edit1",
-                    //   onPressed: null,
-                    //   foregroundColor:
-                    //       Theme.of(context).colorScheme.onSecondary,
-                    //   backgroundColor: Theme.of(context).colorScheme.secondary,
-                    //   child: Icon(Icons.restore),
-                    // )
                     : FloatingActionButton(
                       heroTag: "edit2",
                       foregroundColor: Theme.of(context).colorScheme.onPrimary,

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:plantapp/Data/data.dart';
 import 'package:plantapp/Data/plant.dart';
 import 'package:plantapp/Pages/addpage.dart';
-import 'package:plantapp/Pages/settings.dart';
+import 'package:plantapp/Pages/settingspage.dart';
 import 'package:plantapp/Pages/updatepage.dart';
 
 void snackbarfun(context) {

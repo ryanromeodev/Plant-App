@@ -28,6 +28,14 @@ class _SettingsState extends State<Settings> {
             'wasted chedikal',
             style: Theme.of(context).textTheme.displaySmall,
           ),
+          actions: [
+            IconButton(
+              icon: const Icon(Icons.arrow_back),
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            ),
+          ],
         ),
         body: SingleChildScrollView(
           child: Column(
@@ -52,20 +60,20 @@ class _SettingsState extends State<Settings> {
     return SizedBox(
       height:
           orientation == Orientation.portrait
-              ? MediaQuery.of(context).size.height / 3
+              ? MediaQuery.of(context).size.height / 5
               : MediaQuery.of(context).size.height / 2,
       // width:
       //     orientation == Orientation.portrait
-      //         ? MediaQuery.of(context).size.width / 3
+      //         ? MediaQuery.of(context).size.width / 4
       //         : MediaQuery.of(context).size.width / 2,
       child: GridView.count(
-        crossAxisCount: 3,
+        crossAxisCount: 1,
         shrinkWrap: true,
         padding: const EdgeInsets.symmetric(vertical: 8.0),
-        scrollDirection: Axis.vertical,
+        scrollDirection: Axis.horizontal,
         children:
             widget.plist.map((Plant plant) {
-              return GestureDetector(
+              return InkWell(
                 onTap: () {
                   heroDisplay(plant);
                   setState(() {
@@ -73,6 +81,7 @@ class _SettingsState extends State<Settings> {
                   });
                 },
                 child: ListTile(
+                  iconColor: Theme.of(context).colorScheme.primary,
                   leading: Icon(Icons.eco),
                   title: Text(plant.plantname),
                   subtitle: Text(plant.plantdetails),
