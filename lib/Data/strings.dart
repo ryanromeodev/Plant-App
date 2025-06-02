@@ -8,6 +8,8 @@ const String blue = "\x1b[34m";
 const String magenta = "\x1b[35m";
 const String cyan = "\x1b[36m";
 const String white = "\x1b[37m";
-const String filename = "FlutterPlantData/plantfile.json";
+const String plantsfile = "FlutterPlantData/plantfile.json";
+const String trashfile = "FlutterPlantData/trashfile.json";
+const String plantdownloadfile = "downloadedPlantList.json";
 
 Directory generalDownloadDir = Directory('/storage/emulated/0/Download');

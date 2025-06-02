@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:plantapp/Components/wastecard.dart';
 import 'package:plantapp/Data/data.dart';
+import 'package:plantapp/Data/functions.dart';
 import 'package:plantapp/Data/plant.dart';
+import 'package:plantapp/Data/strings.dart';
 
 class Settings extends StatefulWidget {
-  const Settings({super.key, required this.trashlist, required this.plants});
+  Settings({super.key, required this.trashlist, required this.plants});
 
-  final List<Plant> trashlist;
+  List<Plant> trashlist;
   final List<Plant> plants;
   @override
   State<Settings> createState() => _SettingsState();
@@ -34,8 +36,17 @@ class _SettingsState extends State<Settings> {
           actions: [
             IconButton(
               icon: const Icon(Icons.download),
-              onPressed: () {
-                saveToDownloads(widget.plants, "plantlist.json");
+              onPressed: () async {
+                bool downloadsuccess = await saveToDownloads(
+                  context,
+                  widget.plants,
+                  plantdownloadfile,
+                );
+                if (context.mounted) {
+                  downloadsuccess
+                      ? snackbarfun(context, "Downloaded ആയിരിക്കുന്നു")
+                      : snackbarfun(context, "Download ചെയ്യാൻ കഴിഞ്ഞില്ല");
+                }
               },
             ),
             IconButton(
@@ -51,16 +62,58 @@ class _SettingsState extends State<Settings> {
             children: [
               WasteCard(plant: displayPlant),
               plantListBuilder(),
-              FilledButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                child: const Text('Cancel'),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  FilledButton(
+                    onPressed: () {
+                      showDialogConfirmation(context);
+                    },
+                    child: const Text('Clear'),
+                  ),
+                  FilledButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    child: const Text('Cancel'),
+                  ),
+                ],
               ),
             ],
           ),
         ),
       ),
+    );
+  }
+
+  showDialogConfirmation(BuildContext context) {
+    return showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text("ശ്രദ്ധിക്കുക"),
+          content: Text("ഈ ചെടികള്‍ തിരിച്ചു എടുക്കാൻ സാധിക്കില്ല"),
+          actions: [
+            TextButton(
+              onPressed: () {
+                setState(() {});
+                Navigator.of(context).pop(); // Close the dialog
+              },
+              child: Text("Cancel"),
+            ),
+            TextButton(
+              onPressed: () {
+                PlantData().deleteJson(trashfile);
+                setState(() {
+                  widget.trashlist = [];
+                });
+                // Navigator.of(context).pop();
+              },
+              child: Text("OK"),
+            ),
+          ],
+        );
+      },
     );
   }
 
@@ -71,10 +124,6 @@ class _SettingsState extends State<Settings> {
           orientation == Orientation.portrait
               ? MediaQuery.of(context).size.height / 5
               : MediaQuery.of(context).size.height / 2,
-      // width:
-      //     orientation == Orientation.portrait
-      //         ? MediaQuery.of(context).size.width / 4
-      //         : MediaQuery.of(context).size.width / 2,
       child: GridView.count(
         crossAxisCount: 1,
         shrinkWrap: true,

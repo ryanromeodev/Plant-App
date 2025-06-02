@@ -6,6 +6,7 @@ import 'package:plantapp/Components/theme.dart';
 import 'package:plantapp/Components/bigherocard.dart';
 import 'package:plantapp/Components/plantlistheading.dart';
 import 'package:plantapp/Components/planttile.dart';
+import 'package:plantapp/Data/routingfunctions.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -18,7 +19,6 @@ class HomePage extends StatefulWidget {
 ///to read a text file and populate the data or else create a new text file for
 ///storing the newly populated data
 class _HomePageState extends State<HomePage> {
-  List<Plant> plist = [];
   Plant displayPlant = Plant(
     plantname: "ചെടികളുടെ പേര്",
     plantdetails: "വിവരങ്ങൾ",
@@ -27,6 +27,7 @@ class _HomePageState extends State<HomePage> {
   );
   String day = "", month = "", year = "";
   Icon changinIcon = Icon(Icons.light_mode);
+  List<Plant> plist = [];
   List<Plant> trashList = [];
 
   @override
@@ -39,9 +40,11 @@ class _HomePageState extends State<HomePage> {
   ///used throughout the program instance
   Future<void> plantDataLoad() async {
     List<Plant> inputPlantList = await PlantData().getplantData;
-    plantSorter(inputPlantList);
+    List<Plant> inputTrashList = await PlantData().gettrashData;
+    plantSorter(inputPlantList, inputTrashList);
     setState(() {
       plist = inputPlantList;
+      trashList = inputTrashList;
     });
   }
 
@@ -69,7 +72,7 @@ class _HomePageState extends State<HomePage> {
           IconButton(
             icon: const Icon(Icons.settings),
             onPressed: () {
-              displayTrashPage(context, trashList, plist);
+              displaySettingsPage(context, trashList, plist);
             },
           ),
         ],
@@ -170,6 +173,7 @@ class _HomePageState extends State<HomePage> {
     setState(() {
       trashList.addAll(bufftrash);
       plist.removeWhere((e) => bufftrash.contains(e));
+      plantSorter(plist, trashList);
     });
 
     print("plist $plist");
@@ -219,7 +223,7 @@ class _HomePageState extends State<HomePage> {
         ),
       );
     });
-    plantSorter(plist);
+    plantSorter(plist, trashList);
     resetHeroname();
   }
 
@@ -227,7 +231,7 @@ class _HomePageState extends State<HomePage> {
     String name = plant.plantname;
     setState(() {
       plist.removeWhere((plant) => plant.plantname == name);
-      plantSorter(plist);
+      plantSorter(plist, trashList);
       resetHeroname();
     });
   }
@@ -236,7 +240,7 @@ class _HomePageState extends State<HomePage> {
   addPlantItem(List<Plant> plist, String name, String details, String date) {
     setState(() {
       plist.add(Plant(plantname: name, plantdetails: details, plantdate: date));
-      plantSorter(plist);
+      plantSorter(plist, trashList);
     });
   }
 }
