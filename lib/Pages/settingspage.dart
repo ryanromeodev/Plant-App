@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:plantapp/Components/wastecard.dart';
+import 'package:plantapp/Data/data.dart';
 import 'package:plantapp/Data/plant.dart';
 
 class Settings extends StatefulWidget {
-  const Settings({super.key, required this.plist});
+  const Settings({super.key, required this.trashlist, required this.plants});
 
-  final List<Plant> plist;
+  final List<Plant> trashlist;
+  final List<Plant> plants;
   @override
   State<Settings> createState() => _SettingsState();
 }
@@ -14,7 +16,8 @@ class _SettingsState extends State<Settings> {
   Plant displayPlant = Plant(
     plantname: "ചെടികളുടെ പേര്",
     plantdetails: "വിവരങ്ങൾ",
-    plantdate: DateTime.now().toString().substring(0, 10),
+    // plantdate: DateTime.now().toString().substring(0, 10),
+    plantdate: "",
   );
 
   @override
@@ -25,10 +28,16 @@ class _SettingsState extends State<Settings> {
         appBar: AppBar(
           automaticallyImplyLeading: false,
           title: Text(
-            'wasted chedikal',
+            'Settings',
             style: Theme.of(context).textTheme.displaySmall,
           ),
           actions: [
+            IconButton(
+              icon: const Icon(Icons.download),
+              onPressed: () {
+                saveToDownloads(widget.plants, "plantlist.json");
+              },
+            ),
             IconButton(
               icon: const Icon(Icons.arrow_back),
               onPressed: () {
@@ -72,10 +81,9 @@ class _SettingsState extends State<Settings> {
         padding: const EdgeInsets.symmetric(vertical: 8.0),
         scrollDirection: Axis.horizontal,
         children:
-            widget.plist.map((Plant plant) {
+            widget.trashlist.map((Plant plant) {
               return InkWell(
                 onTap: () {
-                  heroDisplay(plant);
                   setState(() {
                     displayPlant = plant;
                   });
@@ -91,6 +99,4 @@ class _SettingsState extends State<Settings> {
       ),
     );
   }
-
-  heroDisplay(Plant plant) {}
 }

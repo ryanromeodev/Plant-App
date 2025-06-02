@@ -75,7 +75,7 @@ class PlantData {
         );
       }
       developer.log(
-        "$green[data:readJson] complete read of ${plantList.length} plants is success $status$reset",
+        "$green[data:readJson] complete read of ${plantList} plants is success $status$reset",
       );
     } on PathNotFoundException catch (_) {
       developer.log("$red[data:readJson] exception caught while reading$reset");
@@ -92,7 +92,7 @@ Future<String> createFolder(String filename) async {
     '${Platform.isAndroid ?
         // (await getExternalStorageDirectory())!.path //FOR ANDROID
         (await getExternalStorageDirectory())!.path : (await getApplicationSupportDirectory()).path //FOR IOS
-        }/$filename',
+        }',
   );
   var status = await Permission.storage.status;
   if (!status.isGranted) {
@@ -100,16 +100,16 @@ Future<String> createFolder(String filename) async {
   }
   if (await dir.exists()) {
     developer.log(
-      "$blue[fabtestfun:createFolder] Already Exists $dir ${await dir.exists()}$reset",
+      "$blue[data:createFolder] Already Exists $dir ${await dir.exists()}$reset",
     );
     await for (var entity in dir.list(recursive: true, followLinks: false)) {
       if (entity is File) {
         developer.log(
-          "$white[fabtestfun:createFolder] File : ${entity.path} ${await dir.exists()}$reset",
+          "$white[data:createFolder] File : ${entity.path} ${await dir.exists()}$reset",
         );
       } else if (entity is Directory) {
         developer.log(
-          "$white[fabtestfun:createFolder] Directory : ${entity.path} ${await dir.exists()}$reset",
+          "$white[data:createFolder] Directory : ${entity.path} ${await dir.exists()}$reset",
         );
       }
     }

@@ -19,6 +19,15 @@ class HomePage extends StatefulWidget {
 ///storing the newly populated data
 class _HomePageState extends State<HomePage> {
   List<Plant> plist = [];
+  Plant displayPlant = Plant(
+    plantname: "ചെടികളുടെ പേര്",
+    plantdetails: "വിവരങ്ങൾ",
+    // plantdate: DateTime.now().toString().substring(0, 10),
+    plantdate: "",
+  );
+  String day = "", month = "", year = "";
+  Icon changinIcon = Icon(Icons.light_mode);
+  List<Plant> trashList = [];
 
   @override
   initState() {
@@ -36,42 +45,12 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
-  Plant displayPlant = Plant(
-    plantname: "ചെടികളുടെ പേര്",
-    plantdetails: "വിവരങ്ങൾ",
-    plantdate: DateTime.now().toString().substring(0, 10),
-  );
-  String day = "", month = "", year = "";
-  Icon changinIcon = Icon(Icons.light_mode);
-  List<Plant> trashList = [
-    Plant(
-      plantname: "trash1",
-      plantdetails: "trashdetails1",
-      plantdate: "2022-03-10",
-    ),
-    Plant(
-      plantname: "trash2",
-      plantdetails: "trashdetails2",
-      plantdate: "2022-03-10",
-    ),
-    Plant(
-      plantname: "trash3",
-      plantdetails: "trashdetails3",
-      plantdate: "2022-03-10",
-    ),
-  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       // extendBodyBehindAppBar: true,
       appBar: AppBar(
         actions: [
-          IconButton(
-            icon: const Icon(Icons.delete),
-            onPressed: () {
-              displayTrashPage(context, trashList);
-            },
-          ),
           IconButton(
             icon: changinIcon,
             onPressed:
@@ -88,9 +67,9 @@ class _HomePageState extends State<HomePage> {
                 },
           ),
           IconButton(
-            icon: const Icon(Icons.download),
+            icon: const Icon(Icons.settings),
             onPressed: () {
-              saveToDownloads(plist, "plantlist.json");
+              displayTrashPage(context, trashList, plist);
             },
           ),
         ],
@@ -174,7 +153,8 @@ class _HomePageState extends State<HomePage> {
   }
 
   removeUnwantedDate(List<Plant> plants) {
-    for (Plant plant in plants) {
+    List<Plant> bufftrash = [];
+    plist.forEach((plant) {
       final String year = plant.plantdate.substring(0, 4);
       final String month = plant.plantdate.substring(5, 7);
       final String day = plant.plantdate.substring(8, 10);
@@ -182,20 +162,17 @@ class _HomePageState extends State<HomePage> {
       final from = DateTime(int.parse(year), int.parse(month), int.parse(day));
       final to = DateTime.now();
       final int pendingDays = to.difference(from).inDays * -1;
-      // plist.removeWhere((plant) => plant.plantname == name);
       if (pendingDays < 0) {
-        print("$plant$pendingDays");
-        setState(() {
-          addPlantItem(
-            trashList,
-            plant.plantname,
-            plant.plantdetails,
-            plant.plantdate,
-          );
-        });
+        bufftrash.add(plant);
       }
-    }
-    print(trashList);
+    });
+    print("trash $bufftrash");
+    setState(() {
+      trashList.addAll(bufftrash);
+      plist.removeWhere((e) => bufftrash.contains(e));
+    });
+
+    print("plist $plist");
   }
 
   updateHandler(Plant plant) async {
@@ -212,6 +189,17 @@ class _HomePageState extends State<HomePage> {
   heroDisplayFunction(Plant plant) {
     setState(() {
       displayPlant = plant;
+    });
+  }
+
+  resetHeroname() {
+    setState(() {
+      displayPlant =
+          displayPlant = Plant(
+            plantname: "ചെടികളുടെ പേര്",
+            plantdetails: "വിവരങ്ങൾ",
+            plantdate: "",
+          );
     });
   }
 
@@ -241,17 +229,6 @@ class _HomePageState extends State<HomePage> {
       plist.removeWhere((plant) => plant.plantname == name);
       plantSorter(plist);
       resetHeroname();
-    });
-  }
-
-  resetHeroname() {
-    setState(() {
-      displayPlant =
-          displayPlant = Plant(
-            plantname: "ചെടികളുടെ പേര്",
-            plantdetails: "വിവരങ്ങൾ",
-            plantdate: "",
-          );
     });
   }
 
