@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:plantapp/Data/plant.dart';
 import 'package:plantapp/Components/plantlistheading.dart';
@@ -41,7 +43,12 @@ class _AddplantState extends State<Addplant> {
               onPressed: () {
                 Navigator.pop(
                   context,
-                  Plant(plantname: "", plantdetails: "", plantdate: ""),
+                  Plant(
+                    plantid: "",
+                    plantname: "",
+                    plantdetails: "",
+                    plantdate: "",
+                  ),
                 );
               },
             ),
@@ -128,10 +135,10 @@ class _AddplantState extends State<Addplant> {
                     nameController.text.length >= 2
                         ? FilledButton(
                           onPressed: () {
-                            // Close the screen and return "Yep!" as the result.
                             Navigator.pop(
                               context,
                               Plant(
+                                plantid: Random().nextInt(10001).toString(),
                                 plantname: nameController.text,
                                 plantdetails:
                                     detailsController.text.isNotEmpty
@@ -151,7 +158,12 @@ class _AddplantState extends State<Addplant> {
                       onPressed: () {
                         Navigator.pop(
                           context,
-                          Plant(plantname: "", plantdetails: "", plantdate: ""),
+                          Plant(
+                            plantid: "",
+                            plantname: "",
+                            plantdetails: "",
+                            plantdate: "",
+                          ),
                         );
                       },
                       child: const Text('Cancel'),

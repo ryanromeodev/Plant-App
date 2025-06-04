@@ -16,6 +16,7 @@ class Settings extends StatefulWidget {
 
 class _SettingsState extends State<Settings> {
   Plant displayPlant = Plant(
+    plantid: "",
     plantname: "ചെടികളുടെ പേര്",
     plantdetails: "വിവരങ്ങൾ",
     // plantdate: DateTime.now().toString().substring(0, 10),

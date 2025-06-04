@@ -12,18 +12,19 @@ Future<Plant> addingPlantPage(BuildContext context) async {
   // When a BuildContext is used from a StatefulWidget, the mounted property
   // must be checked after an asynchronous gap.
   if (!context.mounted) {
-    return Plant(plantname: "", plantdetails: "", plantdate: "");
+    return Plant(plantid: "", plantname: "", plantdetails: "", plantdate: "");
   }
 
   return plant;
 }
 
-Future<(dynamic, dynamic, dynamic, dynamic)> updatePlantPage(
+Future<(dynamic, dynamic, dynamic, dynamic, dynamic)> updatePlantPage(
   BuildContext context,
   Plant plant,
 ) async {
   final (
     Plant outPlant,
+    String id,
     String name,
     String details,
     String date,
@@ -32,9 +33,15 @@ Future<(dynamic, dynamic, dynamic, dynamic)> updatePlantPage(
     MaterialPageRoute(builder: (context) => UpdatePlant(plant: plant)),
   );
   if (!context.mounted) {
-    return (Plant(plantname: "", plantdetails: "", plantdate: ""), "", "", "");
+    return (
+      Plant(plantid: "", plantname: "", plantdetails: "", plantdate: ""),
+      "",
+      "",
+      "",
+      "",
+    );
   }
-  return (outPlant, name, details, date);
+  return (outPlant, id, name, details, date);
 }
 
 Future<dynamic> displaySettingsPage(

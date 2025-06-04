@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:plantapp/Data/data.dart';
 import 'package:plantapp/Data/functions.dart';
@@ -7,6 +9,9 @@ import 'package:plantapp/Components/bigherocard.dart';
 import 'package:plantapp/Components/plantlistheading.dart';
 import 'package:plantapp/Components/planttile.dart';
 import 'package:plantapp/Data/routingfunctions.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:timezone/data/latest_all.dart' as tz;
+import 'package:timezone/timezone.dart' as tz;
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -19,10 +24,13 @@ class HomePage extends StatefulWidget {
 ///to read a text file and populate the data or else create a new text file for
 ///storing the newly populated data
 class _HomePageState extends State<HomePage> {
+  final FlutterLocalNotificationsPlugin _notificationsPlugin =
+      FlutterLocalNotificationsPlugin();
+
   Plant displayPlant = Plant(
+    plantid: "",
     plantname: "ചെടികളുടെ പേര്",
     plantdetails: "വിവരങ്ങൾ",
-    // plantdate: DateTime.now().toString().substring(0, 10),
     plantdate: "",
   );
   String day = "", month = "", year = "";
@@ -32,15 +40,87 @@ class _HomePageState extends State<HomePage> {
 
   @override
   initState() {
+    _initializeNotifications();
+    tz.initializeTimeZones();
     plantDataLoad();
     super.initState();
   }
+
+  void _initializeNotifications() async {
+    const AndroidInitializationSettings androidSettings =
+        AndroidInitializationSettings('@mipmap/ic_launcher');
+    const InitializationSettings settings = InitializationSettings(
+      android: androidSettings,
+    );
+    await _notificationsPlugin.initialize(settings);
+  }
+
+  /// Scheduled Notification
+  scheduledNotification(
+    String title,
+    String body,
+    int id,
+    int day,
+    int second,
+  ) async {
+    await _notificationsPlugin.zonedSchedule(
+      id,
+      title,
+      body,
+      tz.TZDateTime.now(tz.local).add(
+        Duration(
+          seconds: second,
+          hours: 6, //morning 6 after 00:00
+          days: day,
+        ),
+      ),
+      const NotificationDetails(
+        android: AndroidNotificationDetails(
+          'your channel id',
+          'your channel name',
+          channelDescription: 'your channel description',
+          importance: Importance.max,
+          priority: Priority.high,
+        ),
+      ),
+      androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
+    );
+    print("here2");
+  }
+
+  //TODO : Future Scope
+
+  // Future<void> _deleteNotificationChannel() async {
+  //   const String channelId = 'your channel id';
+  //   await _notificationsPlugin
+  //       .resolvePlatformSpecificImplementation<
+  //         AndroidFlutterLocalNotificationsPlugin
+  //       >()
+  //       ?.deleteNotificationChannel(channelId);
+
+  //   await showDialog<void>(
+  //     context: context,
+  //     builder:
+  //         (BuildContext context) => AlertDialog(
+  //           content: const Text('Channel with id $channelId deleted'),
+  //           actions: <Widget>[
+  //             TextButton(
+  //               onPressed: () {
+  //                 Navigator.of(context).pop();
+  //               },
+  //               child: const Text('OK'),
+  //             ),
+  //           ],
+  //         ),
+  //   );
+  // }
 
   ///[plantDataLoad] Loads the [Plant] Data to a [plist] which could be
   ///used throughout the program instance
   Future<void> plantDataLoad() async {
     List<Plant> inputPlantList = await PlantData().getplantData;
-    List<Plant> inputTrashList = await PlantData().gettrashData;
+    // List<Plant> inputTrashList = await PlantData().gettrashData;
+    List<Plant> inputTrashList = [];
     plantSorter(inputPlantList, inputTrashList);
     setState(() {
       plist = inputPlantList;
@@ -75,6 +155,19 @@ class _HomePageState extends State<HomePage> {
               displaySettingsPage(context, trashList, plist);
             },
           ),
+          IconButton(
+            icon: const Icon(Icons.android),
+            onPressed: () {
+              print("here");
+              _HomePageState().scheduledNotification(
+                plist[0].plantname,
+                plist[0].plantdate,
+                1,
+                0,
+                2,
+              );
+            },
+          ),
         ],
         title: Text('തുടക്കം', style: Theme.of(context).textTheme.displaySmall),
         scrolledUnderElevation: 0.0,
@@ -83,28 +176,8 @@ class _HomePageState extends State<HomePage> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            BigHeroCard(plant: displayPlant, updatehandle: updateHandler),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                PlantListHeading(todisplay: "ചെടികളുടെ പേരുകൾ"),
-                Container(
-                  margin: EdgeInsets.symmetric(horizontal: 10),
-                  child: Container(
-                    // color: Colors.red,
-                    margin: EdgeInsets.fromLTRB(0, 0, 5, 0),
-                    child: SizedBox(
-                      child: GestureDetector(
-                        onTap: () {
-                          removeUnwantedDate(plist);
-                        },
-                        child: Icon(Icons.refresh),
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
+            // BigHeroCard(plant: displayPlant, updatehandle: updateHandler),
+            PlantListHeading(todisplay: "ചെടികളുടെ പേരുകൾ"),
             plantListBuilder(),
           ],
         ),
@@ -115,6 +188,7 @@ class _HomePageState extends State<HomePage> {
           if (plant.plantname.isNotEmpty) {
             addPlantItem(
               plist,
+              plant.plantid,
               plant.plantname,
               plant.plantdetails,
               plant.plantdate,
@@ -130,27 +204,36 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  SizedBox plantListBuilder() {
+  Container plantListBuilder() {
     Orientation orientation = MediaQuery.of(context).orientation;
-    return SizedBox(
+    return Container(
+      margin: EdgeInsets.symmetric(vertical: 10.0),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(26.0),
+        color: Theme.of(context).colorScheme.surface,
+      ),
       height:
-          orientation == Orientation.portrait
-              ? MediaQuery.of(context).size.height / 4
+          Orientation.portrait == orientation
+              ? MediaQuery.of(context).size.height -
+                  (MediaQuery.of(context).size.height / 5)
               : MediaQuery.of(context).size.height / 2,
-      child: GridView.count(
-        crossAxisCount: 1,
-        shrinkWrap: true,
-        padding: const EdgeInsets.symmetric(vertical: 8.0),
-        scrollDirection: Axis.horizontal,
-        children:
-            plist.map((Plant plant) {
-              return PlantTile(
-                plant: plant,
-                onPlantOrgChange: updateHandler,
-                heroDisplay: heroDisplayFunction,
-                displayPlant: displayPlant,
-              );
-            }).toList(),
+      child: Scrollbar(
+        thickness: 10,
+        radius: Radius.circular(2),
+        child: ListView(
+          shrinkWrap: true,
+          padding: const EdgeInsets.symmetric(vertical: 8.0),
+          scrollDirection: Axis.vertical,
+          children:
+              plist.map((Plant plant) {
+                return PlantTile(
+                  plant: plant,
+                  onPlantOrgChange: updateHandler,
+                  heroDisplay: heroDisplayFunction,
+                  displayPlant: displayPlant,
+                );
+              }).toList(),
+        ),
       ),
     );
   }
@@ -158,35 +241,26 @@ class _HomePageState extends State<HomePage> {
   removeUnwantedDate(List<Plant> plants) {
     List<Plant> bufftrash = [];
     plist.forEach((plant) {
-      final String year = plant.plantdate.substring(0, 4);
-      final String month = plant.plantdate.substring(5, 7);
-      final String day = plant.plantdate.substring(8, 10);
-      //the birthday's date
-      final from = DateTime(int.parse(year), int.parse(month), int.parse(day));
-      final to = DateTime.now();
-      final int pendingDays = to.difference(from).inDays * -1;
+      int pendingDays = pendingdays(plant.plantdate);
       if (pendingDays < 0) {
         bufftrash.add(plant);
       }
     });
-    print("trash $bufftrash");
     setState(() {
       trashList.addAll(bufftrash);
       plist.removeWhere((e) => bufftrash.contains(e));
       plantSorter(plist, trashList);
     });
-
-    print("plist $plist");
   }
 
   updateHandler(Plant plant) async {
     Plant outPlant;
-    String name, details, date;
-    (outPlant, name, details, date) = await updatePlantPage(context, plant);
+    String id, name, details, date;
+    (outPlant, id, name, details, date) = await updatePlantPage(context, plant);
     if (name.isEmpty) {
       removePlantItem(plist, outPlant);
     } else {
-      updatePlantItem(outPlant, name, details, date);
+      updatePlantItem(outPlant, id, name, details, date);
     }
   }
 
@@ -200,6 +274,7 @@ class _HomePageState extends State<HomePage> {
     setState(() {
       displayPlant =
           displayPlant = Plant(
+            plantid: "",
             plantname: "ചെടികളുടെ പേര്",
             plantdetails: "വിവരങ്ങൾ",
             plantdate: "",
@@ -209,38 +284,55 @@ class _HomePageState extends State<HomePage> {
 
   updatePlantItem(
     Plant plant,
+    String plantid,
     String updatedPlantname,
     String updatedPlantDetails,
     String date,
   ) {
     removePlantItem(plist, plant);
-    setState(() {
-      plist.add(
-        Plant(
-          plantname: updatedPlantname,
-          plantdetails: updatedPlantDetails,
-          plantdate: date,
-        ),
-      );
-    });
-    plantSorter(plist, trashList);
+    addPlantItem(plist, plantid, updatedPlantname, updatedPlantDetails, date);
     resetHeroname();
   }
 
   removePlantItem(List<Plant> plist, Plant plant) {
-    String name = plant.plantname;
+    String id = plant.plantid;
     setState(() {
-      plist.removeWhere((plant) => plant.plantname == name);
+      plist.removeWhere((plant) => plant.plantid == id);
       plantSorter(plist, trashList);
       resetHeroname();
     });
   }
 
   ///Addding a new [Plant]
-  addPlantItem(List<Plant> plist, String name, String details, String date) {
+  addPlantItem(
+    List<Plant> plist,
+    String id,
+    String name,
+    String details,
+    String date,
+  ) {
     setState(() {
-      plist.add(Plant(plantname: name, plantdetails: details, plantdate: date));
+      plist.add(
+        Plant(
+          plantid: id,
+          plantname: name,
+          plantdetails: details,
+          plantdate: date,
+        ),
+      );
       plantSorter(plist, trashList);
     });
+    int notificationdate = pendingdays(date) - 2; //notifies 2 days before
+    if (notificationdate >= 0) {
+      // notify
+      _HomePageState().scheduledNotification(
+        name,
+        date,
+        int.parse(id), //#id gets random, not mapping, just push
+        // notificationdate,
+        0,
+        5,
+      );
+    }
   }
 }

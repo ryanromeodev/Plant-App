@@ -37,17 +37,16 @@ class _AdeniumState extends State<Adenium> {
         brightness: brightness,
       ),
       textTheme: TextTheme(
-        headlineLarge: GoogleFonts.aboreto(
-          fontWeight: FontWeight.bold,
-          textStyle: TextStyle(
-            decoration: TextDecoration.underline,
-            decorationStyle: TextDecorationStyle.dotted,
-          ),
-        ),
-        headlineSmall: GoogleFonts.aboreto(),
-        // displaySmall: GoogleFonts.aboreto(),
-        titleLarge: GoogleFonts.aboreto(),
-        bodyMedium: GoogleFonts.aboreto(),
+        // headlineLarge: GoogleFonts.aboreto(
+        //   fontWeight: FontWeight.bold,
+        //   textStyle: TextStyle(
+        //     decoration: TextDecoration.underline,
+        //     decorationStyle: TextDecorationStyle.dotted,
+        //   ),
+        // ),
+        // headlineSmall: GoogleFonts.aboreto(),
+        // titleLarge: GoogleFonts.aboreto(),
+        // bodyMedium: GoogleFonts.aboreto(),
       ),
       filledButtonTheme: FilledButtonThemeData(
         style: FilledButton.styleFrom(

@@ -16,11 +16,12 @@ void fileTest(context) {
   pdata.readJson(plantsfile);
 }
 
-///[plantSorter] sort out plants in the order of date t serve the planting functionality
+///[plantSorter] sort out plants in the order of date
+///it serve the saving of trash and plants - functionality
 plantSorter(List<Plant> unsortedPlantList, List<Plant> trashlist) {
   unsortedPlantList.sort(
     (a, b) =>
-        (DateTime.parse(a.plantdate)).compareTo(DateTime.parse(b.plantdate)),
+        (DateTime.parse(b.plantdate)).compareTo(DateTime.parse(a.plantdate)),
   );
   trashlist.sort(
     (a, b) =>
@@ -41,4 +42,14 @@ int daysBetween(DateTime from, DateTime to) {
   from = DateTime(from.year, from.month, from.day);
   to = DateTime(to.year, to.month, to.day);
   return (to.difference(from).inHours / 24).round();
+}
+
+int pendingdays(String plantdate) {
+  final String year = plantdate.substring(0, 4);
+  final String month = plantdate.substring(5, 7);
+  final String day = plantdate.substring(8, 10);
+  final from = DateTime(int.parse(year), int.parse(month), int.parse(day));
+  final to = DateTime.now();
+  final int pendingDays = ((to.difference(from).inHours / 24) * -1).ceil();
+  return pendingDays;
 }

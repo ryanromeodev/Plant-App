@@ -16,7 +16,7 @@ class PlantData {
   /// initial instace of the program.
   /// The method returns a [Plant] object list which is in Future reference.
   Future<List<Plant>> get getplantData async => await _supplyPlist();
-  Future<List<Plant>> get gettrashData async => await _supplyTlist();
+  // Future<List<Plant>> get gettrashData async => await _supplyTlist();
 
   Future<String> get filelocation async => await createFolder();
 
@@ -25,10 +25,10 @@ class PlantData {
     return plantList;
   }
 
-  _supplyTlist() {
-    Future<List<Plant>> plantList = readJson(trashfile);
-    return plantList;
-  }
+  // _supplyTlist() {
+  //   Future<List<Plant>> plantList = readJson(trashfile);
+  //   return plantList;
+  // }
 
   ///Writing the [Plant] Data to the json file
   void writeJson(List<Plant> plants, String filename) async {
@@ -75,6 +75,7 @@ class PlantData {
       for (var i = 0; i < plantListJson.length; i++) {
         plantList.add(
           Plant(
+            plantid: plantListJson[i]["plantid"],
             plantname: plantListJson[i]["plantname"],
             plantdetails: plantListJson[i]["plantdetails"],
             plantdate: plantListJson[i]["plantdate"],
@@ -149,9 +150,12 @@ Future<String> createFolder() async {
 }
 
 Future<dynamic> loadtestdata() async {
-  final String response = await rootBundle.loadString(
-    'assets/plantdetails.json',
-  );
+  String response = "";
+  try {
+    response = await rootBundle.loadString('assets/realplantdetails.json');
+  } on Exception catch (e) {
+    print(e);
+  }
   final data = await json.decode(response);
   developer.log("$yellow[fabtestfun:loadtestdata] Test Data : $data $reset");
   return data["plants"];

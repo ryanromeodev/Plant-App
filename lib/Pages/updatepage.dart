@@ -15,11 +15,12 @@ class _UpdatePlantState extends State<UpdatePlant> {
   final nameController = TextEditingController();
   final detailsController = TextEditingController();
 
-  String oldname = "", olddetails = "", olddate = "";
+  String oldid = "", oldname = "", olddetails = "", olddate = "";
 
   @override
   void initState() {
     super.initState();
+    oldid = widget.plant.plantid;
     oldname = widget.plant.plantname;
     olddetails = widget.plant.plantdetails;
     olddate = widget.plant.plantdate;
@@ -56,7 +57,13 @@ class _UpdatePlantState extends State<UpdatePlant> {
               icon: const Icon(Icons.arrow_back),
               onPressed: () {
                 Navigator.pop(context, (
-                  Plant(plantname: "", plantdetails: "", plantdate: ""),
+                  Plant(
+                    plantid: "",
+                    plantname: "",
+                    plantdetails: "",
+                    plantdate: "",
+                  ),
+                  "",
                   "",
                   "",
                   "",
@@ -147,10 +154,12 @@ class _UpdatePlantState extends State<UpdatePlant> {
                             // Close the screen and return "Yep!" as the result.
                             Navigator.pop(context, (
                               Plant(
+                                plantid: oldid,
                                 plantname: oldname,
                                 plantdetails: olddetails,
                                 plantdate: olddate,
                               ),
+                              widget.plant.plantid,
                               nameController.text,
                               detailsController.text.isNotEmpty
                                   ? detailsController.text
@@ -174,10 +183,12 @@ class _UpdatePlantState extends State<UpdatePlant> {
                           onPressed: () {
                             Navigator.pop(context, (
                               Plant(
+                                plantid: oldid,
                                 plantname: oldname,
                                 plantdetails: olddetails,
                                 plantdate: olddate,
                               ),
+                              "",
                               "",
                               "",
                               "",
@@ -192,7 +203,13 @@ class _UpdatePlantState extends State<UpdatePlant> {
                     FilledButton(
                       onPressed: () {
                         Navigator.pop(context, (
-                          Plant(plantname: "", plantdetails: "", plantdate: ""),
+                          Plant(
+                            plantid: "",
+                            plantname: "",
+                            plantdetails: "",
+                            plantdate: "",
+                          ),
+                          "",
                           "",
                           "",
                           "",
@@ -218,7 +235,9 @@ class _UpdatePlantState extends State<UpdatePlant> {
       lastDate: DateTime(2032),
     );
     setState(() {
-      date = newSelectedDate.toString().substring(0, 10);
+      if (newSelectedDate != null) {
+        date = newSelectedDate.toString().substring(0, 10);
+      }
     });
   }
 }

@@ -31,75 +31,75 @@ class _PlantTileState extends State<PlantTile> {
     //the birthday's date
     final from = DateTime(int.parse(year), int.parse(month), int.parse(day));
     final to = DateTime.now();
-    final pendingDays = to.difference(from).inDays * -1;
+    final pendingDays = ((to.difference(from).inHours / 24) * -1).ceil();
 
-    return Container(
-      padding: EdgeInsets.all(10.0),
-      margin: EdgeInsets.all(16.0),
-      decoration: BoxDecoration(
-        boxShadow: [
-          BoxShadow(color: Colors.black.withAlpha(100), blurRadius: 10.0),
-        ],
-        borderRadius: BorderRadius.circular(26.0),
-        color:
-            widget.plant.plantname == widget.displayPlant.plantname
-                ? Theme.of(context).colorScheme.inversePrimary
-                : Theme.of(context).colorScheme.primaryContainer,
-      ),
-      child: GestureDetector(
-        onTap: () {
-          widget.heroDisplay(widget.plant);
-        },
-        child: Stack(
+    return GestureDetector(
+      onTap: () {
+        widget.heroDisplay(widget.plant);
+      },
+      child: Container(
+        padding: EdgeInsets.all(10.0),
+        margin: EdgeInsets.all(16.0),
+        decoration: BoxDecoration(
+          boxShadow: [
+            BoxShadow(color: Colors.black.withAlpha(100), blurRadius: 10.0),
+          ],
+          borderRadius: BorderRadius.circular(26.0),
+          color:
+              widget.plant.plantname.trim() ==
+                      widget.displayPlant.plantname.trim()
+                  ? Theme.of(context).colorScheme.inversePrimary
+                  : Theme.of(context).colorScheme.primaryContainer,
+        ),
+        child: Column(
           children: [
-            Align(
-              alignment: Alignment.topLeft,
-              child: RichText(
-                text: TextSpan(
-                  text: day,
-                  style: Theme.of(context).textTheme.bodyMedium,
-                  children: [
-                    TextSpan(
-                      text: " $month $year",
-                      style: Theme.of(context).textTheme.bodyMedium,
+            Container(
+              child: Stack(
+                children: [
+                  Align(
+                    alignment: Alignment.topRight,
+                    child: RichText(
+                      text: TextSpan(
+                        text: day,
+                        style: Theme.of(context).textTheme.bodyMedium,
+                        children: [
+                          TextSpan(
+                            text: " $month $year",
+                            style: Theme.of(context).textTheme.bodyMedium,
+                          ),
+                        ],
+                      ),
                     ),
-                  ],
-                ),
+                  ),
+                  Align(
+                    alignment: Alignment.topLeft,
+                    child: Text(
+                      widget.plant.plantname.length > 40
+                          ? '${widget.plant.plantname.substring(0, 40)}...'
+                          : widget.plant.plantname,
+                      style: Theme.of(context).textTheme.bodyMedium,
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 1,
+                    ),
+                  ),
+                ],
               ),
             ),
-            Align(
-              alignment: Alignment.bottomCenter,
+            SizedBox(height: 20),
+            Container(
               child: Text(
-                widget.plant.plantname,
+                textAlign: TextAlign.center,
+                widget.plant.plantdetails,
                 style: Theme.of(context).textTheme.bodyMedium,
-                overflow: TextOverflow.ellipsis,
-                maxLines: 1,
               ),
             ),
             Container(
-              padding: EdgeInsets.all(0.1),
-              margin: EdgeInsets.symmetric(vertical: 25, horizontal: 20),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(26.0),
-                color: Theme.of(context).colorScheme.surfaceContainer,
-              ),
-              alignment: Alignment.center,
-              child: RichText(
-                textAlign: TextAlign.center,
-                text: TextSpan(
-                  text: "ഇനി",
-                  style: Theme.of(context).textTheme.bodyMedium,
-                  children: [
-                    TextSpan(
-                      text: " $pendingDays",
-                      style: Theme.of(context).textTheme.bodyMedium,
-                    ),
-                    TextSpan(
-                      text: " ദിവസം",
-                      style: Theme.of(context).textTheme.bodyMedium,
-                    ),
-                  ],
-                ),
+              alignment: Alignment.centerRight,
+              child: FilledButton(
+                onPressed: () {
+                  widget.onPlantOrgChange(widget.plant);
+                },
+                child: Icon(Icons.edit),
               ),
             ),
           ],
