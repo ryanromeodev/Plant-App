@@ -188,7 +188,7 @@ class _HomePageState extends State<HomePage> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            PlantListHeading(todisplay: "ചെടികളുടെ പേരുകൾ :"),
+            PlantListHeading(todisplay: "ചെടികളുടെ പേരുകൾ"),
             plantListBuilder(),
           ],
         ),
