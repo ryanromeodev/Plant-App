@@ -6,15 +6,22 @@ import 'package:plantapp/Data/plant.dart';
 import 'package:plantapp/Data/strings.dart';
 
 class Settings extends StatefulWidget {
-  Settings({super.key, required this.trashlist, required this.plants});
+  const Settings({super.key, required this.trashlist, required this.plants});
 
-  List<Plant> trashlist;
+  final List<Plant> trashlist;
   final List<Plant> plants;
   @override
   State<Settings> createState() => _SettingsState();
 }
 
 class _SettingsState extends State<Settings> {
+  List<Plant> trashes = [];
+  @override
+  initState() {
+    trashes = widget.trashlist;
+    super.initState();
+  }
+
   Plant displayPlant = Plant(
     plantid: "",
     plantname: "ചെടികളുടെ പേര്",
@@ -53,7 +60,7 @@ class _SettingsState extends State<Settings> {
             IconButton(
               icon: const Icon(Icons.arrow_back),
               onPressed: () {
-                Navigator.pop(context);
+                Navigator.pop(context, trashes);
               },
             ),
           ],
@@ -74,7 +81,7 @@ class _SettingsState extends State<Settings> {
                   ),
                   FilledButton(
                     onPressed: () {
-                      Navigator.pop(context);
+                      Navigator.pop(context, trashes);
                     },
                     child: const Text('Cancel'),
                   ),
@@ -97,7 +104,6 @@ class _SettingsState extends State<Settings> {
           actions: [
             TextButton(
               onPressed: () {
-                setState(() {});
                 Navigator.of(context).pop(); // Close the dialog
               },
               child: Text("Cancel"),
@@ -106,9 +112,9 @@ class _SettingsState extends State<Settings> {
               onPressed: () {
                 PlantData().deleteJson(trashfile);
                 setState(() {
-                  widget.trashlist = [];
+                  trashes = [];
                 });
-                // Navigator.of(context).pop();
+                Navigator.pop(context, trashes);
               },
               child: Text("OK"),
             ),
@@ -131,7 +137,7 @@ class _SettingsState extends State<Settings> {
         padding: const EdgeInsets.symmetric(vertical: 8.0),
         scrollDirection: Axis.horizontal,
         children:
-            widget.trashlist.map((Plant plant) {
+            trashes.map((Plant plant) {
               return InkWell(
                 onTap: () {
                   setState(() {

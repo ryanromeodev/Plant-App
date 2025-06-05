@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:plantapp/Data/plant.dart';
 
@@ -9,13 +10,13 @@ class PlantTile extends StatefulWidget {
     required this.plant,
     required this.onPlantOrgChange,
     required this.heroDisplay,
-    required this.displayPlant,
+    required this.displayPlantName,
   }) : super(key: ObjectKey(plant));
 
   final Plant plant;
   final dynamic onPlantOrgChange;
   final dynamic heroDisplay;
-  final Plant displayPlant;
+  final String displayPlantName;
 
   @override
   State<PlantTile> createState() => _PlantTileState();
@@ -38,69 +39,120 @@ class _PlantTileState extends State<PlantTile> {
         widget.heroDisplay(widget.plant);
       },
       child: Container(
-        padding: EdgeInsets.all(10.0),
-        margin: EdgeInsets.all(16.0),
+        margin: EdgeInsets.symmetric(horizontal: 5.0),
         decoration: BoxDecoration(
-          boxShadow: [
-            BoxShadow(color: Colors.black.withAlpha(100), blurRadius: 10.0),
-          ],
-          borderRadius: BorderRadius.circular(26.0),
-          color:
-              widget.plant.plantname.trim() ==
-                      widget.displayPlant.plantname.trim()
-                  ? Theme.of(context).colorScheme.inversePrimary
-                  : Theme.of(context).colorScheme.primaryContainer,
+          // boxShadow: [
+          //   BoxShadow(color: Colors.black.withAlpha(100), blurRadius: 10.0),
+          // ],
+          // borderRadius: BorderRadius.circular(20.0),
+          // color:
+          //     widget.plant.plantname.trim() == widget.displayPlantName.trim()
+          //         ? Theme.of(context).colorScheme.secondaryContainer
+          //         : Theme.of(context).colorScheme.primaryContainer,
         ),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Container(
-              child: Stack(
+            SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Align(
-                    alignment: Alignment.topRight,
-                    child: RichText(
-                      text: TextSpan(
-                        text: day,
-                        style: Theme.of(context).textTheme.bodyMedium,
+                  Material(
+                    color: Theme.of(context).colorScheme.surfaceContainer,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: Container(
+                      margin: EdgeInsets.symmetric(horizontal: 5),
+                      child: Row(
                         children: [
-                          TextSpan(
-                            text: " $month $year",
-                            style: Theme.of(context).textTheme.bodyMedium,
+                          Icon(
+                            Icons.energy_savings_leaf,
+                            color: Theme.of(context).colorScheme.secondary,
+                          ),
+                          Container(
+                            padding: EdgeInsets.all(5),
+                            child: SingleChildScrollView(
+                              child: Text(
+                                // widget.plant.plantname.length > 13
+                                //     ? '${widget.plant.plantname.substring(0, 13)}...'
+                                //     : widget.plant.plantname,
+                                widget.plant.plantname,
+                                style:
+                                    Theme.of(context).textTheme.headlineSmall,
+                              ),
+                            ),
                           ),
                         ],
                       ),
                     ),
                   ),
-                  Align(
-                    alignment: Alignment.topLeft,
-                    child: Text(
-                      widget.plant.plantname.length > 40
-                          ? '${widget.plant.plantname.substring(0, 40)}...'
-                          : widget.plant.plantname,
-                      style: Theme.of(context).textTheme.bodyMedium,
-                      overflow: TextOverflow.ellipsis,
-                      maxLines: 1,
+                  SizedBox(width: 10),
+                  RichText(
+                    text: TextSpan(
+                      text: "$day.",
+                      style: Theme.of(context).textTheme.bodyLarge,
+                      children: [
+                        TextSpan(
+                          text: "$month.$year",
+                          style: Theme.of(context).textTheme.bodyLarge,
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(width: 10),
+                  Container(
+                    margin: EdgeInsets.fromLTRB(0, 0, 10, 0),
+                    alignment: Alignment.center,
+                    child: GestureDetector(
+                      onTap: () {
+                        widget.onPlantOrgChange(widget.plant);
+                      },
+                      child: Icon(
+                        Icons.edit,
+                        color: Theme.of(context).colorScheme.secondary,
+                      ),
                     ),
                   ),
                 ],
               ),
             ),
-            SizedBox(height: 20),
-            Container(
-              child: Text(
-                textAlign: TextAlign.center,
-                widget.plant.plantdetails,
-                style: Theme.of(context).textTheme.bodyMedium,
+            SizedBox(height: 5),
+            Material(
+              color: Theme.of(context).colorScheme.surfaceDim,
+              shape: BeveledRectangleBorder(
+                side: BorderSide(
+                  color: Theme.of(context).colorScheme.primaryFixed,
+                ),
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(10),
+                  bottomRight: Radius.circular(10),
+                ),
+              ),
+              elevation: 4,
+              child: Container(
+                padding: EdgeInsets.all(5),
+                alignment: Alignment.topLeft,
+                child: Text(
+                  textAlign: TextAlign.justify,
+                  widget.plant.plantdetails,
+                  style: Theme.of(context).textTheme.bodyLarge,
+                ),
               ),
             ),
-            Container(
-              alignment: Alignment.centerRight,
-              child: FilledButton(
-                onPressed: () {
-                  widget.onPlantOrgChange(widget.plant);
-                },
-                child: Icon(Icons.edit),
-              ),
+            SizedBox(height: 5),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Container(
+                  child: Text(
+                    textAlign: TextAlign.justify,
+                    widget.plant.plantid,
+                    style: Theme.of(context).textTheme.bodyMedium,
+                  ),
+                ),
+              ],
             ),
           ],
         ),

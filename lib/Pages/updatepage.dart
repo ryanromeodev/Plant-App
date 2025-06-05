@@ -48,9 +48,15 @@ class _UpdatePlantState extends State<UpdatePlant> {
       child: Scaffold(
         appBar: AppBar(
           automaticallyImplyLeading: false,
-          title: Text(
-            'ചെടി പുതുക്കുക',
-            style: Theme.of(context).textTheme.displaySmall,
+          title: Row(
+            children: [
+              Icon(Icons.edit_square),
+              SizedBox(width: 5),
+              Text(
+                'ചെടി പുതുക്കുക',
+                style: Theme.of(context).textTheme.headlineSmall,
+              ),
+            ],
           ),
           actions: [
             IconButton(
@@ -167,11 +173,6 @@ class _UpdatePlantState extends State<UpdatePlant> {
                               date,
                             ));
                           },
-                          // style: FilledButton.styleFrom(
-                          //   shape: RoundedRectangleBorder(
-                          //     borderRadius: BorderRadius.circular(5.0),
-                          //   ),
-                          // ),
                           child: const Text('Update'),
                         )
                         : FilledButton(

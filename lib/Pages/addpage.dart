@@ -33,9 +33,15 @@ class _AddplantState extends State<Addplant> {
       child: Scaffold(
         appBar: AppBar(
           automaticallyImplyLeading: false,
-          title: Text(
-            'ചെടി ചേർക്കുക',
-            style: Theme.of(context).textTheme.displaySmall,
+          title: Row(
+            children: [
+              Icon(Icons.add_box),
+              SizedBox(width: 5),
+              Text(
+                'ചെടി ചേർക്കുക',
+                style: Theme.of(context).textTheme.headlineSmall,
+              ),
+            ],
           ),
           actions: [
             IconButton(

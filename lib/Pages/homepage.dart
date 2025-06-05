@@ -1,11 +1,8 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:plantapp/Data/data.dart';
 import 'package:plantapp/Data/functions.dart';
 import 'package:plantapp/Data/plant.dart';
 import 'package:plantapp/Components/theme.dart';
-import 'package:plantapp/Components/bigherocard.dart';
 import 'package:plantapp/Components/plantlistheading.dart';
 import 'package:plantapp/Components/planttile.dart';
 import 'package:plantapp/Data/routingfunctions.dart';
@@ -27,13 +24,13 @@ class _HomePageState extends State<HomePage> {
   final FlutterLocalNotificationsPlugin _notificationsPlugin =
       FlutterLocalNotificationsPlugin();
 
-  Plant displayPlant = Plant(
-    plantid: "",
-    plantname: "ചെടികളുടെ പേര്",
-    plantdetails: "വിവരങ്ങൾ",
-    plantdate: "",
-  );
-  String day = "", month = "", year = "";
+  // Plant displayPlant = Plant(
+  //   plantid: "292",
+  //   plantname: "",
+  //   plantdetails: "",
+  //   plantdate: "",
+  // );
+  String day = "", month = "", year = "", displayname = "";
   Icon changinIcon = Icon(Icons.light_mode);
   List<Plant> plist = [];
   List<Plant> trashList = [];
@@ -61,19 +58,21 @@ class _HomePageState extends State<HomePage> {
     String body,
     int id,
     int day,
+    int hour,
     int second,
   ) async {
+    var t = tz.TZDateTime.now(tz.local).add(
+      Duration(
+        seconds: second,
+        hours: hour, //morning 6 after 00:00
+        days: day,
+      ),
+    );
     await _notificationsPlugin.zonedSchedule(
       id,
       title,
       body,
-      tz.TZDateTime.now(tz.local).add(
-        Duration(
-          seconds: second,
-          hours: 6, //morning 6 after 00:00
-          days: day,
-        ),
-      ),
+      t,
       const NotificationDetails(
         android: AndroidNotificationDetails(
           'your channel id',
@@ -83,9 +82,8 @@ class _HomePageState extends State<HomePage> {
           priority: Priority.high,
         ),
       ),
-      androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
+      androidScheduleMode: AndroidScheduleMode.alarmClock,
     );
-    print("here2");
   }
 
   //TODO : Future Scope
@@ -150,34 +148,47 @@ class _HomePageState extends State<HomePage> {
                 },
           ),
           IconButton(
-            icon: const Icon(Icons.settings),
-            onPressed: () {
-              displaySettingsPage(context, trashList, plist);
+            icon: const Icon(Icons.delete),
+            onPressed: () async {
+              List<Plant> trash = await displaySettingsPage(
+                context,
+                trashList,
+                plist,
+              );
+              setState(() {
+                trashList = trash;
+              });
             },
           ),
           IconButton(
-            icon: const Icon(Icons.android),
+            icon: const Icon(Icons.notifications),
             onPressed: () {
-              print("here");
               _HomePageState().scheduledNotification(
-                plist[0].plantname,
-                plist[0].plantdate,
-                1,
-                0,
+                "test",
+                "test",
                 2,
+                0,
+                0,
+                3,
               );
             },
           ),
         ],
-        title: Text('തുടക്കം', style: Theme.of(context).textTheme.displaySmall),
+        title: Row(
+          children: [
+            Icon(Icons.home),
+            SizedBox(width: 5),
+            Text('തുടക്കം', style: Theme.of(context).textTheme.headlineSmall),
+          ],
+        ),
+
         scrolledUnderElevation: 0.0,
         // surfaceTintColor: Colors.transparent,
       ),
       body: SingleChildScrollView(
         child: Column(
           children: [
-            // BigHeroCard(plant: displayPlant, updatehandle: updateHandler),
-            PlantListHeading(todisplay: "ചെടികളുടെ പേരുകൾ"),
+            PlantListHeading(todisplay: "ചെടികളുടെ പേരുകൾ :"),
             plantListBuilder(),
           ],
         ),
@@ -212,6 +223,7 @@ class _HomePageState extends State<HomePage> {
         borderRadius: BorderRadius.circular(26.0),
         color: Theme.of(context).colorScheme.surface,
       ),
+      // height: MediaQuery.of(context).size.height,
       height:
           Orientation.portrait == orientation
               ? MediaQuery.of(context).size.height -
@@ -229,8 +241,8 @@ class _HomePageState extends State<HomePage> {
                 return PlantTile(
                   plant: plant,
                   onPlantOrgChange: updateHandler,
-                  heroDisplay: heroDisplayFunction,
-                  displayPlant: displayPlant,
+                  heroDisplay: groupselectfn,
+                  displayPlantName: displayname,
                 );
               }).toList(),
         ),
@@ -238,49 +250,35 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  removeUnwantedDate(List<Plant> plants) {
-    List<Plant> bufftrash = [];
-    plist.forEach((plant) {
-      int pendingDays = pendingdays(plant.plantdate);
-      if (pendingDays < 0) {
-        bufftrash.add(plant);
-      }
-    });
-    setState(() {
-      trashList.addAll(bufftrash);
-      plist.removeWhere((e) => bufftrash.contains(e));
-      plantSorter(plist, trashList);
-    });
-  }
-
   updateHandler(Plant plant) async {
     Plant outPlant;
     String id, name, details, date;
     (outPlant, id, name, details, date) = await updatePlantPage(context, plant);
-    if (name.isEmpty) {
+    if (id.isEmpty) {
       removePlantItem(plist, outPlant);
-    } else {
+    } else if (date != "") {
       updatePlantItem(outPlant, id, name, details, date);
     }
   }
 
-  heroDisplayFunction(Plant plant) {
+  groupselectfn(Plant plant) {
     setState(() {
-      displayPlant = plant;
+      displayname = plant.plantname;
     });
   }
 
-  resetHeroname() {
-    setState(() {
-      displayPlant =
-          displayPlant = Plant(
-            plantid: "",
-            plantname: "ചെടികളുടെ പേര്",
-            plantdetails: "വിവരങ്ങൾ",
-            plantdate: "",
-          );
-    });
-  }
+  // resetHeroname() {
+  //   setState(() {
+
+  //     displayPlant =
+  //         displayPlant = Plant(
+  //           plantid: "",
+  //           plantname: "",
+  //           plantdetails: "",
+  //           plantdate: "",
+  //         );
+  //   });
+  // }
 
   updatePlantItem(
     Plant plant,
@@ -291,16 +289,17 @@ class _HomePageState extends State<HomePage> {
   ) {
     removePlantItem(plist, plant);
     addPlantItem(plist, plantid, updatedPlantname, updatedPlantDetails, date);
-    resetHeroname();
   }
 
   removePlantItem(List<Plant> plist, Plant plant) {
     String id = plant.plantid;
-    setState(() {
-      plist.removeWhere((plant) => plant.plantid == id);
-      plantSorter(plist, trashList);
-      resetHeroname();
-    });
+    if (id.isNotEmpty) {
+      setState(() {
+        plist.removeWhere((plant) => plant.plantid == id);
+        plantSorter(plist, trashList);
+        trashList.add(plant);
+      });
+    }
   }
 
   ///Addding a new [Plant]
@@ -331,6 +330,7 @@ class _HomePageState extends State<HomePage> {
         int.parse(id), //#id gets random, not mapping, just push
         // notificationdate,
         0,
+        6,
         5,
       );
     }

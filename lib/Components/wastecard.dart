@@ -81,7 +81,7 @@ class _WasteCardState extends State<WasteCard> {
                   ),
                 ),
               ),
-
+          Container(color: Colors.red, child: Text(widget.plant.plantid)),
           Container(
             padding: EdgeInsets.all(16.0),
             alignment: Alignment.bottomLeft,

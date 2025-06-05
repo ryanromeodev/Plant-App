@@ -44,9 +44,10 @@ class _AdeniumState extends State<Adenium> {
         //     decorationStyle: TextDecorationStyle.dotted,
         //   ),
         // ),
-        // headlineSmall: GoogleFonts.aboreto(),
-        // titleLarge: GoogleFonts.aboreto(),
-        // bodyMedium: GoogleFonts.aboreto(),
+        displaySmall: GoogleFonts.notoSerifMalayalam(),
+        titleLarge: GoogleFonts.notoSerifMalayalam(),
+        bodyLarge: GoogleFonts.notoSerifMalayalam(),
+        bodyMedium: GoogleFonts.notoSerifMalayalam(),
       ),
       filledButtonTheme: FilledButtonThemeData(
         style: FilledButton.styleFrom(

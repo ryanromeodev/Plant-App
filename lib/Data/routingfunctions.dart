@@ -44,18 +44,19 @@ Future<(dynamic, dynamic, dynamic, dynamic, dynamic)> updatePlantPage(
   return (outPlant, id, name, details, date);
 }
 
-Future<dynamic> displaySettingsPage(
+Future<List<Plant>> displaySettingsPage(
   BuildContext context,
   List<Plant> trashplants,
   List<Plant> plants,
 ) async {
-  await Navigator.push(
+  final trash = await Navigator.push(
     context,
     MaterialPageRoute(
       builder: (context) => Settings(trashlist: trashplants, plants: plants),
     ),
   );
   if (!context.mounted) {
-    return;
+    return [];
   }
+  return trash;
 }
