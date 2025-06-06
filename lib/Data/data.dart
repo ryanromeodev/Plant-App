@@ -7,6 +7,7 @@ import 'package:flutter/services.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:plantapp/Data/plant.dart';
+import 'package:file_picker/file_picker.dart';
 import 'strings.dart';
 
 class PlantData {
@@ -53,11 +54,11 @@ class PlantData {
     ///Checks for permission if possible
     var status = await Permission.storage.status;
     developer.log(
-      "$green[data:readJson]Phone permission status: $status$reset",
+      "$green[data:readJson] Phone permission status: $status$reset",
     );
     try {
       if (!status.isGranted) {
-        developer.log("$yellow[data:readJson]requesting again$reset");
+        developer.log("$yellow[data:readJson] requesting again$reset");
         openAppSettings();
       }
       String path = await filelocation;
@@ -70,7 +71,7 @@ class PlantData {
       if (plantListJson.isEmpty) {
         // developer.log("$red[]data:readJson] list is null$reset");
         // TODO: [functionality] Load from a file_picker here
-        plantListJson = await loadtestdata();
+        // plantListJson = await loadtestdata();
       }
       for (var i = 0; i < plantListJson.length; i++) {
         plantList.add(
@@ -83,7 +84,7 @@ class PlantData {
         );
       }
       developer.log(
-        "$green[data:readJson] complete read of $plantList plants is success $status$reset",
+        "$green[data:readJson] complete read of ${plantList.length} plants is success $status$reset",
       );
     } on PathNotFoundException catch (_) {
       developer.log("$red[data:readJson] exception caught while reading$reset");
@@ -149,16 +150,39 @@ Future<String> createFolder() async {
   }
 }
 
-Future<dynamic> loadtestdata() async {
-  String response = "";
+Future<List<Plant>> loadtestdata() async {
+  FilePickerResult? result = await FilePicker.platform.pickFiles(
+    type: FileType.custom,
+    allowedExtensions: ['json'],
+  );
+  String filePath = "";
+  List<Plant> plantlist = [];
+  if (result != null) {
+    filePath = result.files.single.path!;
+    print("Selected file path: $filePath");
+  } else {
+    print("File picking canceled.");
+  }
   try {
-    response = await rootBundle.loadString('assets/realplantdetails.json');
+    String str = await File(filePath).readAsString();
+    // String str = await File("assets\\plantdetails.json").readAsString();
+    List<dynamic> plantListJson = await jsonDecode(str)["plants"];
+    for (var i = 0; i < plantListJson.length; i++) {
+      plantlist.add(
+        Plant(
+          plantid: plantListJson[i]["plantid"],
+          plantname: plantListJson[i]["plantname"],
+          plantdetails: plantListJson[i]["plantdetails"],
+          plantdate: plantListJson[i]["plantdate"],
+        ),
+      );
+    }
   } on Exception catch (e) {
     print(e);
   }
-  final data = await json.decode(response);
-  developer.log("$yellow[fabtestfun:loadtestdata] Test Data : $data $reset");
-  return data["plants"];
+
+  developer.log("$yellow[data:loadtestdata] Test Data : $plantlist $reset");
+  return plantlist;
 }
 
 Future<bool> saveToDownloads(

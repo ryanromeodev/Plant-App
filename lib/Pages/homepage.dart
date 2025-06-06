@@ -30,7 +30,7 @@ class _HomePageState extends State<HomePage> {
   //   plantdetails: "",
   //   plantdate: "",
   // );
-  String day = "", month = "", year = "", displayname = "";
+  String day = "", month = "", year = "", displayname = "", displayid = "";
   Icon changinIcon = Icon(Icons.light_mode);
   List<Plant> plist = [];
   List<Plant> trashList = [];
@@ -132,6 +132,17 @@ class _HomePageState extends State<HomePage> {
       // extendBodyBehindAppBar: true,
       appBar: AppBar(
         actions: [
+          if (plist.isEmpty)
+            IconButton(
+              icon: const Icon(Icons.file_open),
+              onPressed: () async {
+                List<Plant> plants = await loadtestdata();
+                setState(() {
+                  plist = plants;
+                  plantSorter(plist, trashList);
+                });
+              },
+            ),
           IconButton(
             icon: changinIcon,
             onPressed:
@@ -185,13 +196,11 @@ class _HomePageState extends State<HomePage> {
         scrolledUnderElevation: 0.0,
         // surfaceTintColor: Colors.transparent,
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            PlantListHeading(todisplay: "ചെടികളുടെ പേരുകൾ"),
-            plantListBuilder(),
-          ],
-        ),
+      body: Column(
+        children: [
+          PlantListHeading(todisplay: "ചെടികളുടെ പേരുകൾ"),
+          Expanded(child: plantListBuilder()),
+        ],
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
@@ -216,19 +225,13 @@ class _HomePageState extends State<HomePage> {
   }
 
   Container plantListBuilder() {
-    Orientation orientation = MediaQuery.of(context).orientation;
     return Container(
       margin: EdgeInsets.symmetric(vertical: 10.0),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(26.0),
         color: Theme.of(context).colorScheme.surface,
       ),
-      // height: MediaQuery.of(context).size.height,
-      height:
-          Orientation.portrait == orientation
-              ? MediaQuery.of(context).size.height -
-                  (MediaQuery.of(context).size.height / 5)
-              : MediaQuery.of(context).size.height / 2,
+      height: MediaQuery.of(context).size.height,
       child: Scrollbar(
         thickness: 10,
         radius: Radius.circular(2),
@@ -243,6 +246,7 @@ class _HomePageState extends State<HomePage> {
                   onPlantOrgChange: updateHandler,
                   heroDisplay: groupselectfn,
                   displayPlantName: displayname,
+                  displayplantid: displayid,
                 );
               }).toList(),
         ),
@@ -264,21 +268,9 @@ class _HomePageState extends State<HomePage> {
   groupselectfn(Plant plant) {
     setState(() {
       displayname = plant.plantname;
+      displayid = plant.plantid;
     });
   }
-
-  // resetHeroname() {
-  //   setState(() {
-
-  //     displayPlant =
-  //         displayPlant = Plant(
-  //           plantid: "",
-  //           plantname: "",
-  //           plantdetails: "",
-  //           plantdate: "",
-  //         );
-  //   });
-  // }
 
   updatePlantItem(
     Plant plant,

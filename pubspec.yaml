@@ -71,6 +71,16 @@ flutter:
     - assets/plantbg1.jpg
     - assets/listbg.jpeg
     - assets/realplantdetails.json
+    - assets/pav1.png
+    - assets/pav2.png
+    - assets/pav3.png
+    - assets/pav4.png
+    - assets/pav5.png
+    - assets/pav6.png
+    - assets/pav7.png
+    - assets/pav8.png
+    - assets/pav9.png
+    - assets/pav10.png
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
 

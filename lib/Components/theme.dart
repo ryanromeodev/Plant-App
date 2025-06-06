@@ -33,17 +33,13 @@ class _AdeniumState extends State<Adenium> {
     return ThemeData(
       colorScheme: ColorScheme.fromSeed(
         seedColor: Colors.blue,
-        dynamicSchemeVariant: DynamicSchemeVariant.vibrant,
         brightness: brightness,
       ),
+      // colorScheme: ColorScheme.fromSeed(
+      //   seedColor: Colors.blue,
+      //   brightness: brightness,
+      // ),
       textTheme: TextTheme(
-        // headlineLarge: GoogleFonts.aboreto(
-        //   fontWeight: FontWeight.bold,
-        //   textStyle: TextStyle(
-        //     decoration: TextDecoration.underline,
-        //     decorationStyle: TextDecorationStyle.dotted,
-        //   ),
-        // ),
         displaySmall: GoogleFonts.notoSerifMalayalam(),
         titleLarge: GoogleFonts.notoSerifMalayalam(),
         bodyLarge: GoogleFonts.notoSerifMalayalam(),
