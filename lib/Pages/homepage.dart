@@ -35,6 +35,7 @@ class _HomePageState extends State<HomePage> {
   Icon changinIcon = Icon(Icons.light_mode);
   List<Plant> plist = [];
   List<Plant> trashList = [];
+  bool fulllist = true;
 
   @override
   initState() {
@@ -246,15 +247,29 @@ class _HomePageState extends State<HomePage> {
           padding: const EdgeInsets.symmetric(vertical: 8.0),
           scrollDirection: Axis.vertical,
           children:
-              plist.map((Plant plant) {
-                return PlantTile(
-                  plant: plant,
-                  onPlantOrgChange: updateHandler,
-                  heroDisplay: groupselectbyplantfn,
-                  displayPlantName: displayname,
-                  displayplantid: displayid,
-                );
-              }).toList(),
+              !fulllist
+                  ? plist.map((Plant plant) {
+                    if (displayname.trim() == plant.plantname.trim()) {
+                      return PlantTile(
+                        plant: plant,
+                        onPlantOrgChange: updateHandler,
+                        heroDisplay: groupselectbyplantfn,
+                        displayPlantName: displayname,
+                        displayplantid: displayid,
+                      );
+                    } else {
+                      return SizedBox.shrink();
+                    }
+                  }).toList()
+                  : plist.map((Plant plant) {
+                    return PlantTile(
+                      plant: plant,
+                      onPlantOrgChange: updateHandler,
+                      heroDisplay: groupselectbyplantfn,
+                      displayPlantName: displayname,
+                      displayplantid: displayid,
+                    );
+                  }).toList(),
         ),
       ),
     );
@@ -277,6 +292,14 @@ class _HomePageState extends State<HomePage> {
   groupselectbynamefn(String pname) {
     setState(() {
       displayname = pname;
+      if (fulllist) {
+        fulllist = false;
+      }
+      if (pname == "മുഴുവൻ പട്ടിക") {
+        if (!fulllist) {
+          fulllist = true;
+        }
+      }
     });
   }
 

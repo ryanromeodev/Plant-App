@@ -70,11 +70,7 @@ class _PlantTileState extends State<PlantTile> {
                 SizedBox(width: 10),
                 Material(
                   elevation: 4,
-                  color:
-                      widget.displayPlantName.trim() ==
-                              widget.plant.plantname.trim()
-                          ? Theme.of(context).colorScheme.primaryContainer
-                          : Theme.of(context).colorScheme.surface,
+                  color: Theme.of(context).colorScheme.primaryContainer,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10),
                     side: BorderSide(
@@ -108,10 +104,13 @@ class _PlantTileState extends State<PlantTile> {
                           "no date",
                           style: Theme.of(context).textTheme.bodyLarge,
                         ),
-                    widget.plant.plantnote.isEmpty
-                        ? Text("", style: Theme.of(context).textTheme.bodySmall)
+                    widget.plant.plantnote.length > 9
+                        ? Text(
+                          widget.plant.plantnote,
+                          style: Theme.of(context).textTheme.bodySmall,
+                        )
                         : Text(
-                          "Notification day : widget.plant.plantnote",
+                          "no notification",
                           style: Theme.of(context).textTheme.bodySmall,
                         ),
                   ],

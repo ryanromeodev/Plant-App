@@ -19,6 +19,7 @@ class _PlantHeaderState extends State<PlantHeader> {
   @override
   Widget build(BuildContext context) {
     List<String> outlist = getplantnames(widget.plants);
+    outlist.insert(0, "മുഴുവൻ പട്ടിക");
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 5),
       width: MediaQuery.of(context).size.width,
@@ -37,7 +38,8 @@ class _PlantHeaderState extends State<PlantHeader> {
                   onPressed: () {
                     widget.groupingfn(plant);
                   },
-                  elevation: 1,
+                  elevation: 2,
+                  shadowColor: Theme.of(context).colorScheme.primary,
                 );
               }).toList(),
         ),
@@ -49,9 +51,7 @@ class _PlantHeaderState extends State<PlantHeader> {
 List<String> getplantnames(List<Plant> plist) {
   List<String> outlist = [];
   for (Plant p in plist) {
-    if (!outlist.contains(p.plantname)) {
-      outlist.add(p.plantname);
-    }
+    outlist.add(p.plantname);
   }
-  return outlist;
+  return outlist.toSet().toList();
 }
