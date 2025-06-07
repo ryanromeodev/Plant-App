@@ -41,7 +41,7 @@ class _UpdatePlantState extends State<UpdatePlant> {
   String name = "",
       details = "",
       date = DateTime.now().toString().substring(0, 10);
-
+  bool isChecked = false;
   @override
   Widget build(BuildContext context) {
     return PopScope(
@@ -151,6 +151,28 @@ class _UpdatePlantState extends State<UpdatePlant> {
                   ),
                 ],
               ),
+              Row(
+                children: [
+                  PlantListHeading(todisplay: "നോട്ടിഫിക്കേഷൻ വേണമോ?"),
+                  Checkbox(
+                    value: isChecked,
+                    onChanged: (bool? value) {
+                      setState(() {
+                        isChecked = !isChecked;
+                      });
+                    },
+                  ),
+                ],
+              ),
+              AnimatedCrossFade(
+                firstChild: notificationBody(context),
+                secondChild: PlantListHeading(todisplay: ""),
+                crossFadeState:
+                    isChecked
+                        ? CrossFadeState.showFirst
+                        : CrossFadeState.showSecond,
+                duration: Duration(milliseconds: 200),
+              ),
               SizedBox(height: 20),
               Container(
                 margin: EdgeInsets.all(16),
@@ -236,6 +258,32 @@ class _UpdatePlantState extends State<UpdatePlant> {
     );
   }
 
+  Row notificationBody(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: [
+        Container(
+          margin: EdgeInsets.all(10.0),
+          alignment: Alignment.centerLeft,
+          decoration: BoxDecoration(borderRadius: BorderRadius.circular(20.0)),
+          child: ElevatedButton(
+            onPressed: () => selectNote(context),
+            child: Icon(Icons.calendar_month, size: 30),
+          ),
+        ),
+        Container(
+          margin: EdgeInsets.all(10.0),
+          alignment: Alignment.centerRight,
+          decoration: BoxDecoration(borderRadius: BorderRadius.circular(20.0)),
+          child: TextButton(
+            onPressed: null,
+            child: Text(widget.plant.plantnote),
+          ),
+        ),
+      ],
+    );
+  }
+
   void selectDate(BuildContext context) async {
     DateTime? newSelectedDate = await showDatePicker(
       context: context,
@@ -247,6 +295,18 @@ class _UpdatePlantState extends State<UpdatePlant> {
       if (newSelectedDate != null) {
         date = newSelectedDate.toString().substring(0, 10);
       }
+    });
+  }
+
+  void selectNote(BuildContext context) async {
+    DateTime? notificationdate = await showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(1999),
+      lastDate: DateTime(2032),
+    );
+    setState(() {
+      widget.plant.plantnote = notificationdate.toString().substring(0, 10);
     });
   }
 }

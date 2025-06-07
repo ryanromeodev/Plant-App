@@ -137,7 +137,7 @@ class _AddplantState extends State<Addplant> {
               ),
               Row(
                 children: [
-                  PlantListHeading(todisplay: "Notification date veno?"),
+                  PlantListHeading(todisplay: "നോട്ടിഫിക്കേഷൻ വേണമോ?"),
                   Checkbox(
                     value: isChecked,
                     onChanged: (bool? value) {
@@ -157,7 +157,6 @@ class _AddplantState extends State<Addplant> {
                         : CrossFadeState.showSecond,
                 duration: Duration(milliseconds: 200),
               ),
-              //TODO: maybe a devider
               Container(
                 margin: EdgeInsets.all(16),
                 child: Row(
@@ -169,14 +168,14 @@ class _AddplantState extends State<Addplant> {
                             Navigator.pop(
                               context,
                               Plant(
-                                plantid: Random().nextInt(10001).toString(),
+                                plantid: Random().nextInt(1000001).toString(),
                                 plantname: nameController.text,
                                 plantdetails:
                                     detailsController.text.isNotEmpty
                                         ? detailsController.text
                                         : "വിവരങ്ങൾ നൽകിയിട്ടില്ല",
                                 plantdate: date,
-                                plantnote: date, //TODO: add note date
+                                plantnote: note,
                               ),
                             );
                           },
@@ -220,15 +219,15 @@ class _AddplantState extends State<Addplant> {
           alignment: Alignment.centerLeft,
           decoration: BoxDecoration(borderRadius: BorderRadius.circular(20.0)),
           child: ElevatedButton(
-            onPressed: () => selectDate(context),
-            child: Text("select date"),
+            onPressed: () => selectNote(context),
+            child: Icon(Icons.calendar_month, size: 30),
           ),
         ),
         Container(
           margin: EdgeInsets.all(10.0),
           alignment: Alignment.centerRight,
           decoration: BoxDecoration(borderRadius: BorderRadius.circular(20.0)),
-          child: TextButton(onPressed: null, child: Text(date)),
+          child: TextButton(onPressed: null, child: Text(note)),
         ),
       ],
     );
@@ -243,6 +242,18 @@ class _AddplantState extends State<Addplant> {
     );
     setState(() {
       date = newSelectedDate.toString().substring(0, 10);
+    });
+  }
+
+  void selectNote(BuildContext context) async {
+    DateTime? notificationdate = await showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(1999),
+      lastDate: DateTime(2032),
+    );
+    setState(() {
+      note = notificationdate.toString().substring(0, 10);
     });
   }
 }

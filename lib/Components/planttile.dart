@@ -85,7 +85,7 @@ class _PlantTileState extends State<PlantTile> {
                     child: SingleChildScrollView(
                       scrollDirection: Axis.horizontal,
                       child: Text(
-                        "${widget.plant.plantid} ${widget.plant.plantname}",
+                        widget.plant.plantname,
                         style: Theme.of(context).textTheme.headlineSmall,
                       ),
                     ),
