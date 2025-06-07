@@ -158,6 +158,7 @@ class _UpdatePlantState extends State<UpdatePlant> {
                     value: isChecked,
                     onChanged: (bool? value) {
                       setState(() {
+                        widget.plant.plantnote = "";
                         isChecked = !isChecked;
                       });
                     },
@@ -217,6 +218,7 @@ class _UpdatePlantState extends State<UpdatePlant> {
                                 plantdate: olddate,
                                 plantnote: oldnote, //TODO
                               ),
+                              "",
                               "",
                               "",
                               "",
@@ -306,7 +308,9 @@ class _UpdatePlantState extends State<UpdatePlant> {
       lastDate: DateTime(2032),
     );
     setState(() {
-      widget.plant.plantnote = notificationdate.toString().substring(0, 10);
+      if (notificationdate != null) {
+        widget.plant.plantnote = notificationdate.toString().substring(0, 10);
+      }
     });
   }
 }

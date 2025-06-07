@@ -142,6 +142,7 @@ class _AddplantState extends State<Addplant> {
                     value: isChecked,
                     onChanged: (bool? value) {
                       setState(() {
+                        note = "";
                         isChecked = !isChecked;
                       });
                     },
@@ -241,7 +242,9 @@ class _AddplantState extends State<Addplant> {
       lastDate: DateTime(2032),
     );
     setState(() {
-      date = newSelectedDate.toString().substring(0, 10);
+      if (newSelectedDate != null) {
+        date = newSelectedDate.toString().substring(0, 10);
+      }
     });
   }
 
@@ -253,7 +256,9 @@ class _AddplantState extends State<Addplant> {
       lastDate: DateTime(2032),
     );
     setState(() {
-      note = notificationdate.toString().substring(0, 10);
+      if (notificationdate != null) {
+        note = notificationdate.toString().substring(0, 10);
+      }
     });
   }
 }
