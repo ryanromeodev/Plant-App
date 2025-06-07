@@ -16,7 +16,8 @@ class _AddplantState extends State<Addplant> {
   final detailsController = TextEditingController();
   String name = "",
       details = "",
-      date = DateTime.now().toString().substring(0, 10);
+      date = DateTime.now().toString().substring(0, 10),
+      note = "";
 
   @override
   void dispose() {
@@ -26,6 +27,7 @@ class _AddplantState extends State<Addplant> {
     super.dispose();
   }
 
+  bool isChecked = false;
   @override
   Widget build(BuildContext context) {
     return PopScope(
@@ -133,7 +135,29 @@ class _AddplantState extends State<Addplant> {
                   ),
                 ],
               ),
-              SizedBox(height: 20),
+              Row(
+                children: [
+                  PlantListHeading(todisplay: "Notification date veno?"),
+                  Checkbox(
+                    value: isChecked,
+                    onChanged: (bool? value) {
+                      setState(() {
+                        isChecked = !isChecked;
+                      });
+                    },
+                  ),
+                ],
+              ),
+              AnimatedCrossFade(
+                firstChild: notificationBody(context),
+                secondChild: PlantListHeading(todisplay: ""),
+                crossFadeState:
+                    isChecked
+                        ? CrossFadeState.showFirst
+                        : CrossFadeState.showSecond,
+                duration: Duration(milliseconds: 200),
+              ),
+              //TODO: maybe a devider
               Container(
                 margin: EdgeInsets.all(16),
                 child: Row(
@@ -184,6 +208,29 @@ class _AddplantState extends State<Addplant> {
           ),
         ),
       ),
+    );
+  }
+
+  Row notificationBody(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: [
+        Container(
+          margin: EdgeInsets.all(10.0),
+          alignment: Alignment.centerLeft,
+          decoration: BoxDecoration(borderRadius: BorderRadius.circular(20.0)),
+          child: ElevatedButton(
+            onPressed: () => selectDate(context),
+            child: Text("select date"),
+          ),
+        ),
+        Container(
+          margin: EdgeInsets.all(10.0),
+          alignment: Alignment.centerRight,
+          decoration: BoxDecoration(borderRadius: BorderRadius.circular(20.0)),
+          child: TextButton(onPressed: null, child: Text(date)),
+        ),
+      ],
     );
   }
 
