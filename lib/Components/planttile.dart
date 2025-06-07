@@ -34,6 +34,12 @@ class _PlantTileState extends State<PlantTile> {
       month = widget.plant.plantdate.substring(5, 7);
       day = widget.plant.plantdate.substring(8, 10);
     }
+    String noteyear = "", noteday = "", notemonth = "";
+    if (widget.plant.plantnote.length > 9) {
+      noteyear = widget.plant.plantnote.substring(0, 4);
+      notemonth = widget.plant.plantnote.substring(5, 7);
+      noteday = widget.plant.plantnote.substring(8, 10);
+    }
     //the birthday's date
 
     return GestureDetector(
@@ -59,8 +65,12 @@ class _PlantTileState extends State<PlantTile> {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 CircleAvatar(
-                  backgroundColor: Theme.of(context).colorScheme.primary,
-                  radius: 20,
+                  backgroundColor:
+                      widget.displayplantid.trim() ==
+                              widget.plant.plantid.trim()
+                          ? Theme.of(context).colorScheme.secondary
+                          : Theme.of(context).colorScheme.primary,
+                  radius: 22,
                   child: CircleAvatar(
                     radius: 18,
                     backgroundImage:
@@ -70,11 +80,11 @@ class _PlantTileState extends State<PlantTile> {
                 SizedBox(width: 10),
                 Material(
                   elevation: 4,
-                  color: Theme.of(context).colorScheme.primaryContainer,
+                  color: Theme.of(context).colorScheme.surface,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10),
                     side: BorderSide(
-                      color: Theme.of(context).colorScheme.primary,
+                      color: Theme.of(context).colorScheme.primaryFixed,
                       width: 1,
                     ),
                   ),
@@ -104,9 +114,10 @@ class _PlantTileState extends State<PlantTile> {
                           "no date",
                           style: Theme.of(context).textTheme.bodyLarge,
                         ),
-                    widget.plant.plantnote.length > 9
+                    widget.plant.plantnote.length > 9 &&
+                            widget.plant.plantnote.isNotEmpty
                         ? Text(
-                          widget.plant.plantnote,
+                          "അറിയിപ്പ് : $noteday.$notemonth.$noteyear",
                           style: Theme.of(context).textTheme.bodySmall,
                         )
                         : Text(
@@ -127,11 +138,7 @@ class _PlantTileState extends State<PlantTile> {
             ),
             SizedBox(height: 15),
             Material(
-              color:
-                  widget.displayPlantName.trim() ==
-                          widget.plant.plantname.trim()
-                      ? Theme.of(context).colorScheme.primaryContainer
-                      : Theme.of(context).colorScheme.surface,
+              color: Theme.of(context).colorScheme.surface,
               shape: BeveledRectangleBorder(
                 side: BorderSide(
                   color: Theme.of(context).colorScheme.primaryFixedDim,

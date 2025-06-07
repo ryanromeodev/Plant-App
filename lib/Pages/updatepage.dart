@@ -27,7 +27,6 @@ class _UpdatePlantState extends State<UpdatePlant> {
     oldnote = widget.plant.plantnote;
     nameController.text = widget.plant.plantname;
     detailsController.text = widget.plant.plantdetails;
-    date = widget.plant.plantdate;
   }
 
   @override
@@ -38,9 +37,7 @@ class _UpdatePlantState extends State<UpdatePlant> {
     super.dispose();
   }
 
-  String name = "",
-      details = "",
-      date = DateTime.now().toString().substring(0, 10);
+  String name = "", details = "";
   bool isChecked = false;
   @override
   Widget build(BuildContext context) {
@@ -136,9 +133,13 @@ class _UpdatePlantState extends State<UpdatePlant> {
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20.0),
                     ),
-                    child: ElevatedButton(
+                    child: IconButton(
+                      icon: Icon(
+                        Icons.calendar_month,
+                        color: Theme.of(context).colorScheme.primary,
+                        size: 30,
+                      ),
                       onPressed: () => selectDate(context),
-                      child: Text("select date"),
                     ),
                   ),
                   Container(
@@ -147,7 +148,10 @@ class _UpdatePlantState extends State<UpdatePlant> {
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20.0),
                     ),
-                    child: TextButton(onPressed: null, child: Text(date)),
+                    child: TextButton(
+                      onPressed: null,
+                      child: Text(widget.plant.plantdate),
+                    ),
                   ),
                 ],
               ),
@@ -197,8 +201,8 @@ class _UpdatePlantState extends State<UpdatePlant> {
                               detailsController.text.isNotEmpty
                                   ? detailsController.text
                                   : "വിവരങ്ങൾ നൽകിയിട്ടില്ല",
-                              date,
-                              date, //TODO add note
+                              widget.plant.plantdate,
+                              widget.plant.plantnote,
                             ));
                           },
                           child: const Text('Update'),
@@ -216,7 +220,7 @@ class _UpdatePlantState extends State<UpdatePlant> {
                                 plantname: oldname,
                                 plantdetails: olddetails,
                                 plantdate: olddate,
-                                plantnote: oldnote, //TODO
+                                plantnote: oldnote,
                               ),
                               "",
                               "",
@@ -295,7 +299,7 @@ class _UpdatePlantState extends State<UpdatePlant> {
     );
     setState(() {
       if (newSelectedDate != null) {
-        date = newSelectedDate.toString().substring(0, 10);
+        widget.plant.plantdate = newSelectedDate.toString().substring(0, 10);
       }
     });
   }

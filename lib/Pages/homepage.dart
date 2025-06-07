@@ -160,7 +160,7 @@ class _HomePageState extends State<HomePage> {
                 },
           ),
           IconButton(
-            icon: const Icon(Icons.delete),
+            icon: const Icon(Icons.settings),
             onPressed: () async {
               List<Plant> trash = await displaySettingsPage(
                 context,
@@ -172,19 +172,19 @@ class _HomePageState extends State<HomePage> {
               });
             },
           ),
-          IconButton(
-            icon: const Icon(Icons.notifications),
-            onPressed: () {
-              _HomePageState().scheduledNotification(
-                "test",
-                "test",
-                2,
-                0,
-                0,
-                3,
-              );
-            },
-          ),
+          // IconButton(
+          //   icon: const Icon(Icons.notifications),
+          //   onPressed: () {
+          //     _HomePageState().scheduledNotification(
+          //       "test",
+          //       "test",
+          //       2,
+          //       0,
+          //       0,
+          //       3,
+          //     );
+          //   },
+          // ),
         ],
         title: Row(
           children: [

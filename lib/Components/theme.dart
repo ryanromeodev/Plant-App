@@ -26,6 +26,7 @@ class _AdeniumState extends State<Adenium> {
         colorScheme: ColorScheme.fromSeed(
           seedColor: Colors.green,
           brightness: Brightness.light,
+          secondary: Colors.orangeAccent,
         ),
         textTheme: TextTheme(
           displaySmall: GoogleFonts.notoSerifMalayalam(),
