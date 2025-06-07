@@ -16,7 +16,7 @@ class PlantData {
   /// initial instace of the program.
   /// The method returns a [Plant] object list which is in Future reference.
   Future<List<Plant>> get getplantData async => await _supplyPlist();
-  // Future<List<Plant>> get gettrashData async => await _supplyTlist();
+  Future<List<Plant>> get gettrashData async => await _supplyTlist();
 
   Future<String> get filelocation async => await createFolder();
 
@@ -25,10 +25,10 @@ class PlantData {
     return plantList;
   }
 
-  // _supplyTlist() {
-  //   Future<List<Plant>> plantList = readJson(trashfile);
-  //   return plantList;
-  // }
+  _supplyTlist() {
+    Future<List<Plant>> plantList = readJson(trashfile);
+    return plantList;
+  }
 
   ///Writing the [Plant] Data to the json file
   void writeJson(List<Plant> plants, String filename) async {

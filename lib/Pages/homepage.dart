@@ -118,8 +118,7 @@ class _HomePageState extends State<HomePage> {
   ///used throughout the program instance
   Future<void> plantDataLoad() async {
     List<Plant> inputPlantList = await PlantData().getplantData;
-    // List<Plant> inputTrashList = await PlantData().gettrashData;
-    List<Plant> inputTrashList = [];
+    List<Plant> inputTrashList = await PlantData().gettrashData;
     plantSorter(inputPlantList, inputTrashList);
     setState(() {
       plist = inputPlantList;
@@ -199,13 +198,13 @@ class _HomePageState extends State<HomePage> {
       ),
       body: Column(
         children: [
-          PlantHeader(plist: plist),
+          PlantListHeading(todisplay: "ചെടികളുടെ പേരുകൾ"),
+          PlantHeader(plants: plist, groupingfn: groupselectbynamefn),
           Container(
-            height: 1.0, // Line thickness
+            height: 2.0, // Line thickness
             color: Theme.of(context).colorScheme.primary, // Line color
             margin: EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
           ),
-          PlantListHeading(todisplay: "ചെടികളുടെ പേരുകൾ"),
           Expanded(child: plantListBuilder()),
         ],
       ),
@@ -223,8 +222,6 @@ class _HomePageState extends State<HomePage> {
             );
           }
         },
-        foregroundColor: Theme.of(context).colorScheme.onPrimary,
-        backgroundColor: Theme.of(context).colorScheme.primary,
         heroTag:
             "add", // need to add this as only one FAB per route is possible
         child: const Icon(Icons.add),
@@ -253,7 +250,7 @@ class _HomePageState extends State<HomePage> {
                 return PlantTile(
                   plant: plant,
                   onPlantOrgChange: updateHandler,
-                  heroDisplay: groupselectfn,
+                  heroDisplay: groupselectbyplantfn,
                   displayPlantName: displayname,
                   displayplantid: displayid,
                 );
@@ -277,7 +274,13 @@ class _HomePageState extends State<HomePage> {
     }
   }
 
-  groupselectfn(Plant plant) {
+  groupselectbynamefn(String pname) {
+    setState(() {
+      displayname = pname;
+    });
+  }
+
+  groupselectbyplantfn(Plant plant) {
     setState(() {
       displayname = plant.plantname;
       displayid = plant.plantid;

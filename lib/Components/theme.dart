@@ -22,46 +22,68 @@ class _AdeniumState extends State<Adenium> {
     return MaterialApp(
       title: "Adenium",
       debugShowCheckedModeBanner: false,
-      theme: baseTheme(Brightness.light),
-      darkTheme: baseTheme(Brightness.dark),
+      theme: ThemeData(
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: Colors.green,
+          brightness: Brightness.light,
+        ),
+        textTheme: TextTheme(
+          displaySmall: GoogleFonts.notoSerifMalayalam(),
+          titleLarge: GoogleFonts.notoSerifMalayalam(),
+          bodyLarge: GoogleFonts.notoSerifMalayalam(),
+          bodyMedium: GoogleFonts.notoSerifMalayalam(),
+        ),
+        filledButtonTheme: FilledButtonThemeData(
+          style: FilledButton.styleFrom(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(5.0),
+            ),
+          ),
+        ),
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(5.0),
+            ),
+          ),
+        ),
+        floatingActionButtonTheme: FloatingActionButtonThemeData(
+          backgroundColor: Colors.orangeAccent,
+          foregroundColor: Colors.white,
+        ),
+      ),
+      darkTheme: ThemeData(
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: Colors.green,
+          brightness: Brightness.dark,
+        ),
+        textTheme: TextTheme(
+          displaySmall: GoogleFonts.notoSerifMalayalam(),
+          titleLarge: GoogleFonts.notoSerifMalayalam(),
+          bodyLarge: GoogleFonts.notoSerifMalayalam(),
+          bodyMedium: GoogleFonts.notoSerifMalayalam(),
+        ),
+        filledButtonTheme: FilledButtonThemeData(
+          style: FilledButton.styleFrom(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(5.0),
+            ),
+          ),
+        ),
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(5.0),
+            ),
+          ),
+        ),
+        floatingActionButtonTheme: FloatingActionButtonThemeData(
+          backgroundColor: Colors.orangeAccent,
+          foregroundColor: Colors.white,
+        ),
+      ),
       themeMode: _themeMode,
       home: const HomePage(),
-    );
-  }
-
-  ThemeData baseTheme(Brightness brightness) {
-    return ThemeData(
-      colorScheme: ColorScheme.fromSeed(
-        seedColor: Colors.blue,
-        brightness: brightness,
-      ),
-      // colorScheme: ColorScheme.fromSeed(
-      //   seedColor: Colors.blue,
-      //   brightness: brightness,
-      // ),
-      textTheme: TextTheme(
-        displaySmall: GoogleFonts.notoSerifMalayalam(),
-        titleLarge: GoogleFonts.notoSerifMalayalam(),
-        bodyLarge: GoogleFonts.notoSerifMalayalam(),
-        bodyMedium: GoogleFonts.notoSerifMalayalam(),
-      ),
-      filledButtonTheme: FilledButtonThemeData(
-        style: FilledButton.styleFrom(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(5.0),
-          ),
-        ),
-      ),
-      elevatedButtonTheme: ElevatedButtonThemeData(
-        style: ElevatedButton.styleFrom(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(5.0),
-          ),
-        ),
-      ),
-      floatingActionButtonTheme: FloatingActionButtonThemeData(
-        foregroundColor: Theme.of(context).colorScheme.primary,
-      ),
     );
   }
 

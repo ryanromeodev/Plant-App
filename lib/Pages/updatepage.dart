@@ -75,6 +75,7 @@ class _UpdatePlantState extends State<UpdatePlant> {
                   "",
                   "",
                   "",
+                  "",
                 ));
               },
             ),
@@ -216,6 +217,7 @@ class _UpdatePlantState extends State<UpdatePlant> {
                             plantdate: "",
                             plantnote: "",
                           ),
+                          "",
                           "",
                           "",
                           "",
