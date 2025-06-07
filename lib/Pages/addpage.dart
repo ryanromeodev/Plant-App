@@ -54,6 +54,7 @@ class _AddplantState extends State<Addplant> {
                     plantname: "",
                     plantdetails: "",
                     plantdate: "",
+                    plantnote: "",
                   ),
                 );
               },
@@ -151,6 +152,7 @@ class _AddplantState extends State<Addplant> {
                                         ? detailsController.text
                                         : "വിവരങ്ങൾ നൽകിയിട്ടില്ല",
                                 plantdate: date,
+                                plantnote: date, //TODO: add note date
                               ),
                             );
                           },
@@ -169,6 +171,7 @@ class _AddplantState extends State<Addplant> {
                             plantname: "",
                             plantdetails: "",
                             plantdate: "",
+                            plantnote: "",
                           ),
                         );
                       },

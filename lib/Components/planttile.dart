@@ -28,13 +28,13 @@ class _PlantTileState extends State<PlantTile> {
   // @override
   @override
   Widget build(BuildContext context) {
-    final String year = widget.plant.plantdate.substring(0, 4);
-    final String month = widget.plant.plantdate.substring(5, 7);
-    final String day = widget.plant.plantdate.substring(8, 10);
+    String year = "", day = "", month = "";
+    if (widget.plant.plantdate.length > 9) {
+      year = widget.plant.plantdate.substring(0, 4);
+      month = widget.plant.plantdate.substring(5, 7);
+      day = widget.plant.plantdate.substring(8, 10);
+    }
     //the birthday's date
-    final from = DateTime(int.parse(year), int.parse(month), int.parse(day));
-    final to = DateTime.now();
-    final pendingDays = ((to.difference(from).inHours / 24) * -1).ceil();
 
     return GestureDetector(
       onTap: () {
@@ -58,18 +58,13 @@ class _PlantTileState extends State<PlantTile> {
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                GestureDetector(
-                  onTap: () {
-                    widget.onPlantOrgChange(widget.plant);
-                  },
+                CircleAvatar(
+                  backgroundColor: Theme.of(context).colorScheme.primary,
+                  radius: 20,
                   child: CircleAvatar(
-                    backgroundColor: Theme.of(context).colorScheme.primary,
-                    radius: 20,
-                    child: CircleAvatar(
-                      radius: 18,
-                      backgroundImage:
-                          (aim[int.parse(widget.plant.plantid) % 10]),
-                    ),
+                    radius: 18,
+                    backgroundImage:
+                        (aim[int.parse(widget.plant.plantid) % 10]),
                   ),
                 ),
                 SizedBox(width: 10),
@@ -101,21 +96,31 @@ class _PlantTileState extends State<PlantTile> {
                   ),
                 ),
                 SizedBox(width: 10),
-                RichText(
-                  text: TextSpan(
-                    text: "$day.",
-                    style: Theme.of(context).textTheme.bodyLarge,
-                    children: [
-                      TextSpan(
-                        text: "$month.$year",
-                        style: Theme.of(context).textTheme.bodyLarge,
-                      ),
-                    ],
-                  ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    widget.plant.plantdate.length > 9
+                        ? Text(
+                          "$day.$month.$year",
+                          style: Theme.of(context).textTheme.bodyLarge,
+                        )
+                        : Text(
+                          "no date",
+                          style: Theme.of(context).textTheme.bodyLarge,
+                        ),
+                    widget.plant.plantnote.isEmpty
+                        ? Text("", style: Theme.of(context).textTheme.bodySmall)
+                        : Text(
+                          "Notification day : widget.plant.plantnote",
+                          style: Theme.of(context).textTheme.bodySmall,
+                        ),
+                  ],
                 ),
                 if (widget.plant.plantid == widget.displayplantid)
                   IconButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      widget.onPlantOrgChange(widget.plant);
+                    },
                     icon: Icon(Icons.chevron_left),
                     color: Theme.of(context).colorScheme.primary,
                   ),
@@ -144,7 +149,7 @@ class _PlantTileState extends State<PlantTile> {
                 ),
               ),
             ),
-            SizedBox(height: 15),
+            SizedBox(height: 10),
           ],
         ),
       ),

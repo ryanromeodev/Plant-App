@@ -3,7 +3,6 @@ import 'dart:io';
 import 'dart:developer' as developer;
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:plantapp/Data/plant.dart';
@@ -80,6 +79,7 @@ class PlantData {
             plantname: plantListJson[i]["plantname"],
             plantdetails: plantListJson[i]["plantdetails"],
             plantdate: plantListJson[i]["plantdate"],
+            plantnote: plantListJson[i]["plantnote"],
           ),
         );
       }
@@ -174,6 +174,7 @@ Future<List<Plant>> loadtestdata() async {
           plantname: plantListJson[i]["plantname"],
           plantdetails: plantListJson[i]["plantdetails"],
           plantdate: plantListJson[i]["plantdate"],
+          plantnote: plantListJson[i]["plantnote"],
         ),
       );
     }

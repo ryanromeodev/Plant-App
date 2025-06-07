@@ -7,6 +7,7 @@ import 'package:plantapp/Components/plantlistheading.dart';
 import 'package:plantapp/Components/planttile.dart';
 import 'package:plantapp/Data/routingfunctions.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:plantapp/Components/plantheader.dart';
 import 'package:timezone/data/latest_all.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
 
@@ -198,6 +199,12 @@ class _HomePageState extends State<HomePage> {
       ),
       body: Column(
         children: [
+          PlantHeader(plist: plist),
+          Container(
+            height: 1.0, // Line thickness
+            color: Theme.of(context).colorScheme.primary, // Line color
+            margin: EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
+          ),
           PlantListHeading(todisplay: "ചെടികളുടെ പേരുകൾ"),
           Expanded(child: plantListBuilder()),
         ],
@@ -212,6 +219,7 @@ class _HomePageState extends State<HomePage> {
               plant.plantname,
               plant.plantdetails,
               plant.plantdate,
+              plant.plantnote,
             );
           }
         },
@@ -236,6 +244,7 @@ class _HomePageState extends State<HomePage> {
         thickness: 10,
         radius: Radius.circular(2),
         child: ListView(
+          physics: AlwaysScrollableScrollPhysics(),
           shrinkWrap: true,
           padding: const EdgeInsets.symmetric(vertical: 8.0),
           scrollDirection: Axis.vertical,
@@ -256,12 +265,15 @@ class _HomePageState extends State<HomePage> {
 
   updateHandler(Plant plant) async {
     Plant outPlant;
-    String id, name, details, date;
-    (outPlant, id, name, details, date) = await updatePlantPage(context, plant);
+    String id, name, details, date, note;
+    (outPlant, id, name, details, date, note) = await updatePlantPage(
+      context,
+      plant,
+    );
     if (id.isEmpty) {
       removePlantItem(plist, outPlant);
     } else if (date != "") {
-      updatePlantItem(outPlant, id, name, details, date);
+      updatePlantItem(outPlant, id, name, details, date, note);
     }
   }
 
@@ -278,9 +290,17 @@ class _HomePageState extends State<HomePage> {
     String updatedPlantname,
     String updatedPlantDetails,
     String date,
+    String note,
   ) {
     removePlantItem(plist, plant);
-    addPlantItem(plist, plantid, updatedPlantname, updatedPlantDetails, date);
+    addPlantItem(
+      plist,
+      plantid,
+      updatedPlantname,
+      updatedPlantDetails,
+      date,
+      note,
+    );
   }
 
   removePlantItem(List<Plant> plist, Plant plant) {
@@ -301,6 +321,7 @@ class _HomePageState extends State<HomePage> {
     String name,
     String details,
     String date,
+    String note,
   ) {
     setState(() {
       plist.add(
@@ -309,6 +330,7 @@ class _HomePageState extends State<HomePage> {
           plantname: name,
           plantdetails: details,
           plantdate: date,
+          plantnote: note, //TODO : Add note date
         ),
       );
       plantSorter(plist, trashList);

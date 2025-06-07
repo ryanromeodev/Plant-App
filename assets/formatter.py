@@ -10,5 +10,6 @@ for dreier in plantlist:
     print(f"\t\"plantid\":\"{plant[2]}\",")
     print(f"\t\"plantname\":\"{plant[0]}\",")
     print(f"\t\"plantdetails\":\"{plant[3]}\",")
-    print(f"\t\"plantdate\":\"{year}-{month}-{day}\"")        
+    print(f"\t\"plantdate\":\"{year}-{month}-{day}\",")        
+    print(f"\t\"plantnote\":\"\"")
     print("},")

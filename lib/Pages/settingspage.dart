@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:plantapp/Components/wastecard.dart';
+import 'package:plantapp/Components/plantlistheading.dart';
 import 'package:plantapp/Data/data.dart';
 import 'package:plantapp/Data/functions.dart';
 import 'package:plantapp/Data/plant.dart';
@@ -21,14 +21,6 @@ class _SettingsState extends State<Settings> {
     trashes = widget.trashlist;
     super.initState();
   }
-
-  Plant displayPlant = Plant(
-    plantid: "",
-    plantname: "ചെടികളുടെ പേര്",
-    plantdetails: "വിവരങ്ങൾ",
-    // plantdate: DateTime.now().toString().substring(0, 10),
-    plantdate: "",
-  );
 
   @override
   Widget build(BuildContext context) {
@@ -68,7 +60,12 @@ class _SettingsState extends State<Settings> {
         body: SingleChildScrollView(
           child: Column(
             children: [
-              WasteCard(plant: displayPlant),
+              Container(
+                height: 1.0, // Line thickness
+                color: Theme.of(context).colorScheme.primary, // Line color
+                margin: EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
+              ),
+              PlantListHeading(todisplay: "Deleted plants"),
               plantListBuilder(),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -135,21 +132,14 @@ class _SettingsState extends State<Settings> {
         crossAxisCount: 1,
         shrinkWrap: true,
         padding: const EdgeInsets.symmetric(vertical: 8.0),
-        scrollDirection: Axis.horizontal,
+        scrollDirection: Axis.vertical,
         children:
             trashes.map((Plant plant) {
-              return InkWell(
-                onTap: () {
-                  setState(() {
-                    displayPlant = plant;
-                  });
-                },
-                child: ListTile(
-                  iconColor: Theme.of(context).colorScheme.primary,
-                  leading: Icon(Icons.eco),
-                  title: Text(plant.plantname),
-                  subtitle: Text(plant.plantdetails),
-                ),
+              return ListTile(
+                iconColor: Theme.of(context).colorScheme.primary,
+                leading: Icon(Icons.eco),
+                title: Text(plant.plantname),
+                subtitle: Text(plant.plantdetails),
               );
             }).toList(),
       ),

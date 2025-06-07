@@ -15,7 +15,7 @@ class _UpdatePlantState extends State<UpdatePlant> {
   final nameController = TextEditingController();
   final detailsController = TextEditingController();
 
-  String oldid = "", oldname = "", olddetails = "", olddate = "";
+  String oldid = "", oldname = "", olddetails = "", olddate = "", oldnote = "";
 
   @override
   void initState() {
@@ -24,6 +24,7 @@ class _UpdatePlantState extends State<UpdatePlant> {
     oldname = widget.plant.plantname;
     olddetails = widget.plant.plantdetails;
     olddate = widget.plant.plantdate;
+    oldnote = widget.plant.plantnote;
     nameController.text = widget.plant.plantname;
     detailsController.text = widget.plant.plantdetails;
     date = widget.plant.plantdate;
@@ -68,6 +69,7 @@ class _UpdatePlantState extends State<UpdatePlant> {
                     plantname: "",
                     plantdetails: "",
                     plantdate: "",
+                    plantnote: "",
                   ),
                   "",
                   "",
@@ -164,6 +166,7 @@ class _UpdatePlantState extends State<UpdatePlant> {
                                 plantname: oldname,
                                 plantdetails: olddetails,
                                 plantdate: olddate,
+                                plantnote: oldnote,
                               ),
                               widget.plant.plantid,
                               nameController.text,
@@ -171,6 +174,7 @@ class _UpdatePlantState extends State<UpdatePlant> {
                                   ? detailsController.text
                                   : "വിവരങ്ങൾ നൽകിയിട്ടില്ല",
                               date,
+                              date, //TODO add note
                             ));
                           },
                           child: const Text('Update'),
@@ -188,6 +192,7 @@ class _UpdatePlantState extends State<UpdatePlant> {
                                 plantname: oldname,
                                 plantdetails: olddetails,
                                 plantdate: olddate,
+                                plantnote: oldnote, //TODO
                               ),
                               "",
                               "",
@@ -209,6 +214,7 @@ class _UpdatePlantState extends State<UpdatePlant> {
                             plantname: "",
                             plantdetails: "",
                             plantdate: "",
+                            plantnote: "",
                           ),
                           "",
                           "",
