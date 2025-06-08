@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:plantapp/Data/functions.dart';
 import 'package:plantapp/Data/plant.dart';
 
 class PlantHeader extends StatefulWidget {
@@ -6,10 +7,12 @@ class PlantHeader extends StatefulWidget {
     super.key,
     required this.plants,
     required this.groupingfn,
+    required this.displayName,
   });
 
   final List<Plant> plants;
   final dynamic groupingfn;
+  final String displayName;
 
   @override
   State<PlantHeader> createState() => _PlantHeaderState();
@@ -35,6 +38,10 @@ class _PlantHeaderState extends State<PlantHeader> {
               outlist.map((String plant) {
                 return ActionChip.elevated(
                   label: Text(plant),
+                  backgroundColor:
+                      plant == widget.displayName
+                          ? Theme.of(context).colorScheme.primaryContainer
+                          : Theme.of(context).colorScheme.surface,
                   onPressed: () {
                     widget.groupingfn(plant);
                   },
@@ -46,12 +53,4 @@ class _PlantHeaderState extends State<PlantHeader> {
       ),
     );
   }
-}
-
-List<String> getplantnames(List<Plant> plist) {
-  List<String> outlist = [];
-  for (Plant p in plist) {
-    outlist.add(p.plantname);
-  }
-  return outlist.toSet().toList();
 }

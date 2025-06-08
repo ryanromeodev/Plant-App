@@ -53,3 +53,11 @@ int pendingdays(String plantdate) {
   final int pendingDays = ((to.difference(from).inHours / 24) * -1).ceil();
   return pendingDays;
 }
+
+List<String> getplantnames(List<Plant> plist) {
+  List<String> outlist = [];
+  for (Plant p in plist) {
+    outlist.add(p.plantname);
+  }
+  return outlist.toSet().toList();
+}

@@ -25,12 +25,6 @@ class _HomePageState extends State<HomePage> {
   final FlutterLocalNotificationsPlugin _notificationsPlugin =
       FlutterLocalNotificationsPlugin();
 
-  // Plant displayPlant = Plant(
-  //   plantid: "292",
-  //   plantname: "",
-  //   plantdetails: "",
-  //   plantdate: "",
-  // );
   String day = "", month = "", year = "", displayname = "", displayid = "";
   Icon changinIcon = Icon(Icons.light_mode);
   List<Plant> plist = [];
@@ -200,7 +194,11 @@ class _HomePageState extends State<HomePage> {
       body: Column(
         children: [
           PlantListHeading(todisplay: "ചെടികളുടെ പേരുകൾ"),
-          PlantHeader(plants: plist, groupingfn: groupselectbynamefn),
+          PlantHeader(
+            plants: plist,
+            displayName: displayname,
+            groupingfn: groupselectbynamefn,
+          ),
           Container(
             height: 2.0, // Line thickness
             color: Theme.of(context).colorScheme.primary, // Line color
@@ -361,18 +359,5 @@ class _HomePageState extends State<HomePage> {
       );
       plantSorter(plist, trashList);
     });
-    int notificationdate = pendingdays(date) - 2; //notifies 2 days before
-    if (notificationdate >= 0) {
-      // notify
-      _HomePageState().scheduledNotification(
-        name,
-        date,
-        int.parse(id), //#id gets random, not mapping, just push
-        // notificationdate,
-        0,
-        6,
-        5,
-      );
-    }
   }
 }
