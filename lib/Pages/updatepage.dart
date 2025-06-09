@@ -15,8 +15,6 @@ class _UpdatePlantState extends State<UpdatePlant> {
   final nameController = TextEditingController();
   final detailsController = TextEditingController();
 
-  String oldid = "", oldname = "", olddetails = "", olddate = "", oldnote = "";
-
   @override
   void initState() {
     super.initState();
@@ -27,6 +25,10 @@ class _UpdatePlantState extends State<UpdatePlant> {
     oldnote = widget.plant.plantnote;
     nameController.text = widget.plant.plantname;
     detailsController.text = widget.plant.plantdetails;
+    isChecked =
+        widget.plant.plantnote.length > 9 && widget.plant.plantnote.isNotEmpty
+            ? true
+            : false;
   }
 
   @override
@@ -37,7 +39,13 @@ class _UpdatePlantState extends State<UpdatePlant> {
     super.dispose();
   }
 
-  String name = "", details = "";
+  String oldid = "",
+      oldname = "",
+      olddetails = "",
+      olddate = "",
+      oldnote = "",
+      name = "",
+      details = "";
   bool isChecked = false;
   @override
   Widget build(BuildContext context) {
@@ -157,7 +165,7 @@ class _UpdatePlantState extends State<UpdatePlant> {
               ),
               Row(
                 children: [
-                  PlantListHeading(todisplay: "നോട്ടിഫിക്കേഷൻ വേണമോ?"),
+                  PlantListHeading(todisplay: "നോട്ടിഫിക്കേഷൻ വേണോ?"),
                   Checkbox(
                     value: isChecked,
                     onChanged: (bool? value) {
@@ -187,7 +195,6 @@ class _UpdatePlantState extends State<UpdatePlant> {
                     nameController.text.length >= 2
                         ? FilledButton(
                           onPressed: () {
-                            // Close the screen and return "Yep!" as the result.
                             Navigator.pop(context, (
                               Plant(
                                 plantid: oldid,

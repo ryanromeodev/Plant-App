@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:plantapp/Data/data.dart';
+import 'package:plantapp/Data/notification.dart';
 import 'package:plantapp/Data/plant.dart';
 import 'package:plantapp/Data/strings.dart';
 
@@ -31,12 +32,23 @@ plantSorter(List<Plant> unsortedPlantList, List<Plant> trashlist) {
   PlantData().writeJson(trashlist, trashfile);
 }
 
-setNotifiation(List<Plant> plantlist) {
-  for (Plant plant in plantlist) {
-    if (plant.plantnote.isNotEmpty && plant.plantnote.length > 9) {
-      // scheduledNotification();
-    }
+setNotification(Plant plant) {
+  if (plant.plantnote.isNotEmpty && plant.plantnote.length > 9) {
+    int pending = pendingdays(plant.plantnote);
+    print(pending);
+    scheduledNotification(
+      plant.plantname,
+      plant.plantdetails,
+      int.parse(plant.plantid),
+      0,
+      0,
+      15,
+    );
   }
+}
+
+removeNotification(Plant plant) {
+  deleteNotificationChannel(plant.plantid);
 }
 
 /// [dateTimeFormatter] is used to deal with the format of the DateTime and String

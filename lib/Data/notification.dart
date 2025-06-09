@@ -49,28 +49,12 @@ scheduledNotification(
 
 //TODO : Future Scope
 
-  // Future<void> _deleteNotificationChannel() async {
-  //   const String channelId = 'your channel id';
-  //   await _notificationsPlugin
-  //       .resolvePlatformSpecificImplementation<
-  //         AndroidFlutterLocalNotificationsPlugin
-  //       >()
-  //       ?.deleteNotificationChannel(channelId);
-
-  //   await showDialog<void>(
-  //     context: context,
-  //     builder:
-  //         (BuildContext context) => AlertDialog(
-  //           content: const Text('Channel with id $channelId deleted'),
-  //           actions: <Widget>[
-  //             TextButton(
-  //               onPressed: () {
-  //                 Navigator.of(context).pop();
-  //               },
-  //               child: const Text('OK'),
-  //             ),
-  //           ],
-  //         ),
-  //   );
-  // }
-
+Future<void> deleteNotificationChannel(String channelid) async {
+  // const String channelId = 'your channel id';
+  // await _notificationsPlugin
+  //     .resolvePlatformSpecificImplementation<
+  //       AndroidFlutterLocalNotificationsPlugin
+  //     >()
+  //     ?.deleteNotificationChannel(channelid);
+  await _notificationsPlugin.cancel(int.parse(channelid));
+}

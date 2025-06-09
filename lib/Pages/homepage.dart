@@ -251,9 +251,10 @@ class _HomePageState extends State<HomePage> {
     if (id.isNotEmpty) {
       setState(() {
         plist.removeWhere((plant) => plant.plantid == id);
-        plantSorter(plist, trashList);
         trashList.add(plant);
       });
+      plantSorter(plist, trashList);
+      removeNotification(plant);
     }
   }
 
@@ -276,7 +277,16 @@ class _HomePageState extends State<HomePage> {
           plantnote: note,
         ),
       );
-      plantSorter(plist, trashList);
     });
+    plantSorter(plist, trashList);
+    setNotification(
+      Plant(
+        plantid: id,
+        plantname: name,
+        plantdetails: details,
+        plantdate: date,
+        plantnote: note,
+      ),
+    );
   }
 }
