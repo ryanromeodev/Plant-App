@@ -7,10 +7,8 @@ import 'package:plantapp/Components/theme.dart';
 import 'package:plantapp/Components/plantlistheading.dart';
 import 'package:plantapp/Components/planttile.dart';
 import 'package:plantapp/Data/routingfunctions.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:plantapp/Components/plantheader.dart';
 import 'package:timezone/data/latest_all.dart' as tz;
-import 'package:timezone/timezone.dart' as tz;
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
