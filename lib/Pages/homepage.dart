@@ -188,7 +188,7 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
 
-        scrolledUnderElevation: 0.0,
+        // scrolledUnderElevation: 0.0,
         // surfaceTintColor: Colors.transparent,
       ),
       body: Column(

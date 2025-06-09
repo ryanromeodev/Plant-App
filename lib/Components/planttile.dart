@@ -25,7 +25,6 @@ class PlantTile extends StatefulWidget {
 }
 
 class _PlantTileState extends State<PlantTile> {
-  // @override
   @override
   Widget build(BuildContext context) {
     String year = "", day = "", month = "";
@@ -40,7 +39,6 @@ class _PlantTileState extends State<PlantTile> {
       notemonth = widget.plant.plantnote.substring(5, 7);
       noteday = widget.plant.plantnote.substring(8, 10);
     }
-    //the birthday's date
 
     return GestureDetector(
       onTap: () {
@@ -68,24 +66,28 @@ class _PlantTileState extends State<PlantTile> {
                   backgroundColor:
                       widget.displayplantid.trim() ==
                               widget.plant.plantid.trim()
-                          ? Theme.of(context).colorScheme.secondary
-                          : Theme.of(context).colorScheme.primary,
-                  radius: 22,
+                          ? Theme.of(context).colorScheme.primary
+                          : Theme.of(context).colorScheme.primaryFixed,
+                  radius: 18,
                   child: CircleAvatar(
-                    radius: 18,
+                    radius: 15,
                     backgroundImage:
                         (aim[int.parse(widget.plant.plantid) % 10]),
                   ),
                 ),
-                SizedBox(width: 10),
+                SizedBox(width: 5),
                 Material(
-                  elevation: 4,
+                  elevation: 2,
                   color: Theme.of(context).colorScheme.surface,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10),
                     side: BorderSide(
-                      color: Theme.of(context).colorScheme.primaryFixed,
-                      width: 1,
+                      color:
+                          widget.displayplantid.trim() ==
+                                  widget.plant.plantid.trim()
+                              ? Theme.of(context).colorScheme.primary
+                              : Theme.of(context).colorScheme.primaryFixed,
+                      width: 2,
                     ),
                   ),
                   child: Container(
@@ -101,7 +103,7 @@ class _PlantTileState extends State<PlantTile> {
                     ),
                   ),
                 ),
-                SizedBox(width: 10),
+                SizedBox(width: 5),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -117,7 +119,7 @@ class _PlantTileState extends State<PlantTile> {
                     widget.plant.plantnote.length > 9 &&
                             widget.plant.plantnote.isNotEmpty
                         ? Text(
-                          "അറിയിപ്പ് : $noteday.$notemonth.$noteyear",
+                          "അറിയിപ്പ്:$noteday.$notemonth.$noteyear",
                           style: Theme.of(context).textTheme.bodySmall,
                         )
                         : Text(
@@ -131,17 +133,21 @@ class _PlantTileState extends State<PlantTile> {
                     onPressed: () {
                       widget.onPlantOrgChange(widget.plant);
                     },
-                    icon: Icon(Icons.chevron_left),
+                    icon: Icon(Icons.arrow_forward_ios),
                     color: Theme.of(context).colorScheme.primary,
                   ),
               ],
             ),
-            SizedBox(height: 15),
+            SizedBox(height: 10),
             Material(
               color: Theme.of(context).colorScheme.surface,
               shape: BeveledRectangleBorder(
                 side: BorderSide(
-                  color: Theme.of(context).colorScheme.primaryFixedDim,
+                  color:
+                      widget.displayplantid.trim() ==
+                              widget.plant.plantid.trim()
+                          ? Theme.of(context).colorScheme.primary
+                          : Theme.of(context).colorScheme.primaryFixed,
                 ),
                 borderRadius: BorderRadius.only(topLeft: Radius.circular(10)),
               ),

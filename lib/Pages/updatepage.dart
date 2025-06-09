@@ -272,9 +272,13 @@ class _UpdatePlantState extends State<UpdatePlant> {
           margin: EdgeInsets.all(10.0),
           alignment: Alignment.centerLeft,
           decoration: BoxDecoration(borderRadius: BorderRadius.circular(20.0)),
-          child: ElevatedButton(
+          child: IconButton(
             onPressed: () => selectNote(context),
-            child: Icon(Icons.calendar_month, size: 30),
+            icon: Icon(
+              Icons.calendar_month,
+              size: 30,
+              color: Theme.of(context).colorScheme.primary,
+            ),
           ),
         ),
         Container(
