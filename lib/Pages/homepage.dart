@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:plantapp/Data/data.dart';
 import 'package:plantapp/Data/functions.dart';
+import 'package:plantapp/Data/notification.dart';
 import 'package:plantapp/Data/plant.dart';
 import 'package:plantapp/Components/theme.dart';
 import 'package:plantapp/Components/plantlistheading.dart';
@@ -22,9 +23,6 @@ class HomePage extends StatefulWidget {
 ///to read a text file and populate the data or else create a new text file for
 ///storing the newly populated data
 class _HomePageState extends State<HomePage> {
-  final FlutterLocalNotificationsPlugin _notificationsPlugin =
-      FlutterLocalNotificationsPlugin();
-
   String day = "", month = "", year = "", displayname = "", displayid = "";
   Icon changinIcon = Icon(Icons.light_mode);
   List<Plant> plist = [];
@@ -33,81 +31,11 @@ class _HomePageState extends State<HomePage> {
 
   @override
   initState() {
-    _initializeNotifications();
+    initializeNotifications();
     tz.initializeTimeZones();
     plantDataLoad();
     super.initState();
   }
-
-  void _initializeNotifications() async {
-    const AndroidInitializationSettings androidSettings =
-        AndroidInitializationSettings('@mipmap/ic_launcher');
-    const InitializationSettings settings = InitializationSettings(
-      android: androidSettings,
-    );
-    await _notificationsPlugin.initialize(settings);
-  }
-
-  /// Scheduled Notification
-  scheduledNotification(
-    String title,
-    String body,
-    int id,
-    int day,
-    int hour,
-    int second,
-  ) async {
-    var t = tz.TZDateTime.now(tz.local).add(
-      Duration(
-        seconds: second,
-        hours: hour, //morning 6 after 00:00
-        days: day,
-      ),
-    );
-    await _notificationsPlugin.zonedSchedule(
-      id,
-      title,
-      body,
-      t,
-      const NotificationDetails(
-        android: AndroidNotificationDetails(
-          'your channel id',
-          'your channel name',
-          channelDescription: 'your channel description',
-          importance: Importance.max,
-          priority: Priority.high,
-        ),
-      ),
-      androidScheduleMode: AndroidScheduleMode.alarmClock,
-    );
-  }
-
-  //TODO : Future Scope
-
-  // Future<void> _deleteNotificationChannel() async {
-  //   const String channelId = 'your channel id';
-  //   await _notificationsPlugin
-  //       .resolvePlatformSpecificImplementation<
-  //         AndroidFlutterLocalNotificationsPlugin
-  //       >()
-  //       ?.deleteNotificationChannel(channelId);
-
-  //   await showDialog<void>(
-  //     context: context,
-  //     builder:
-  //         (BuildContext context) => AlertDialog(
-  //           content: const Text('Channel with id $channelId deleted'),
-  //           actions: <Widget>[
-  //             TextButton(
-  //               onPressed: () {
-  //                 Navigator.of(context).pop();
-  //               },
-  //               child: const Text('OK'),
-  //             ),
-  //           ],
-  //         ),
-  //   );
-  // }
 
   ///[plantDataLoad] Loads the [Plant] Data to a [plist] which could be
   ///used throughout the program instance
@@ -166,19 +94,12 @@ class _HomePageState extends State<HomePage> {
               });
             },
           ),
-          // IconButton(
-          //   icon: const Icon(Icons.notifications),
-          //   onPressed: () {
-          //     _HomePageState().scheduledNotification(
-          //       "test",
-          //       "test",
-          //       2,
-          //       0,
-          //       0,
-          //       3,
-          //     );
-          //   },
-          // ),
+          IconButton(
+            icon: const Icon(Icons.notifications),
+            onPressed: () {
+              scheduledNotification("test", "test", 2, 0, 0, 3);
+            },
+          ),
         ],
         title: Row(
           children: [
@@ -354,7 +275,7 @@ class _HomePageState extends State<HomePage> {
           plantname: name,
           plantdetails: details,
           plantdate: date,
-          plantnote: note, //TODO : Add note date
+          plantnote: note,
         ),
       );
       plantSorter(plist, trashList);

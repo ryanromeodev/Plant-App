@@ -31,6 +31,14 @@ plantSorter(List<Plant> unsortedPlantList, List<Plant> trashlist) {
   PlantData().writeJson(trashlist, trashfile);
 }
 
+setNotifiation(List<Plant> plantlist) {
+  for (Plant plant in plantlist) {
+    if (plant.plantnote.isNotEmpty && plant.plantnote.length > 9) {
+      // scheduledNotification();
+    }
+  }
+}
+
 /// [dateTimeFormatter] is used to deal with the format of the DateTime and String
 String dateTimeFormatter(DateTime? datetime) {
   //the function returns a string Date

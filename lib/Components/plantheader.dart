@@ -43,7 +43,7 @@ class _PlantHeaderState extends State<PlantHeader> {
                           ? Theme.of(context).colorScheme.primaryContainer
                           : plant == "മുഴുവൻ പട്ടിക"
                           ? Theme.of(context).colorScheme.tertiaryContainer
-                          : Theme.of(context).colorScheme.surfaceContainer,
+                          : Theme.of(context).colorScheme.secondaryContainer,
                   onPressed: () {
                     widget.groupingfn(plant);
                   },
