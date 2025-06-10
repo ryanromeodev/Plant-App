@@ -3,10 +3,11 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:plantapp/Data/plant.dart';
 import 'package:plantapp/Components/plantlistheading.dart';
+import 'package:plantapp/Data/strings.dart';
 
 class Addplant extends StatefulWidget {
-  const Addplant({super.key});
-
+  const Addplant({super.key, required this.malayalam});
+  final bool malayalam;
   @override
   State<Addplant> createState() => _AddplantState();
 }
@@ -40,7 +41,7 @@ class _AddplantState extends State<Addplant> {
               Icon(Icons.add_box),
               SizedBox(width: 5),
               Text(
-                'ചെടി ചേർക്കുക',
+                widget.malayalam ? madd : add,
                 style: Theme.of(context).textTheme.headlineSmall,
               ),
             ],
@@ -66,7 +67,7 @@ class _AddplantState extends State<Addplant> {
         body: SingleChildScrollView(
           child: Column(
             children: [
-              PlantListHeading(todisplay: "പേര്"),
+              PlantListHeading(todisplay: widget.malayalam ? mperu : peru),
               Container(
                 margin: EdgeInsets.all(10.0),
                 decoration: BoxDecoration(
@@ -86,11 +87,13 @@ class _AddplantState extends State<Addplant> {
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.all(Radius.circular(20)),
                     ),
-                    hintText: 'പേര് ഇവിടെ എഴുതുക',
+                    hintText: widget.malayalam ? mhinttextperu : hinttextperu,
                   ),
                 ),
               ),
-              PlantListHeading(todisplay: "വിവരങ്ങൾ"),
+              PlantListHeading(
+                todisplay: widget.malayalam ? mvivaranghal : vivaranghal,
+              ),
               Container(
                 margin: EdgeInsets.all(10.0),
                 decoration: BoxDecoration(
@@ -104,13 +107,17 @@ class _AddplantState extends State<Addplant> {
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.all(Radius.circular(20)),
                     ),
-                    hintText: 'വിവരങ്ങൾ ഇവിടെ എഴുതുക',
-                    fillColor: Colors.white,
+                    hintText:
+                        widget.malayalam
+                            ? mhinttextvivaranghal
+                            : hinttextvivaranghal,
                     hintMaxLines: 3,
                   ),
                 ),
               ),
-              PlantListHeading(todisplay: "ഒരു തീയതി തിരഞ്ഞെടുക്കുക"),
+              PlantListHeading(
+                todisplay: widget.malayalam ? mthiyathi : thiyathi,
+              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
@@ -141,7 +148,10 @@ class _AddplantState extends State<Addplant> {
               ),
               Row(
                 children: [
-                  PlantListHeading(todisplay: "നോട്ടിഫിക്കേഷൻ വേണമോ?"),
+                  PlantListHeading(
+                    todisplay:
+                        widget.malayalam ? mnotificationveno : notificationveno,
+                  ),
                   Checkbox(
                     value: isChecked,
                     onChanged: (bool? value) {

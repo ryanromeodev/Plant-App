@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:plantapp/Data/functions.dart';
 import 'package:plantapp/Data/plant.dart';
+import 'package:plantapp/Data/strings.dart';
 
 class PlantHeader extends StatefulWidget {
   const PlantHeader({
@@ -8,11 +9,13 @@ class PlantHeader extends StatefulWidget {
     required this.plants,
     required this.groupingfn,
     required this.displayName,
+    required this.malayalam,
   });
 
   final List<Plant> plants;
   final dynamic groupingfn;
   final String displayName;
+  final bool malayalam;
 
   @override
   State<PlantHeader> createState() => _PlantHeaderState();
@@ -22,7 +25,7 @@ class _PlantHeaderState extends State<PlantHeader> {
   @override
   Widget build(BuildContext context) {
     List<String> outlist = getplantnames(widget.plants);
-    outlist.insert(0, "മുഴുവൻ പട്ടിക");
+    outlist.insert(0, widget.malayalam?mmuzhuvanpattika:muzhuvanpattika);
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 5),
       width: MediaQuery.of(context).size.width,
@@ -41,7 +44,7 @@ class _PlantHeaderState extends State<PlantHeader> {
                   backgroundColor:
                       plant == widget.displayName
                           ? Theme.of(context).colorScheme.primaryContainer
-                          : plant == "മുഴുവൻ പട്ടിക"
+                          : plant == (widget.malayalam?mmuzhuvanpattika:muzhuvanpattika)
                           ? Theme.of(context).colorScheme.tertiaryContainer
                           : Theme.of(context).colorScheme.secondaryContainer,
                   onPressed: () {

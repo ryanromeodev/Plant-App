@@ -8,6 +8,7 @@ import 'package:plantapp/Components/plantlistheading.dart';
 import 'package:plantapp/Components/planttile.dart';
 import 'package:plantapp/Data/routingfunctions.dart';
 import 'package:plantapp/Components/plantheader.dart';
+import 'package:plantapp/Data/strings.dart';
 import 'package:timezone/data/latest_all.dart' as tz;
 
 class HomePage extends StatefulWidget {
@@ -26,7 +27,7 @@ class _HomePageState extends State<HomePage> {
   List<Plant> plist = [];
   List<Plant> trashList = [];
   bool fulllist = true;
-
+  bool malayalam = true;
   @override
   initState() {
     initializeNotifications();
@@ -67,6 +68,14 @@ class _HomePageState extends State<HomePage> {
               },
             ),
           IconButton(
+            icon: const Icon(Icons.translate),
+            onPressed: () {
+              setState(() {
+                malayalam = !malayalam;
+              });
+            },
+          ),
+          IconButton(
             icon: changinIcon,
             onPressed:
                 () => {
@@ -99,17 +108,21 @@ class _HomePageState extends State<HomePage> {
           children: [
             Icon(Icons.home),
             SizedBox(width: 5),
-            Text('തുടക്കം', style: Theme.of(context).textTheme.headlineSmall),
+            Text(
+              malayalam ? mhometitle : hometitle,
+              style: Theme.of(context).textTheme.headlineSmall,
+            ),
           ],
         ),
       ),
       body: Column(
         children: [
-          PlantListHeading(todisplay: "ചെടികളുടെ പേരുകൾ"),
+          PlantListHeading(todisplay: malayalam ? mchediname : chediname),
           PlantHeader(
             plants: plist,
             displayName: displayname,
             groupingfn: groupselectbynamefn,
+            malayalam: malayalam,
           ),
           Container(
             height: 2.0, // Line thickness
@@ -121,7 +134,7 @@ class _HomePageState extends State<HomePage> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
-          Plant plant = await addingPlantPage(context);
+          Plant plant = await addingPlantPage(context, malayalam);
           if (plant.plantname.isNotEmpty) {
             addPlantItem(
               plist,
@@ -163,6 +176,7 @@ class _HomePageState extends State<HomePage> {
                         heroDisplay: groupselectbyplantfn,
                         displayPlantName: displayname,
                         displayplantid: displayid,
+                        malayalam: malayalam,
                       );
                     } else {
                       return SizedBox.shrink();
@@ -175,6 +189,7 @@ class _HomePageState extends State<HomePage> {
                       heroDisplay: groupselectbyplantfn,
                       displayPlantName: displayname,
                       displayplantid: displayid,
+                      malayalam: malayalam,
                     );
                   }).toList(),
         ),
@@ -182,12 +197,13 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  updateHandler(Plant plant) async {
+  updateHandler(Plant plant, bool malayalam) async {
     Plant outPlant;
     String id, name, details, date, note;
     (outPlant, id, name, details, date, note) = await updatePlantPage(
       context,
       plant,
+      malayalam,
     );
     if (id.isEmpty) {
       removePlantItem(plist, outPlant);
@@ -202,7 +218,7 @@ class _HomePageState extends State<HomePage> {
       if (fulllist) {
         fulllist = false;
       }
-      if (pname == "മുഴുവൻ പട്ടിക") {
+      if (pname == (malayalam ? mmuzhuvanpattika : muzhuvanpattika)) {
         if (!fulllist) {
           fulllist = true;
         }

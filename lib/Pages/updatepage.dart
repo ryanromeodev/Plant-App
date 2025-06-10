@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:plantapp/Data/plant.dart';
 import 'package:plantapp/Components/plantlistheading.dart';
+import 'package:plantapp/Data/strings.dart';
 
 class UpdatePlant extends StatefulWidget {
-  const UpdatePlant({super.key, required this.plant});
+  const UpdatePlant({super.key, required this.plant, required this.malayalam});
 
   final Plant plant;
+  final bool malayalam;
 
   @override
   State<UpdatePlant> createState() => _UpdatePlantState();
@@ -59,7 +61,7 @@ class _UpdatePlantState extends State<UpdatePlant> {
               Icon(Icons.edit_square),
               SizedBox(width: 5),
               Text(
-                'ചെടി പുതുക്കുക',
+                widget.malayalam ? mupdate : update,
                 style: Theme.of(context).textTheme.headlineSmall,
               ),
             ],
@@ -89,7 +91,7 @@ class _UpdatePlantState extends State<UpdatePlant> {
         body: SingleChildScrollView(
           child: Column(
             children: [
-              PlantListHeading(todisplay: "പേര്"),
+              PlantListHeading(todisplay: widget.malayalam ? mperu : peru),
               Container(
                 margin: EdgeInsets.all(10.0),
                 decoration: BoxDecoration(
@@ -109,11 +111,13 @@ class _UpdatePlantState extends State<UpdatePlant> {
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.all(Radius.circular(20)),
                     ),
-                    hintText: 'പേര് ഇവിടെ എഴുതുക',
+                    hintText: widget.malayalam ? mhinttextperu : hinttextperu,
                   ),
                 ),
               ),
-              PlantListHeading(todisplay: "വിവരങ്ങൾ"),
+              PlantListHeading(
+                todisplay: widget.malayalam ? mvivaranghal : vivaranghal,
+              ),
               Container(
                 margin: EdgeInsets.all(10.0),
                 decoration: BoxDecoration(
@@ -127,11 +131,16 @@ class _UpdatePlantState extends State<UpdatePlant> {
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.all(Radius.circular(20)),
                     ),
-                    hintText: 'വിവരങ്ങൾ ഇവിടെ എഴുതുക',
+                    hintText:
+                        widget.malayalam
+                            ? mhinttextvivaranghal
+                            : hinttextvivaranghal,
                   ),
                 ),
               ),
-              PlantListHeading(todisplay: "ഒരു തീയതി തിരഞ്ഞെടുക്കുക"),
+              PlantListHeading(
+                todisplay: widget.malayalam ? mthiyathi : thiyathi,
+              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
@@ -165,7 +174,10 @@ class _UpdatePlantState extends State<UpdatePlant> {
               ),
               Row(
                 children: [
-                  PlantListHeading(todisplay: "നോട്ടിഫിക്കേഷൻ വേണോ?"),
+                  PlantListHeading(
+                    todisplay:
+                        widget.malayalam ? mnotificationveno : notificationveno,
+                  ),
                   Checkbox(
                     value: isChecked,
                     onChanged: (bool? value) {

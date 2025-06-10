@@ -11,9 +11,11 @@ class PlantTile extends StatefulWidget {
     required this.heroDisplay,
     required this.displayPlantName,
     required this.displayplantid,
+    required this.malayalam,
   }) : super(key: ObjectKey(plant));
 
   final Plant plant;
+  final bool malayalam;
   final dynamic onPlantOrgChange;
   final dynamic heroDisplay;
   final String displayPlantName;
@@ -120,7 +122,7 @@ class _PlantTileState extends State<PlantTile> {
                 if (widget.plant.plantid == widget.displayplantid)
                   IconButton(
                     onPressed: () {
-                      widget.onPlantOrgChange(widget.plant);
+                      widget.onPlantOrgChange(widget.plant, widget.malayalam);
                     },
                     icon: Icon(Icons.arrow_forward_ios),
                     color: Theme.of(context).colorScheme.primary,

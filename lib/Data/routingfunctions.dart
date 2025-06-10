@@ -4,10 +4,10 @@ import 'package:plantapp/Pages/addpage.dart';
 import 'package:plantapp/Pages/settingspage.dart';
 import 'package:plantapp/Pages/updatepage.dart';
 
-Future<Plant> addingPlantPage(BuildContext context) async {
+Future<Plant> addingPlantPage(BuildContext context, bool malayalam) async {
   final Plant plant = await Navigator.push(
     context,
-    MaterialPageRoute(builder: (context) => Addplant()),
+    MaterialPageRoute(builder: (context) => Addplant(malayalam: malayalam)),
   );
   // When a BuildContext is used from a StatefulWidget, the mounted property
   // must be checked after an asynchronous gap.
@@ -27,6 +27,7 @@ Future<Plant> addingPlantPage(BuildContext context) async {
 Future<(dynamic, dynamic, dynamic, dynamic, dynamic, dynamic)> updatePlantPage(
   BuildContext context,
   Plant plant,
+  bool malayalam,
 ) async {
   final (
     Plant outPlant,
@@ -37,7 +38,9 @@ Future<(dynamic, dynamic, dynamic, dynamic, dynamic, dynamic)> updatePlantPage(
     String note,
   ) = await Navigator.push(
     context,
-    MaterialPageRoute(builder: (context) => UpdatePlant(plant: plant)),
+    MaterialPageRoute(
+      builder: (context) => UpdatePlant(plant: plant, malayalam: malayalam),
+    ),
   );
   if (!context.mounted) {
     return (

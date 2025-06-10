@@ -14,15 +14,25 @@ const String plantdownloadfile = "downloadedPlantList.json";
 
 Directory generalDownloadDir = Directory('/storage/emulated/0/Download');
 
-// List<AssetImage> aim = [
-//   AssetImage("assets/pav1.png"),
-//   AssetImage("assets/pav2.png"),
-//   AssetImage("assets/pav3.png"),
-//   AssetImage("assets/pav4.png"),
-//   AssetImage("assets/pav5.png"),
-//   AssetImage("assets/pav6.png"),
-//   AssetImage("assets/pav7.png"),
-//   AssetImage("assets/pav8.png"),
-//   AssetImage("assets/pav9.png"),
-//   AssetImage("assets/pav10.png"),
-// ];
+final String mhometitle = "തുടക്കം";
+final String hometitle = "Home";
+final String mchediname = "ചെടികളുടെ പേരുകൾ";
+final String chediname = "Name of Plants";
+final String mmuzhuvanpattika = "മുഴുവൻ പട്ടിക";
+final String muzhuvanpattika = "Complete List";
+final String mupdate = 'ചെടി പുതുക്കുക';
+final String update = 'Update Plant';
+final String mperu = "പേര്";
+final String peru = "Name";
+final String mhinttextperu = 'പേര് ഇവിടെ എഴുതുക';
+final String hinttextperu = 'Please write the name here';
+final String mvivaranghal = "വിവരങ്ങൾ";
+final String vivaranghal = "Details";
+final String mhinttextvivaranghal = "വിവരങ്ങൾ ഇവിടെ എഴുതുക";
+final String hinttextvivaranghal = "Please write the details here";
+final String mthiyathi = "തീയതി തിരഞ്ഞെടുക്കുക";
+final String thiyathi = "Select Date";
+final String mnotificationveno = "നോട്ടിഫിക്കേഷൻ വേണോ?";
+final String notificationveno = "Set a notification ?";
+final String madd = 'ചെടി ചേർക്കുക';
+final String add = 'Add a plant';
