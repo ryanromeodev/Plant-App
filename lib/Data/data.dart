@@ -69,7 +69,6 @@ class PlantData {
       List<dynamic> plantListJson = await jsonDecode(str);
       if (plantListJson.isEmpty) {
         // developer.log("$red[]data:readJson] list is null$reset");
-        // TODO: [functionality] Load from a file_picker here
         // plantListJson = await loadtestdata();
       }
       for (var i = 0; i < plantListJson.length; i++) {
@@ -159,9 +158,11 @@ Future<List<Plant>> loadtestdata() async {
   List<Plant> plantlist = [];
   if (result != null) {
     filePath = result.files.single.path!;
-    print("Selected file path: $filePath");
+    developer.log(
+      "$white[data:loadtestdata] Selected file path: $filePath $reset",
+    );
   } else {
-    print("File picking canceled.");
+    developer.log("$red[data:loadtestdata] File picking canceled.$reset");
   }
   try {
     String str = await File(filePath).readAsString();
@@ -179,7 +180,7 @@ Future<List<Plant>> loadtestdata() async {
       );
     }
   } on Exception catch (e) {
-    print(e);
+    developer.log("$red[data:loadtestdata] exception $e$reset");
   }
 
   developer.log("$yellow[data:loadtestdata] Test Data : $plantlist $reset");

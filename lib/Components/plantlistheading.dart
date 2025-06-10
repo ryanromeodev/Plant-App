@@ -9,7 +9,7 @@ class PlantListHeading extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       alignment: Alignment.centerLeft,
-      margin: EdgeInsets.symmetric(horizontal: 10),
+      padding: EdgeInsets.symmetric(horizontal: 10),
       child: Text(todisplay, style: Theme.of(context).textTheme.titleLarge),
     );
   }

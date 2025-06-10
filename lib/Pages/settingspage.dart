@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:plantapp/Components/plantlistheading.dart';
 import 'package:plantapp/Data/data.dart';
 import 'package:plantapp/Data/functions.dart';
+import 'package:plantapp/Data/notification.dart';
 import 'package:plantapp/Data/plant.dart';
 import 'package:plantapp/Data/strings.dart';
 
@@ -46,6 +47,22 @@ class _SettingsState extends State<Settings> {
                   downloadsuccess
                       ? snackbarfun(context, "Downloaded ആയിരിക്കുന്നു")
                       : snackbarfun(context, "Download ചെയ്യാൻ കഴിഞ്ഞില്ല");
+                }
+              },
+            ),
+            IconButton(
+              icon: Icon(Icons.notifications_active),
+              onPressed: () {
+                for (Plant plant in widget.plants) {
+                  scheduledNotification(
+                    plant.plantname,
+                    plant.plantdetails,
+                    int.parse(plant.plantid),
+                    0,
+                    0,
+                    0,
+                    10,
+                  );
                 }
               },
             ),

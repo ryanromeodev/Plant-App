@@ -24,7 +24,7 @@ class _PlantHeaderState extends State<PlantHeader> {
     List<String> outlist = getplantnames(widget.plants);
     outlist.insert(0, "മുഴുവൻ പട്ടിക");
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 5),
+      padding: EdgeInsets.symmetric(horizontal: 5),
       width: MediaQuery.of(context).size.width,
       height: MediaQuery.of(context).size.height / 8.5,
       child: SingleChildScrollView(

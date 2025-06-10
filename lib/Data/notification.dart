@@ -20,12 +20,14 @@ scheduledNotification(
   int id,
   int day,
   int hour,
+  int minutes,
   int second,
 ) async {
   var t = tz.TZDateTime.now(tz.local).add(
     Duration(
       seconds: second,
       hours: hour, //morning 6 after 00:00
+      minutes: minutes,
       days: day,
     ),
   );
@@ -46,8 +48,6 @@ scheduledNotification(
     androidScheduleMode: AndroidScheduleMode.alarmClock,
   );
 }
-
-//TODO : Future Scope
 
 Future<void> deleteNotificationChannel(String channelid) async {
   // const String channelId = 'your channel id';

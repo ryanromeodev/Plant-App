@@ -35,15 +35,21 @@ plantSorter(List<Plant> unsortedPlantList, List<Plant> trashlist) {
 setNotification(Plant plant) {
   if (plant.plantnote.isNotEmpty && plant.plantnote.length > 9) {
     int pending = pendingdays(plant.plantnote);
+    int realPending = pending - 2;
     print(pending);
-    scheduledNotification(
-      plant.plantname,
-      plant.plantdetails,
-      int.parse(plant.plantid),
-      0,
-      0,
-      15,
-    );
+    if (realPending >= 0) {
+      scheduledNotification(
+        plant.plantname,
+        plant.plantdetails,
+        int.parse(plant.plantid),
+        // realPending,
+        // 6,
+        0,
+        0,
+        5,
+        0,
+      );
+    }
   }
 }
 

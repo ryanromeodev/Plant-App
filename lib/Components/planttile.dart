@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:plantapp/Data/plant.dart';
-import 'package:plantapp/Data/strings.dart';
 
 /// This is the UI of a single [Plant] TILE
 /// multiple of these instances are created with to form a long list of plants
@@ -46,16 +45,6 @@ class _PlantTileState extends State<PlantTile> {
       },
       child: Container(
         margin: EdgeInsets.symmetric(vertical: 5.0, horizontal: 5.0),
-        decoration: BoxDecoration(
-          // boxShadow: [
-          //   BoxShadow(color: Colors.black.withAlpha(100), blurRadius: 10.0),
-          // ],
-          // borderRadius: BorderRadius.circular(20.0),
-          // color:
-          //     widget.plant.plantname.trim() == widget.displayPlantName.trim()
-          //         ? Theme.of(context).colorScheme.error
-          //         : Theme.of(context).colorScheme.primaryContainer,
-        ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -70,9 +59,9 @@ class _PlantTileState extends State<PlantTile> {
                           : Theme.of(context).colorScheme.primaryFixed,
                   radius: 18,
                   child: CircleAvatar(
-                    radius: 15,
-                    backgroundImage:
-                        (aim[int.parse(widget.plant.plantid) % 10]),
+                    radius: 16,
+                    backgroundImage: AssetImage("assets/pflanzen.png"),
+                    // (aim[int.parse(widget.plant.plantid) % 10]),
                   ),
                 ),
                 SizedBox(width: 5),

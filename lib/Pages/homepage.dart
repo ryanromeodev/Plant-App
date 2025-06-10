@@ -52,6 +52,8 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       // extendBodyBehindAppBar: true,
       appBar: AppBar(
+        // backgroundColor: Colors.transparent,
+        // elevation: 0.0,
         actions: [
           if (plist.isEmpty)
             IconButton(
@@ -92,12 +94,6 @@ class _HomePageState extends State<HomePage> {
               });
             },
           ),
-          IconButton(
-            icon: const Icon(Icons.notifications),
-            onPressed: () {
-              scheduledNotification("test", "test", 2, 0, 0, 3);
-            },
-          ),
         ],
         title: Row(
           children: [
@@ -106,9 +102,6 @@ class _HomePageState extends State<HomePage> {
             Text('തുടക്കം', style: Theme.of(context).textTheme.headlineSmall),
           ],
         ),
-
-        // scrolledUnderElevation: 0.0,
-        // surfaceTintColor: Colors.transparent,
       ),
       body: Column(
         children: [
@@ -121,7 +114,7 @@ class _HomePageState extends State<HomePage> {
           Container(
             height: 2.0, // Line thickness
             color: Theme.of(context).colorScheme.primary, // Line color
-            margin: EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
+            padding: EdgeInsets.symmetric(horizontal: 10.0),
           ),
           Expanded(child: plantListBuilder()),
         ],
@@ -150,10 +143,7 @@ class _HomePageState extends State<HomePage> {
   Container plantListBuilder() {
     return Container(
       margin: EdgeInsets.symmetric(vertical: 10.0),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(26.0),
-        color: Theme.of(context).colorScheme.surface,
-      ),
+      decoration: BoxDecoration(borderRadius: BorderRadius.circular(26.0)),
       height: MediaQuery.of(context).size.height,
       child: Scrollbar(
         thickness: 10,
