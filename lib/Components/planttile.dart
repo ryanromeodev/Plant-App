@@ -58,7 +58,7 @@ class _PlantTileState extends State<PlantTile> {
                       widget.displayplantid.trim() ==
                               widget.plant.plantid.trim()
                           ? Theme.of(context).colorScheme.primary
-                          : Theme.of(context).colorScheme.primaryFixed,
+                          : Theme.of(context).colorScheme.secondary,
                   radius: 18,
                   child: CircleAvatar(
                     radius: 16,
@@ -77,7 +77,7 @@ class _PlantTileState extends State<PlantTile> {
                           widget.displayplantid.trim() ==
                                   widget.plant.plantid.trim()
                               ? Theme.of(context).colorScheme.primary
-                              : Theme.of(context).colorScheme.primaryFixed,
+                              : Theme.of(context).colorScheme.secondary,
                       width: 2,
                     ),
                   ),
@@ -125,7 +125,11 @@ class _PlantTileState extends State<PlantTile> {
                       widget.onPlantOrgChange(widget.plant, widget.malayalam);
                     },
                     icon: Icon(Icons.arrow_forward_ios),
-                    color: Theme.of(context).colorScheme.primary,
+                    iconSize: 25,
+                    // color: Theme.of(context).colorScheme.tertiary,
+                    // style: IconButton.styleFrom(
+                    //   foregroundColor: Theme.of(context).colorScheme.primary,
+                    // ),
                   ),
               ],
             ),
@@ -138,7 +142,7 @@ class _PlantTileState extends State<PlantTile> {
                       widget.displayplantid.trim() ==
                               widget.plant.plantid.trim()
                           ? Theme.of(context).colorScheme.primary
-                          : Theme.of(context).colorScheme.primaryFixed,
+                          : Theme.of(context).colorScheme.secondary,
                 ),
                 borderRadius: BorderRadius.only(topLeft: Radius.circular(10)),
               ),

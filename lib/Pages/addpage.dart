@@ -38,7 +38,7 @@ class _AddplantState extends State<Addplant> {
           automaticallyImplyLeading: false,
           title: Row(
             children: [
-              Icon(Icons.add_box),
+              Icon(Icons.add_box, color: Theme.of(context).colorScheme.primary),
               SizedBox(width: 5),
               Text(
                 widget.malayalam ? madd : add,

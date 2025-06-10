@@ -7,10 +7,16 @@ import 'package:plantapp/Data/plant.dart';
 import 'package:plantapp/Data/strings.dart';
 
 class Settings extends StatefulWidget {
-  const Settings({super.key, required this.trashlist, required this.plants});
+  const Settings({
+    super.key,
+    required this.trashlist,
+    required this.plants,
+    required this.malayalam,
+  });
 
   final List<Plant> trashlist;
   final List<Plant> plants;
+  final bool malayalam;
   @override
   State<Settings> createState() => _SettingsState();
 }
@@ -30,9 +36,17 @@ class _SettingsState extends State<Settings> {
       child: Scaffold(
         appBar: AppBar(
           automaticallyImplyLeading: false,
-          title: Text(
-            'Settings',
-            style: Theme.of(context).textTheme.displaySmall,
+          title: Row(
+            children: [
+              Icon(
+                Icons.settings,
+                color: Theme.of(context).colorScheme.primary,
+              ),
+              Text(
+                widget.malayalam ? msettings : settings,
+                style: Theme.of(context).textTheme.headlineSmall,
+              ),
+            ],
           ),
           actions: [
             IconButton(
@@ -82,7 +96,9 @@ class _SettingsState extends State<Settings> {
                 color: Theme.of(context).colorScheme.primary, // Line color
                 margin: EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
               ),
-              PlantListHeading(todisplay: "Deleted plants"),
+              PlantListHeading(
+                todisplay: widget.malayalam ? mdeleted : deleted,
+              ),
               plantListBuilder(),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -113,8 +129,8 @@ class _SettingsState extends State<Settings> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text("ശ്രദ്ധിക്കുക"),
-          content: Text("ഈ ചെടികള്‍ തിരിച്ചു എടുക്കാൻ സാധിക്കില്ല"),
+          title: Text(widget.malayalam ? mcareful : careful),
+          content: Text(widget.malayalam ? mcannotbeundone : cannotbeundone),
           actions: [
             TextButton(
               onPressed: () {

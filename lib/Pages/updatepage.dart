@@ -58,7 +58,10 @@ class _UpdatePlantState extends State<UpdatePlant> {
           automaticallyImplyLeading: false,
           title: Row(
             children: [
-              Icon(Icons.edit_square),
+              Icon(
+                Icons.edit_square,
+                color: Theme.of(context).colorScheme.primary,
+              ),
               SizedBox(width: 5),
               Text(
                 widget.malayalam ? mupdate : update,

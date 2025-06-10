@@ -97,6 +97,7 @@ class _HomePageState extends State<HomePage> {
                 context,
                 trashList,
                 plist,
+                malayalam,
               );
               setState(() {
                 trashList = trash;
@@ -126,7 +127,7 @@ class _HomePageState extends State<HomePage> {
           ),
           Container(
             height: 2.0, // Line thickness
-            color: Theme.of(context).colorScheme.primary, // Line color
+            color: Theme.of(context).colorScheme.tertiary, // Line color
             padding: EdgeInsets.symmetric(horizontal: 10.0),
           ),
           Expanded(child: plantListBuilder()),

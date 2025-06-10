@@ -16,6 +16,11 @@ class Adenium extends StatefulWidget {
 
 class _AdeniumState extends State<Adenium> {
   ThemeMode _themeMode = ThemeMode.system;
+  Color color1 = Color(0xffffa91c);
+  Color color2 = Color(0xfffe9553);
+  Color color3 = Color(0xffb57400);
+  Color color4 = Color(0xff44525f);
+  Color color5 = Color(0xffb5cbd8);
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -31,15 +36,26 @@ class _AdeniumState extends State<Adenium> {
   ThemeData theme(Brightness brightness) {
     return ThemeData(
       colorScheme: ColorScheme.fromSeed(
-        seedColor: Colors.green,
+        seedColor: Colors.blue,
         brightness: brightness,
+        primary: color1,
+        secondary: color5,
+        tertiary: color4,
       ),
-      appBarTheme: AppBarTheme(),
       textTheme: TextTheme(
-        displaySmall: GoogleFonts.notoSerifMalayalam(),
-        titleLarge: GoogleFonts.notoSerifMalayalam(),
-        bodyLarge: GoogleFonts.notoSerifMalayalam(),
-        bodyMedium: GoogleFonts.notoSerifMalayalam(),
+        // displaySmall: GoogleFonts.notoSerifMalayalam(),
+        headlineSmall: GoogleFonts.notoSerifMalayalam(
+          //plant_name
+        ),
+        titleLarge: GoogleFonts.notoSerifMalayalam(
+          //headtitle
+        ),
+        bodyLarge: GoogleFonts.notoSerifMalayalam(
+          //whole_body
+        ),
+        bodyMedium: GoogleFonts.notoSerifMalayalam(
+          //plant_note
+        ),
       ),
       filledButtonTheme: FilledButtonThemeData(
         style: FilledButton.styleFrom(
@@ -55,7 +71,11 @@ class _AdeniumState extends State<Adenium> {
           ),
         ),
       ),
-      floatingActionButtonTheme: FloatingActionButtonThemeData(),
+      floatingActionButtonTheme: FloatingActionButtonThemeData(
+        foregroundColor: color1,
+        backgroundColor: color4,
+        iconSize: 30,
+      ),
     );
   }
 

@@ -65,11 +65,17 @@ Future<List<Plant>> displaySettingsPage(
   BuildContext context,
   List<Plant> trashplants,
   List<Plant> plants,
+  bool malayalam,
 ) async {
   final trash = await Navigator.push(
     context,
     MaterialPageRoute(
-      builder: (context) => Settings(trashlist: trashplants, plants: plants),
+      builder:
+          (context) => Settings(
+            trashlist: trashplants,
+            plants: plants,
+            malayalam: malayalam,
+          ),
     ),
   );
   if (!context.mounted) {
