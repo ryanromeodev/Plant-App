@@ -143,22 +143,39 @@ class _SettingsState extends State<Settings> {
     return SizedBox(
       height:
           orientation == Orientation.portrait
-              ? MediaQuery.of(context).size.height / 5
+              ? MediaQuery.of(context).size.height / 4
               : MediaQuery.of(context).size.height / 2,
-      child: GridView.count(
-        crossAxisCount: 1,
-        shrinkWrap: true,
-        padding: const EdgeInsets.symmetric(vertical: 8.0),
-        scrollDirection: Axis.vertical,
-        children:
-            trashes.map((Plant plant) {
-              return ListTile(
-                iconColor: Theme.of(context).colorScheme.primary,
-                leading: Icon(Icons.eco),
-                title: Text(plant.plantname),
-                subtitle: Text(plant.plantdetails),
-              );
-            }).toList(),
+      child: Scrollbar(
+        child: ListView(
+          shrinkWrap: true,
+          padding: const EdgeInsets.symmetric(vertical: 8.0),
+          scrollDirection: Axis.vertical,
+          children:
+              trashes.map((Plant plant) {
+                return ListTile(
+                  iconColor: Theme.of(context).colorScheme.primary,
+                  leading: CircleAvatar(
+                    backgroundImage: AssetImage("assets/topfe.png"),
+                  ),
+                  title: Row(
+                    children: [
+                      SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: Text(
+                          plant.plantname.length > 15
+                              ? plant.plantname.substring(0, 15)
+                              : plant.plantname,
+                        ),
+                      ),
+                      Text(" ${plant.plantdate}"),
+                    ],
+                  ),
+                  subtitle: Text(
+                    "details: ${plant.plantdetails}, notification date: ${plant.plantnote}",
+                  ),
+                );
+              }).toList(),
+        ),
       ),
     );
   }
