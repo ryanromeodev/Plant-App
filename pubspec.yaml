@@ -39,7 +39,7 @@ dependencies:
   permission_handler: any
   google_fonts: ^6.2.1
   timezone: ^0.10.1
-  file_picker: ^10.1.9
+  file_picker: ^10.1.9  
 
 dev_dependencies:
   flutter_test:
