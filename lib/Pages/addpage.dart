@@ -38,8 +38,17 @@ class _AddplantState extends State<Addplant> {
           automaticallyImplyLeading: false,
           title: Row(
             children: [
-              Icon(Icons.add_box, color: Theme.of(context).colorScheme.primary),
-              SizedBox(width: 5),
+              IconButton(
+                icon: Icon(Icons.add_box),
+                onPressed: () {},
+                style: IconButton.styleFrom(
+                  foregroundColor: Theme.of(context).colorScheme.primary,
+                  backgroundColor: Theme.of(context).colorScheme.tertiary,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
+              ),
               Text(
                 widget.malayalam ? madd : add,
                 style: Theme.of(context).textTheme.headlineSmall,

@@ -38,9 +38,16 @@ class _SettingsState extends State<Settings> {
           automaticallyImplyLeading: false,
           title: Row(
             children: [
-              Icon(
-                Icons.settings,
-                color: Theme.of(context).colorScheme.primary,
+              IconButton(
+                icon: Icon(Icons.settings),
+                onPressed: () {},
+                style: IconButton.styleFrom(
+                  foregroundColor: Theme.of(context).colorScheme.primary,
+                  backgroundColor: Theme.of(context).colorScheme.tertiary,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
               ),
               Text(
                 widget.malayalam ? msettings : settings,

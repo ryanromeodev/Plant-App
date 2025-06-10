@@ -135,8 +135,17 @@ class _HomePageState extends State<HomePage> {
         ],
         title: Row(
           children: [
-            Icon(Icons.home),
-            SizedBox(width: 5),
+            IconButton(
+              icon: Icon(Icons.home),
+              onPressed: () {},
+              style: IconButton.styleFrom(
+                foregroundColor: Theme.of(context).colorScheme.primary,
+                backgroundColor: Theme.of(context).colorScheme.tertiary,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+              ),
+            ),
             Text(
               malayalam ? mhometitle : hometitle,
               style: Theme.of(context).textTheme.headlineSmall,
