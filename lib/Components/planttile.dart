@@ -82,7 +82,7 @@ class _PlantTileState extends State<PlantTile> {
                     ),
                   ),
                   child: Container(
-                    alignment: Alignment.center,
+                    alignment: Alignment.bottomCenter,
                     width: MediaQuery.of(context).size.width / 2.5,
                     padding: EdgeInsets.all(5),
                     child: SingleChildScrollView(

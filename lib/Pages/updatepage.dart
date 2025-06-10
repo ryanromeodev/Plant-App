@@ -71,6 +71,13 @@ class _UpdatePlantState extends State<UpdatePlant> {
           ),
           actions: [
             IconButton(
+              style: IconButton.styleFrom(
+                foregroundColor: Theme.of(context).colorScheme.primary,
+                backgroundColor: Theme.of(context).colorScheme.tertiary,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+              ),
               icon: const Icon(Icons.arrow_back),
               onPressed: () {
                 Navigator.pop(context, (
@@ -154,6 +161,13 @@ class _UpdatePlantState extends State<UpdatePlant> {
                       borderRadius: BorderRadius.circular(20.0),
                     ),
                     child: IconButton(
+                      style: IconButton.styleFrom(
+                        foregroundColor: Theme.of(context).colorScheme.primary,
+                        backgroundColor: Theme.of(context).colorScheme.tertiary,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                      ),
                       icon: Icon(
                         Icons.calendar_month,
                         color: Theme.of(context).colorScheme.primary,
@@ -295,6 +309,13 @@ class _UpdatePlantState extends State<UpdatePlant> {
           alignment: Alignment.centerLeft,
           decoration: BoxDecoration(borderRadius: BorderRadius.circular(20.0)),
           child: IconButton(
+            style: IconButton.styleFrom(
+              foregroundColor: Theme.of(context).colorScheme.primary,
+              backgroundColor: Theme.of(context).colorScheme.tertiary,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10),
+              ),
+            ),
             onPressed: () => selectNote(context),
             icon: Icon(
               Icons.calendar_month,

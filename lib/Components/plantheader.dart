@@ -25,7 +25,7 @@ class _PlantHeaderState extends State<PlantHeader> {
   @override
   Widget build(BuildContext context) {
     List<String> outlist = getplantnames(widget.plants);
-    outlist.insert(0, widget.malayalam?mmuzhuvanpattika:muzhuvanpattika);
+    outlist.insert(0, widget.malayalam ? mmuzhuvanpattika : muzhuvanpattika);
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 5),
       width: MediaQuery.of(context).size.width,
@@ -40,13 +40,25 @@ class _PlantHeaderState extends State<PlantHeader> {
           children:
               outlist.map((String plant) {
                 return ActionChip.elevated(
-                  label: Text(plant),
+                  label: Text(
+                    plant,
+                    style: Theme.of(context).textTheme.titleSmall,
+                  ),
                   backgroundColor:
                       plant == widget.displayName
-                          ? Theme.of(context).colorScheme.primaryContainer
-                          : plant == (widget.malayalam?mmuzhuvanpattika:muzhuvanpattika)
-                          ? Theme.of(context).colorScheme.tertiaryContainer
-                          : Theme.of(context).colorScheme.secondaryContainer,
+                          ? Theme.of(
+                            context,
+                          ).colorScheme.primary.withRed(230).withAlpha(150)
+                          : plant ==
+                              (widget.malayalam
+                                  ? mmuzhuvanpattika
+                                  : muzhuvanpattika)
+                          ? Theme.of(
+                            context,
+                          ).colorScheme.primary.withBlue(150).withAlpha(150)
+                          : Theme.of(
+                            context,
+                          ).colorScheme.primary.withRed(100).withAlpha(150),
                   onPressed: () {
                     widget.groupingfn(plant);
                   },

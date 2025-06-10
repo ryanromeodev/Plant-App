@@ -58,6 +58,13 @@ class _HomePageState extends State<HomePage> {
         actions: [
           if (plist.isEmpty)
             IconButton(
+              style: IconButton.styleFrom(
+                foregroundColor: Theme.of(context).colorScheme.primary,
+                backgroundColor: Theme.of(context).colorScheme.tertiary,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+              ),
               icon: const Icon(Icons.file_open),
               onPressed: () async {
                 List<Plant> plants = await loadtestdata();
@@ -68,6 +75,13 @@ class _HomePageState extends State<HomePage> {
               },
             ),
           IconButton(
+            style: IconButton.styleFrom(
+              foregroundColor: Theme.of(context).colorScheme.primary,
+              backgroundColor: Theme.of(context).colorScheme.tertiary,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10),
+              ),
+            ),
             icon: const Icon(Icons.translate),
             onPressed: () {
               setState(() {
@@ -76,6 +90,13 @@ class _HomePageState extends State<HomePage> {
             },
           ),
           IconButton(
+            style: IconButton.styleFrom(
+              foregroundColor: Theme.of(context).colorScheme.primary,
+              backgroundColor: Theme.of(context).colorScheme.tertiary,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10),
+              ),
+            ),
             icon: changinIcon,
             onPressed:
                 () => {
@@ -91,7 +112,14 @@ class _HomePageState extends State<HomePage> {
                 },
           ),
           IconButton(
-            icon: const Icon(Icons.settings),
+            style: IconButton.styleFrom(
+              foregroundColor: Theme.of(context).colorScheme.primary,
+              backgroundColor: Theme.of(context).colorScheme.tertiary,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10),
+              ),
+            ),
+            icon: Icon(Icons.settings),
             onPressed: () async {
               List<Plant> trash = await displaySettingsPage(
                 context,

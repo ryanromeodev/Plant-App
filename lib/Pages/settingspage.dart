@@ -50,6 +50,13 @@ class _SettingsState extends State<Settings> {
           ),
           actions: [
             IconButton(
+              style: IconButton.styleFrom(
+                foregroundColor: Theme.of(context).colorScheme.primary,
+                backgroundColor: Theme.of(context).colorScheme.tertiary,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+              ),
               icon: const Icon(Icons.download),
               onPressed: () async {
                 bool downloadsuccess = await saveToDownloads(
@@ -65,6 +72,13 @@ class _SettingsState extends State<Settings> {
               },
             ),
             IconButton(
+              style: IconButton.styleFrom(
+                foregroundColor: Theme.of(context).colorScheme.primary,
+                backgroundColor: Theme.of(context).colorScheme.tertiary,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+              ),
               icon: Icon(Icons.notifications_active),
               onPressed: () {
                 for (Plant plant in widget.plants) {
@@ -81,6 +95,13 @@ class _SettingsState extends State<Settings> {
               },
             ),
             IconButton(
+              style: IconButton.styleFrom(
+                foregroundColor: Theme.of(context).colorScheme.primary,
+                backgroundColor: Theme.of(context).colorScheme.tertiary,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+              ),
               icon: const Icon(Icons.arrow_back),
               onPressed: () {
                 Navigator.pop(context, trashes);

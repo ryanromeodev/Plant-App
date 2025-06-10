@@ -50,6 +50,11 @@ class _AdeniumState extends State<Adenium> {
         titleLarge: GoogleFonts.notoSerifMalayalam(
           //headtitle
         ),
+        titleSmall: GoogleFonts.notoSerifMalayalam(
+          fontSize: 16,
+
+          //tiles
+        ),
         bodyLarge: GoogleFonts.notoSerifMalayalam(
           //whole_body
         ),
@@ -59,6 +64,8 @@ class _AdeniumState extends State<Adenium> {
       ),
       filledButtonTheme: FilledButtonThemeData(
         style: FilledButton.styleFrom(
+          // foregroundColor: color4,
+          backgroundColor: color2,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(5.0),
           ),
