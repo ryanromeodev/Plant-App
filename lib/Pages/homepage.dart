@@ -155,6 +155,7 @@ class _HomePageState extends State<HomePage> {
       ),
       body: Column(
         children: [
+          Container(margin: EdgeInsets.symmetric(vertical: 5.0)),
           PlantListHeading(todisplay: malayalam ? mchediname : chediname),
           PlantHeader(
             plants: plist,
@@ -165,7 +166,7 @@ class _HomePageState extends State<HomePage> {
           Container(
             height: 2.0, // Line thickness
             color: Theme.of(context).colorScheme.tertiary, // Line color
-            padding: EdgeInsets.symmetric(horizontal: 10.0),
+            margin: EdgeInsets.symmetric(vertical: 5.0),
           ),
           Expanded(child: plantListBuilder()),
         ],

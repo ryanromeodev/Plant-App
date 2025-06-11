@@ -41,6 +41,7 @@ class _AdeniumState extends State<Adenium> {
         primary: color1,
         secondary: color5,
         tertiary: color4,
+        primaryContainer: color1.withAlpha(25),
       ),
       textTheme: TextTheme(
         // displaySmall: GoogleFonts.notoSerifMalayalam(),
@@ -52,7 +53,6 @@ class _AdeniumState extends State<Adenium> {
         ),
         titleSmall: GoogleFonts.notoSerifMalayalam(
           fontSize: 16,
-
           //tiles
         ),
         bodyLarge: GoogleFonts.notoSerifMalayalam(

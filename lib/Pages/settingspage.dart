@@ -119,11 +119,7 @@ class _SettingsState extends State<Settings> {
         body: SingleChildScrollView(
           child: Column(
             children: [
-              Container(
-                height: 1.0, // Line thickness
-                color: Theme.of(context).colorScheme.primary, // Line color
-                margin: EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
-              ),
+              Container(margin: EdgeInsets.symmetric(vertical: 5.0)),
               PlantListHeading(
                 todisplay: widget.malayalam ? mdeleted : deleted,
               ),

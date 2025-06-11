@@ -44,3 +44,5 @@ final String mcannotbeundone = "ഈ ചെടികള്‍ തിരിച്�
 final String cannotbeundone = "This action cannot be undone";
 final String msettings = 'സജ്ജീകരണം';
 final String settings = 'Settings';
+final String notification = 'notification';
+final String mnotification = 'അറിയിപ്പ്';

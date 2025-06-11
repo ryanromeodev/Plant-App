@@ -107,6 +107,7 @@ class _UpdatePlantState extends State<UpdatePlant> {
         body: SingleChildScrollView(
           child: Column(
             children: [
+              Container(margin: EdgeInsets.symmetric(vertical: 5.0)),
               PlantListHeading(todisplay: widget.malayalam ? mperu : peru),
               Container(
                 margin: EdgeInsets.all(10.0),

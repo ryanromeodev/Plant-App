@@ -63,7 +63,6 @@ class _PlantTileState extends State<PlantTile> {
                   child: CircleAvatar(
                     radius: 16,
                     backgroundImage: AssetImage("assets/pflanzen.png"),
-                    // (aim[int.parse(widget.plant.plantid) % 10]),
                   ),
                 ),
                 SizedBox(width: 5),
@@ -110,7 +109,7 @@ class _PlantTileState extends State<PlantTile> {
                     widget.plant.plantnote.length > 9 &&
                             widget.plant.plantnote.isNotEmpty
                         ? Text(
-                          "അറിയിപ്പ്:$noteday.$notemonth.$noteyear",
+                          "${widget.malayalam ? "അറിയിപ്പ്" : "notification"} :$noteday.$notemonth.$noteyear",
                           style: Theme.of(context).textTheme.bodySmall,
                         )
                         : Text(
