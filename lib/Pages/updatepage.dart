@@ -240,7 +240,7 @@ class _UpdatePlantState extends State<UpdatePlant> {
                                 plantnote: oldnote,
                               ),
                               widget.plant.plantid,
-                              nameController.text,
+                              nameController.text.trim(),
                               detailsController.text.isNotEmpty
                                   ? detailsController.text
                                   : "വിവരങ്ങൾ നൽകിയിട്ടില്ല",

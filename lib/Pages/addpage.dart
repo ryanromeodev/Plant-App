@@ -208,7 +208,7 @@ class _AddplantState extends State<Addplant> {
                               context,
                               Plant(
                                 plantid: Random().nextInt(1000001).toString(),
-                                plantname: nameController.text,
+                                plantname: nameController.text.trim(),
                                 plantdetails:
                                     detailsController.text.isNotEmpty
                                         ? detailsController.text
