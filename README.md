@@ -22,8 +22,7 @@ Run the project from IDE
 # adenium features
 - Sort the list according to the date :: `Basic functionality`
 - chip level sorting for better UI
-![chip sorting](./docs/gifs/chips.gif)
-<img src="https://media.giphy.com/media/vFKqnCdLPNOKc/giphy.gif" width="300" height="200" alt="Alt Text">
+<img src="./docs/gifs/chips.gif" width="300" height="500" alt="chip sorting">
 - read and write a file
 - keep track of the deleted plants, old updated names, dates etc
 - Animation effects
