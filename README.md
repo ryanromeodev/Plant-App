@@ -9,7 +9,7 @@ Conventionally it would be better to Note down the dates in a calendar or someth
 # How to use?
 Download or clone this repo using the following link:
 ```
-https://github.com/oreymaonr/adenium.git
+https://github.com/ryanromeodev/adenium.git
 ```
 Go to project root and execute the following command in console to get the required dependencies:
 ```
@@ -21,17 +21,23 @@ Run the project from IDE
 
 # adenium features
 - Sort the list according to the date :: `Basic functionality`
-- chip level sorting for better UI
-<img src="./docs/gifs/chips.gif" width="300" height="600" alt="chip sorting">
-- read and write a file
-- keep track of the deleted plants, old updated names, dates etc
-- Animation effects
+- Read and write a files like Plantslist and DeletedplantBufferList by keep track of the deleted plants, old updated names, dates etc
 - User Notification(Notifies the plant data before 2 days)
+- Adding a new plant data
+<img src="./docs/gifs/addplant.gif" width="300" height="600" alt="add">
+- Update a plant data
+<img src="./docs/gifs/updateplant.gif" width="300" height="600" alt="update">
 - In മലയാളം(native south-indian) and English
-- 
+<img src="./docs/gifs/language.gif" width="300" height="600" alt="language">
+- Theme mode for Light and Dark Theme
+<img src="./docs/gifs/brightlight.gif" width="300" height="600" alt="brightness">
+- Chip level sorting for better UI
+<img src="./docs/gifs/chips.gif" width="300" height="600" alt="chip sorting">
+- Animation effects of basic Flutter transitions with date and notification state
+<img src="./docs/gifs/dateandnotification.gif" width="300" height="600" alt="notificationa and date">
 
 # Wiki
-Check out more information on [Wiki](https://github.com/oreymaonr/adenium/wiki)
+Check out more information on [Wiki](https://github.com/ryanromeodev/adenium/wiki)
 
 # Conclusion
 I will be happy to answer any questions that you may have on this approach, and if you want to lend a hand with the `adenium` then please feel free to submit an issue and/or pull request 🙂. If you liked my work, don’t forget to ⭐ star the repo to show your support.
