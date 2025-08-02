@@ -1,7 +1,5 @@
-# Adenium
+# Plant App
 
-
-![Alt Text](![2D image](https://github.com/ryanromeodev/Adenium/blob/main/docs/gifs/image0.gif))
 Indoor plants🪴 are considered as the best hobby😊 nowadays due to the relaxation and peacefullness that the hobby offers. However since these plants are grown indoors, the poor little plants could not gain maximum sunlight☀️ and soil nutrients as compared to the outdoor ones. So it would be an integral part in providing these plants with regular and timed supply of food(soil nutrients) so as to ensure they grow healthy😁.
 
 ## Getting Started: How to feed the plants in a regular time interval?
@@ -22,13 +20,16 @@ Run the project from IDE
 -This program requires file Read and Write permission.
 
 # adenium features
+- Sort the list according to the date :: `Basic functionality`
+- chip level sorting for better UI
+![chip sorting](./docs/gifs/chips.gif)
+<img src="https://media.giphy.com/media/vFKqnCdLPNOKc/giphy.gif" width="300" height="200" alt="Alt Text">
 - read and write a file
-- sort the list according to the date
-
-# Up-coming features:
+- keep track of the deleted plants, old updated names, dates etc
 - Animation effects
-- User Notification
-- In മലയാളം
+- User Notification(Notifies the plant data before 2 days)
+- In മലയാളം(native south-indian) and English
+- 
 
 # Wiki
 Check out more information on [Wiki](https://github.com/oreymaonr/adenium/wiki)
