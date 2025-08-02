@@ -35,7 +35,7 @@ Notification is triggered on new plant addition and is notified 2 days before th
 
 ## Adding and Updating plant data with date and notification Animations
 
-<p float="left" align="center" padding-right="10px">
+<p float="left" align="center" padding-right="50px">
     <img src="./docs/gifs/addplant.gif" width="300" height="600" alt="add">
     <img src="./docs/gifs/updateplant.gif" width="300" height="600" alt="update">
 </p>
