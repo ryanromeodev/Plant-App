@@ -33,17 +33,16 @@ Files like *active plant* list and deleted or *renamed plant* list is kept on tr
 
 Notification is triggered on new plant addition and is notified 2 days before the date at which the plant is to be notified of fertilizer suppliment.
 
-## Adding a new plant data
+## Adding and Updating plant data with date and notification Animations
 
-<p align="center">
-<img src="./docs/gifs/addplant.gif" width="300" height="600" alt="add">
+<p float="left">
+    <img src="./docs/gifs/addplant.gif" width="300" height="600" alt="add">
+    <img src="./docs/gifs/updateplant.gif" width="300" height="600" alt="update">
+    <img src="./docs/gifs/dateandnotification.gif" width="300" height="600" alt="notificationa and date">
 </p>
 
-## Update a plant data
 
-<img src="./docs/gifs/updateplant.gif" width="300" height="600" alt="update">
-
-## In മലയാളം(native south-indian) and English
+## Language in മലയാളം (native south-indian) and English
 
 <img src="./docs/gifs/language.gif" width="300" height="600" alt="language">
 
@@ -55,9 +54,6 @@ Notification is triggered on new plant addition and is notified 2 days before th
 
 <img src="./docs/gifs/chips.gif" width="300" height="600" alt="chip sorting">
 
-## Animation effects of basic Flutter transitions with date and notification state
-
-<img src="./docs/gifs/dateandnotification.gif" width="300" height="600" alt="notificationa and date">
 
 # Wiki
 Check out more information on [Wiki](https://github.com/ryanromeodev/Plant-App/wiki)
