@@ -34,9 +34,11 @@ Files like *active plant* list and deleted or *renamed plant* list is kept on tr
 Notification is triggered on new plant addition and is notified 2 days before the date at which the plant is to be notified of fertilizer suppliment.
 
 ## Adding a new plant data
+
 <p align="center">
 <img src="./docs/gifs/addplant.gif" width="300" height="600" alt="add">
 </p>
+
 ## Update a plant data
 
 <img src="./docs/gifs/updateplant.gif" width="300" height="600" alt="update">
