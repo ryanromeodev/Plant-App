@@ -1,7 +1,7 @@
 # Adenium
 
 
-![Alt Text](![2D image](https://github.com/ryanromeodev/Adenium/blob/main/docs/gifs/color.gif?raw=true))
+![Alt Text](![2D image](https://github.com/ryanromeodev/Adenium/blob/main/docs/gifs/image0.gif))
 Indoor plants🪴 are considered as the best hobby😊 nowadays due to the relaxation and peacefullness that the hobby offers. However since these plants are grown indoors, the poor little plants could not gain maximum sunlight☀️ and soil nutrients as compared to the outdoor ones. So it would be an integral part in providing these plants with regular and timed supply of food(soil nutrients) so as to ensure they grow healthy😁.
 
 ## Getting Started: How to feed the plants in a regular time interval?
