@@ -35,25 +35,35 @@ Notification is triggered on new plant addition and is notified 2 days before th
 
 ## Adding and Updating plant data with date and notification Animations
 
-<p float="left">
+<p float="left" align="center">
     <img src="./docs/gifs/addplant.gif" width="300" height="600" alt="add">
     <img src="./docs/gifs/updateplant.gif" width="300" height="600" alt="update">
-    <img src="./docs/gifs/dateandnotification.gif" width="300" height="600" alt="notificationa and date">
 </p>
 
 
 ## Language in മലയാളം (native south-indian) and English
 
-<img src="./docs/gifs/language.gif" width="300" height="600" alt="language">
+<p align="center">
+    <img src="./docs/gifs/language.gif" width="300" height="600" alt="language">
+</p>
 
 ## Theme mode for Light and Dark Theme
 
-<img src="./docs/gifs/brightlight.gif" width="300" height="600" alt="brightness">
+<p align="center">
+    <img src="./docs/gifs/brightlight.gif" width="300" height="600" alt="brightness">
+</p>
 
 ## Chip level sorting for better UI
 
-<img src="./docs/gifs/chips.gif" width="300" height="600" alt="chip sorting">
+<p align="center">
+    <img src="./docs/gifs/chips.gif" width="300" height="600" alt="chip sorting">
+</p>
 
+## Animation effects of basic Flutter transitions with date and notification state
+
+<p align="center">
+    <img src="./docs/gifs/dateandnotification.gif" width="300" height="600" alt="notificationa and date">
+</p>
 
 # Wiki
 Check out more information on [Wiki](https://github.com/ryanromeodev/Plant-App/wiki)
