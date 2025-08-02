@@ -1,4 +1,4 @@
-# Plant App
+# Plant-App
 
 Indoor plants🪴 are considered as the best hobby😊 nowadays due to the relaxation and peacefullness that the hobby offers. However since these plants are grown indoors, the poor little plants could not gain maximum sunlight☀️ and soil nutrients as compared to the outdoor ones. So it would be an integral part in providing these plants with regular and timed supply of food(soil nutrients) so as to ensure they grow healthy😁.
 
@@ -9,7 +9,7 @@ Conventionally it would be better to Note down the dates in a calendar or someth
 # How to use?
 Download or clone this repo using the following link:
 ```
-https://github.com/ryanromeodev/adenium.git
+https://github.com/ryanromeodev/Plant-App.git
 ```
 Go to project root and execute the following command in console to get the required dependencies:
 ```
@@ -23,9 +23,15 @@ Run the project from IDE
 
 ## Sort the list according to the date :: `Basic functionality`
 
-## Read and write a files like Plantslist and DeletedplantBufferList by keep track of the deleted plants, old updated names, dates etc
+Each new and updated entry into the app is sorted as per date in ascending order. so as to have a clear **history track** of what was done previously to the plant.
+
+## Read and write a files 
+
+Files like *active plant* list and deleted or *renamed plant* list is kept on track just in case for an accidential recovery. A **Download**⬇️ button is also available on the *settings*⚙️ action button on the top so as to transfer the data alone as a json file just in case as a fail-safe button.
 
 ## User Notification(Notifies the plant data before 2 days)
+
+Notification is triggered on new plant addition and is notified 2 days before the date at which the plant is to be notified of fertilizer suppliment.
 
 ## Adding a new plant data
 
@@ -52,9 +58,9 @@ Run the project from IDE
 <img src="./docs/gifs/dateandnotification.gif" width="300" height="600" alt="notificationa and date">
 
 # Wiki
-Check out more information on [Wiki](https://github.com/ryanromeodev/adenium/wiki)
+Check out more information on [Wiki](https://github.com/ryanromeodev/Plant-App/wiki)
 
-# Conclusion
-I will be happy to answer any questions that you may have on this approach, and if you want to lend a hand with the `adenium` then please feel free to submit an issue and/or pull request 🙂. If you liked my work, don’t forget to ⭐ star the repo to show your support.
+# Remarks
+I will be happy to answer any questions that you may have on this approach, and if you want to lend a hand with the `Plant-App` then please feel free to submit an issue and/or pull request 🙂. If you liked my work, don’t forget to ⭐ star the repo to show your support. The image assets used is of online resources. Kindly notify on my account just in case to notify me to change anything of such.
 
 
