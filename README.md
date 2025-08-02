@@ -19,21 +19,36 @@ flutter pub get
 Run the project from IDE
 -This program requires file Read and Write permission.
 
-# adenium features
-- Sort the list according to the date :: `Basic functionality`
-- Read and write a files like Plantslist and DeletedplantBufferList by keep track of the deleted plants, old updated names, dates etc
-- User Notification(Notifies the plant data before 2 days)
-- Adding a new plant data
+# Features
+
+## Sort the list according to the date :: `Basic functionality`
+
+## Read and write a files like Plantslist and DeletedplantBufferList by keep track of the deleted plants, old updated names, dates etc
+
+## User Notification(Notifies the plant data before 2 days)
+
+## Adding a new plant data
+
 <img src="./docs/gifs/addplant.gif" width="300" height="600" alt="add">
-- Update a plant data
+
+## Update a plant data
+
 <img src="./docs/gifs/updateplant.gif" width="300" height="600" alt="update">
-- In മലയാളം(native south-indian) and English
+
+## In മലയാളം(native south-indian) and English
+
 <img src="./docs/gifs/language.gif" width="300" height="600" alt="language">
-- Theme mode for Light and Dark Theme
+
+## Theme mode for Light and Dark Theme
+
 <img src="./docs/gifs/brightlight.gif" width="300" height="600" alt="brightness">
-- Chip level sorting for better UI
+
+## Chip level sorting for better UI
+
 <img src="./docs/gifs/chips.gif" width="300" height="600" alt="chip sorting">
-- Animation effects of basic Flutter transitions with date and notification state
+
+## Animation effects of basic Flutter transitions with date and notification state
+
 <img src="./docs/gifs/dateandnotification.gif" width="300" height="600" alt="notificationa and date">
 
 # Wiki
