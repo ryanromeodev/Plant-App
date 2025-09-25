@@ -4,6 +4,7 @@ project:
 
 website:
   title: "Plant App"
+  favicon: media/pics/pflanzen.png
   navbar:
     right:
       - href: index.qmd
