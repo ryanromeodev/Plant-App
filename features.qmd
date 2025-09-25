@@ -2,20 +2,135 @@
 title: "Features"
 ---
 
-# Basic functionality
+# 🌱 Basic Functionality
 
-Sort the list of plant appo according to the date. Each new and updated entry into the app is sorted as per date in ascending order. so as to have a clear history track of what was done previously to the plant.
+**Keep your plant care timeline in perfect order!**  
+The app automatically sorts all your plant entries by date in ascending order, so you always have a clear history trail. Never forget what you did last—your plant's journey is neatly organized! 📅
 
-# Read and write a files
+---
 
-Files like active plant list and deleted or renamed plant list is kept on track just in case for an accidential recovery. A Download⬇️ button is also available on the settings⚙️ action button on the top so as to transfer the data alone as a json file just in case as a fail-safe button.
+# 💾 Read & Write Files
 
-# User Notification(Notifies the plant data before 2 days)
+**Safety first, plant parents!**  
+We keep track of your active plant list and even maintain a separate list for deleted or renamed plants—just in case you need to recover something accidentally.  
+Plus, there's a handy **Download ⬇️** button in the settings ⚙️ menu so you can export your data as a JSON file. Think of it as your plant-care safety net! 🛡️
 
-Notification is triggered on new plant addition and is notified 2 days before the date at which the plant is to be notified of fertilizer suppliment.
+---
 
-# Adding and Updating plant data with date and notification Animations
+# 🔔 User Notification
 
-![A Lovely Image](docs/gifs/addplant.gif)
+**Your plants won't let you forget!**  
+As soon as you add a new plant, the notification system kicks in. You'll get a friendly reminder **2 days before** it's time for fertilizer—so you're always prepared. No more guessing games! 🌿
 
-![Another Lovely Image](docs/gifs/updateplant.gif)
+---
+
+# ➕ Adding Plant Data
+
+<div style="display: flex; align-items: center; gap: 20px;">
+<div style="flex: 1">
+
+**Quick, fun, and full of life!**  
+Adding a new plant is a breeze with smooth animations and date pickers. It feels as good as potting a new plant itself!
+
+</div>
+<div style="flex: 1">
+
+![](docs/gifs/addplant.gif){width=200}
+
+</div>
+</div>
+
+---
+
+# ✏️ Updating Plant Data
+
+<div style="display: flex; align-items: center; gap: 20px;">
+<div style="flex: 1">
+
+**Life changes, and so do plant needs!**  
+Update your plant entries with the same lively animations and ease. Keep your plant logs as fresh as your plants!
+
+</div>
+<div style="flex: 1">
+
+![](docs/gifs/updateplant.gif){width=200}
+
+</div>
+</div>
+
+---
+
+# 🗣️ Language
+
+<div style="display: flex; align-items: center; gap: 20px;">
+<div style="flex: 1">
+
+**Speak your plant's language!**  
+Full support for **English** and **മലയാളം**—because everyone should feel at home while caring for their greens. 🌍
+
+</div>
+<div style="flex: 1">
+
+![](docs/gifs/language.gif){width=200}
+
+</div>
+</div>
+
+---
+
+# 🎨 Theme
+
+<div style="display: flex; align-items: center; gap: 20px;">
+<div style="flex: 1">
+
+**Light mode or dark mode—your plants don't mind!**  
+Switch between light and dark themes based on your mood or time of day. Your eyes will thank you! ☀️🌙
+
+</div>
+<div style="flex: 1">
+
+![](docs/gifs/brightlight.gif){width=200}
+
+</div>
+</div>
+
+---
+
+# 🧩 Chip-Level Sorting
+
+<div style="display: flex; align-items: center; gap: 20px;">
+<div style="flex: 1">
+
+**Tidy UI, happy you!**  
+Use action chips to sort and filter your plant list effortlessly. It's like having little helpers to organize your garden visually! 🏷️
+
+</div>
+<div style="flex: 1">
+
+![](docs/gifs/chips.gif){width=200}
+
+</div>
+</div>
+
+---
+
+# ✨ Basic Notifications & Animations
+
+<div style="display: flex; align-items: center; gap: 20px;">
+<div style="flex: 1">
+
+**A little flair goes a long way!**  
+Enjoy subtle animations for dates and notifications that make the app feel alive and interactive. Because who said plant care can't be fun? 🎉
+
+</div>
+<div style="flex: 1">
+
+![](docs/gifs/dateandnotification.gif){width=200}
+
+</div>
+</div>
+
+---
+
+> Built with love for plant lovers 💚  
+> Keep growing, keep glowing! 🌟

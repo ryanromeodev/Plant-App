@@ -7,13 +7,12 @@ website:
     right:
       - href: index.qmd
         text: Home
-      - about.qmd
       - features.qmd
 
 format:
   html:
     theme:
-      - sandstone
+      - superhero
       - brand
     css: styles.css
     toc: true
