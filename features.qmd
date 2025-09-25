@@ -1,0 +1,21 @@
+---
+title: "Features"
+---
+
+# Basic functionality
+
+Sort the list of plant appo according to the date. Each new and updated entry into the app is sorted as per date in ascending order. so as to have a clear history track of what was done previously to the plant.
+
+# Read and write a files
+
+Files like active plant list and deleted or renamed plant list is kept on track just in case for an accidential recovery. A Download⬇️ button is also available on the settings⚙️ action button on the top so as to transfer the data alone as a json file just in case as a fail-safe button.
+
+# User Notification(Notifies the plant data before 2 days)
+
+Notification is triggered on new plant addition and is notified 2 days before the date at which the plant is to be notified of fertilizer suppliment.
+
+# Adding and Updating plant data with date and notification Animations
+
+![A Lovely Image](docs/gifs/addplant.gif)
+
+![Another Lovely Image](docs/gifs/updateplant.gif)

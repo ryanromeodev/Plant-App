@@ -1,0 +1,23 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Plant App",
+    "section": "",
+    "text": "Indoor plants🪴 are considered as the best hobby😊 nowadays due to the relaxation and peacefullness that the hobby offers. However since these plants are grown indoors, the poor little plants could not gain maximum sunlight☀️ and soil nutrients as compared to the outdoor ones. So it would be an integral part in providing these plants with regular and timed supply of food(soil nutrients) so as to ensure they grow healthy😁.\n\nGetting Started: How to feed the plants in a regular time interval?\nConventionally it would be better to Note down the dates in a calendar or something. However, there is no challenge and thigs might be cluttered there. On the other hand having an application which only deals with dedicated issues of feeding the plant is much better and efficient. The application not only arranges the data in a beautiful UI but also sorts📃 the plant which require food immediately on the top of the list and so on…\n\n\nFeatures\nto know more about the features click here"
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "About this site"
+  },
+  {
+    "objectID": "features.html",
+    "href": "features.html",
+    "title": "Features",
+    "section": "",
+    "text": "Basic functionality\nSort the list of plant appo according to the date. Each new and updated entry into the app is sorted as per date in ascending order. so as to have a clear history track of what was done previously to the plant.\n\n\nRead and write a files\nFiles like active plant list and deleted or renamed plant list is kept on track just in case for an accidential recovery. A Download⬇️ button is also available on the settings⚙️ action button on the top so as to transfer the data alone as a json file just in case as a fail-safe button.\n\n\nUser Notification(Notifies the plant data before 2 days)\nNotification is triggered on new plant addition and is notified 2 days before the date at which the plant is to be notified of fertilizer suppliment.\n\n\nAdding and Updating plant data with date and notification Animations\n\n\n\nA Lovely Image\n\n\n\n\n\nAnother Lovely Image"
+  }
+]

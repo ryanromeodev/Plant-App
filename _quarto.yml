@@ -1,0 +1,22 @@
+project:
+  type: website
+
+website:
+  title: "Plant App"
+  navbar:
+    right:
+      - href: index.qmd
+        text: Home
+      - about.qmd
+      - features.qmd
+
+format:
+  html:
+    theme:
+      - sandstone
+      - brand
+    css: styles.css
+    toc: true
+
+
+
