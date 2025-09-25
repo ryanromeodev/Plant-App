@@ -27,10 +27,10 @@ That's where **Plant App** comes in! We help you provide regular, timely food (s
 
 We've all been there – scribbling dates on calendars only to forget them in the daily clutter. But what if you had a dedicated plant care assistant?
 
-**Plant App** not only keeps your plant feeding schedule organized but also:
-- 📋 **Smart sorting** – Plants needing immediate attention jump to the top
-- 🎨 **Beautiful UI** – Enjoy managing your plants in a clean, intuitive interface
-- ⏰ **Smart reminders** – Get notified before feeding time so you're always prepared
+**Plant App** not only keeps your plant feeding schedule organized but also:    
+- 📋 **Smart sorting** – Plants needing immediate attention jump to the top  
+- 🎨 **Beautiful UI** – Enjoy managing your plants in a clean, intuitive interface  
+- ⏰ **Smart reminders** – Get notified before feeding time so you're always prepared  
 
 ---
 
@@ -44,12 +44,12 @@ Check out all the cool things Plant App can do for you and your green friends!
 </a>
 </div>
 
-**Highlights include:**
-- 🔔 **Smart notifications** 2 days before feeding time
-- 💾 **Data backup & export** for peace of mind
-- 🎨 **Light/Dark theme** for comfortable viewing
-- 🌐 **Multi-language support** (English & മലയാളം)
-- 📱 **Beautiful animations** that make plant care fun!
+**Highlights include:**   
+- 🔔 **Smart notifications** 2 days before feeding time  
+- 💾 **Data backup & export** for peace of mind  
+- 🎨 **Light/Dark theme** for comfortable viewing  
+- 🌐 **Multi-language support** (English & മലയാളം)  
+- 📱 **Beautiful animations** that make plant care fun!  
 
 ---
 
@@ -62,11 +62,11 @@ Check out all the cool things Plant App can do for you and your green friends!
 
 I'd be thrilled to have you on board! Whether you're a plant lover 🌱, developer 💻, or designer 🎨 – there's a place for you in our growing community.
 
-**How you can help:**
-- 🐛 **Report issues** – Found a bug? Let me know!
-- 💡 **Suggest features** – Have ideas to make Plant App better?
-- 🔧 **Submit PRs** – Want to code? Pull requests are welcome!
-- ⭐ **Star the repo** – Show your support with a star!
+**How you can help:**   
+- 🐛 **Report issues** – Found a bug? Let me know!  
+- 💡 **Suggest features** – Have ideas to make Plant App better?  
+- 🔧 **Submit PRs** – Want to code? Pull requests are welcome!  
+- ⭐ **Star the repo** – Show your support with a star!  
 
 <!-- </div>
 <div style="flex: 1; text-align: center;">
