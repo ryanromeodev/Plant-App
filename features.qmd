@@ -35,7 +35,7 @@ Adding a new plant is a breeze with smooth animations and date pickers. It feels
 </div>
 <div style="flex: 1">
 
-![](docs/gifs/addplant.gif){width=200}
+![](media/gifs/addplant.gif){width=200}
 
 </div>
 </div>
@@ -53,7 +53,7 @@ Update your plant entries with the same lively animations and ease. Keep your pl
 </div>
 <div style="flex: 1">
 
-![](docs/gifs/updateplant.gif){width=200}
+![](media/gifs/updateplant.gif){width=200}
 
 </div>
 </div>
@@ -71,7 +71,7 @@ Full support for **English** and **മലയാളം**—because everyone shoul
 </div>
 <div style="flex: 1">
 
-![](docs/gifs/language.gif){width=200}
+![](media/gifs/language.gif){width=200}
 
 </div>
 </div>
@@ -89,7 +89,7 @@ Switch between light and dark themes based on your mood or time of day. Your eye
 </div>
 <div style="flex: 1">
 
-![](docs/gifs/brightlight.gif){width=200}
+![](media/gifs/brightlight.gif){width=200}
 
 </div>
 </div>
@@ -107,7 +107,7 @@ Use action chips to sort and filter your plant list effortlessly. It's like havi
 </div>
 <div style="flex: 1">
 
-![](docs/gifs/chips.gif){width=200}
+![](media/gifs/chips.gif){width=200}
 
 </div>
 </div>
@@ -125,7 +125,7 @@ Enjoy subtle animations for dates and notifications that make the app feel alive
 </div>
 <div style="flex: 1">
 
-![](docs/gifs/dateandnotification.gif){width=200}
+![](media/gifs/dateandnotification.gif){width=200}
 
 </div>
 </div>

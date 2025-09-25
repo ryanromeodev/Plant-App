@@ -1,0 +1,23 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Plant App",
+    "section": "",
+    "text": "Indoor plants 🪴 are becoming everyone’s favorite hobby these days – and for good reason! They bring so much relaxation and peace into our lives. But since these green buddies live indoors, they often miss out on maximum sunlight ☀️ and soil nutrients compared to their outdoor friends.\nThat’s where Plant App comes in! We help you provide regular, timely food (soil nutrients) to your plants, ensuring they grow healthy and happy 😁.\n\n\n\nKeep your plants thriving! 🌱"
+  },
+  {
+    "objectID": "index.html#want-to-contribute",
+    "href": "index.html#want-to-contribute",
+    "title": "Plant App",
+    "section": "🤝 Want to contribute?",
+    "text": "🤝 Want to contribute?\nI’d be thrilled to have you on board! Whether you’re a plant lover 🌱, developer 💻, or designer 🎨 – there’s a place for you in our growing community.\nHow you can help: - 🐛 Report issues – Found a bug? Let me know! - 💡 Suggest features – Have ideas to make Plant App better? - 🔧 Submit PRs – Want to code? Pull requests are welcome! - ⭐ Star the repo – Show your support with a star!"
+  },
+  {
+    "objectID": "features.html",
+    "href": "features.html",
+    "title": "Features",
+    "section": "",
+    "text": "🌱 Basic Functionality\nKeep your plant care timeline in perfect order!\nThe app automatically sorts all your plant entries by date in ascending order, so you always have a clear history trail. Never forget what you did last—your plant’s journey is neatly organized! 📅\n\n\n\n💾 Read & Write Files\nSafety first, plant parents!\nWe keep track of your active plant list and even maintain a separate list for deleted or renamed plants—just in case you need to recover something accidentally.\nPlus, there’s a handy Download ⬇️ button in the settings ⚙️ menu so you can export your data as a JSON file. Think of it as your plant-care safety net! 🛡️\n\n\n\n🔔 User Notification\nYour plants won’t let you forget!\nAs soon as you add a new plant, the notification system kicks in. You’ll get a friendly reminder 2 days before it’s time for fertilizer—so you’re always prepared. No more guessing games! 🌿\n\n\n\n➕ Adding Plant Data\n\n\nQuick, fun, and full of life!\nAdding a new plant is a breeze with smooth animations and date pickers. It feels as good as potting a new plant itself!\n\n\n\n\n\n\n\n\n✏️ Updating Plant Data\n\n\nLife changes, and so do plant needs!\nUpdate your plant entries with the same lively animations and ease. Keep your plant logs as fresh as your plants!\n\n\n\n\n\n\n\n\n🗣️ Language\n\n\nSpeak your plant’s language!\nFull support for English and മലയാളം—because everyone should feel at home while caring for their greens. 🌍\n\n\n\n\n\n\n\n\n🎨 Theme\n\n\nLight mode or dark mode—your plants don’t mind!\nSwitch between light and dark themes based on your mood or time of day. Your eyes will thank you! ☀️🌙\n\n\n\n\n\n\n\n\n🧩 Chip-Level Sorting\n\n\nTidy UI, happy you!\nUse action chips to sort and filter your plant list effortlessly. It’s like having little helpers to organize your garden visually! 🏷️\n\n\n\n\n\n\n\n\n✨ Basic Notifications & Animations\n\n\nA little flair goes a long way!\nEnjoy subtle animations for dates and notifications that make the app feel alive and interactive. Because who said plant care can’t be fun? 🎉\n\n\n\n\n\n\n\nBuilt with love for plant lovers 💚\nKeep growing, keep glowing! 🌟"
+  }
+]

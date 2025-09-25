@@ -13,7 +13,7 @@ That's where **Plant App** comes in! We help you provide regular, timely food (s
 
 </div>
 <div style="flex: 1; text-align: center;">
-<img src="docs/pics/photo_2025-09-25_22-57-07.jpg" alt="Happy indoor plants" style="width: 100%; max-width: 250px; border-radius: 15px;"/>
+<img src="media/pics/photo_2025-09-25_22-57-07.jpg" alt="Happy indoor plants" style="width: 100%; max-width: 250px; border-radius: 15px;"/>
 
 <em>Keep your plants thriving! 🌱</em>
 </div>
